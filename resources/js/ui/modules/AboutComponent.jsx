@@ -4,15 +4,15 @@ import BaseComponent from '../../base/BaseComponent.jsx';
 
 export default class AboutComponent extends BaseComponent {
 
-	componentWillReceiveProps(props) {
-	}
+    componentWillReceiveProps(props) {
+    }
 
     render() {
 
         return (
             <div>
-				О программе
-			</div>
+                О программе
+            </div>
         );
     }
 }

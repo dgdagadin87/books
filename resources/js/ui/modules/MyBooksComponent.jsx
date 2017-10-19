@@ -4,15 +4,15 @@ import BaseComponent from '../../base/BaseComponent.jsx';
 
 export default class MyBooksComponent extends BaseComponent {
 
-	componentWillReceiveProps(props) {
-	}
+    componentWillReceiveProps(props) {
+    }
 
     render() {
 
         return (
             <div>
-				Мои книги
-			</div>
+                Мои книги
+            </div>
         );
     }
 }

@@ -7,16 +7,16 @@ import FooterComponent from './FooterComponent.jsx';
 
 export default class RootComponent extends BaseComponent {
 
-	componentWillReceiveProps(props) {
-	}
+    componentWillReceiveProps(props) {
+    }
 
     render() {
 
         return (
             <div>
-				<HeaderComponent />
+                <HeaderComponent />
                 {this.props.children}
-				<FooterComponent />
+                <FooterComponent />
             </div>
         );
     }

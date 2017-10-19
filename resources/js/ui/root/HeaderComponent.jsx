@@ -2,24 +2,24 @@ import React from 'react';
 
 import BaseComponent from '../../base/BaseComponent.jsx';
 
-import {NavLink} from 'react-router-dom';
+import MenuLink from '../components/MenuLinkComponent.jsx';
 
 export default class HeaderComponent extends BaseComponent {
 
-	componentWillReceiveProps(props) {
-	}
+    componentWillReceiveProps(props) {
+    }
 
     render() {
 
         return (
             <menu>
-				<ul>
-					<li><NavLink activeClassName="active" to="/">Мои книги</NavLink></li>
-					<li><NavLink activeClassName="active" to="/allbooks">Все книги</NavLink></li>
-					<li><NavLink activeClassName="active" to="/addbook">Добавить книгу</NavLink></li>
-					<li><NavLink activeClassName="active" to="/about">О программе</NavLink></li>
-				</ul>
-			</menu>
+                <ul>
+                    <li><MenuLink activeOnlyWhenExact={true} to="/" label="Мои книги" /></li>
+                    <li><MenuLink to="/allbooks" label="Все книги" /></li>
+                    <li><MenuLink to="/addbook" label="Добавить книгу" /></li>
+                    <li><MenuLink to="/about" label="О программе" /></li>
+                </ul>
+            </menu>
         );
     }
 }
