@@ -1,10 +1,12 @@
 
 let defaultSettings = {
-    'serverName' : '4stor.local'
+    'serverHost' : 'localhost',
+    'serverPort': 9000,
+    'serverProtocol': 'http'
 };
 
 let urlSettings = {
-    'getCommonData': '/index.php?mode=json&action=common'
+    'getCommonData': '/books/common'
 };
 
 export {defaultSettings, urlSettings};

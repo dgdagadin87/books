@@ -23,6 +23,10 @@ function applyParams (object, config) {
     return object;
 };
 
+function createUrlLink (settings, url) {
+    return settings['serverProtocol'] + '://' + settings['serverHost'] + ':' + settings['serverPort'] + url;
+};
+
 function ajaxQuery (config, functions){
     
     let {
@@ -64,9 +68,9 @@ function ajaxQuery (config, functions){
             afterComplete(jqXHR, textStatus, afterCompleteParams);
         }
     };
-    let cfg = this.applyParams(loConf, queryConfig);
+    let cfg = applyParams(config, queryConfig);
 
     $.ajax(cfg);
 }
 
-export {isEmpty, emptyFunction, applyParams, ajaxQuery};
+export {isEmpty, emptyFunction, createUrlLink, applyParams, ajaxQuery};
