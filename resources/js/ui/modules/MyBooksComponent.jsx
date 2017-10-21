@@ -24,7 +24,8 @@ class MyBooksComponent extends BaseComponent {
 };
 
 MyBooksComponent.propTypes = {
-    serverData: PropTypes.object.isRequired
+    serverData: PropTypes.object.isRequired,
+    globalEvents:  PropTypes.object.isRequired
 };
 
 export default MyBooksComponent;

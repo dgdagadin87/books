@@ -36,10 +36,10 @@ export default class HeaderComponent extends BaseComponent {
         let menuLinks = [];
         
         
-        _.each(headers, (item) => {
+        _.each(headers, (item, key) => {
             if ((userIsAdmin && item.admin) || !item.admin) {
                 menuLinks.push(
-                    <li>
+                    <li key={key}>
                         <MenuLink
                             activeOnlyWhenExact={item.headerUrl === '/' ? true : false}
                             to={item.headerUrl}

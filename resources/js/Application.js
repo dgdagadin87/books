@@ -3,6 +3,8 @@ import reactDom from 'react-dom';
 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
+import Events from './core/Events';
+
 import RootComponent from './ui/root/RootComponent.jsx';
 
 import {defaultSettings, urlSettings} from './config/settings';
@@ -23,6 +25,8 @@ ajaxQuery({
     },{
         afterSuccess: (result) => {
 
+            let globalEvents = new Events();
+
             let {data = {}} = result;
             let {
                 user = {},
@@ -33,28 +37,30 @@ ajaxQuery({
                 <BrowserRouter>
                     <RootComponent
                         serverData={data}
+                        globalEvents={globalEvents}
                     >
                         <Switch>
                             <Route
                                 exact
                                 path="/"
-                                render={ (props) => <MyBooksComponent {...props} serverData={data} /> }
+                                render={ (props) => <MyBooksComponent {...props} globalEvents={globalEvents} serverData={data} /> }
                             />
                             <Route
                                 path="/about"
-                                render={ (props) => <AboutComponent {...props} serverData={data} /> }
+                                render={ (props) => <AboutComponent {...props} globalEvents={globalEvents} serverData={data} /> }
                             />
                             <Route
                                 path="/addbook"
-                                render={ (props) => <AddBookComponent {...props} serverData={data} /> }
+                                globalEvents={globalEvents}
+                                render={ (props) => <AddBookComponent {...props} globalEvents={globalEvents} serverData={data} /> }
                             />
                             <Route
                                 path="/allbooks"
-                                render={ (props) => <AllBooksComponent {...props} serverData={data} /> }
+                                render={ (props) => <AllBooksComponent {...props} globalEvents={globalEvents} serverData={data} /> }
                             />
                             <Route
                                 path="/users"
-                                render={ (props) => <UsersComponent {...props} serverData={data} /> }
+                                render={ (props) => <UsersComponent {...props} globalEvents={globalEvents} serverData={data} /> }
                             />
                             <Route
                                 component={NotFoundComponent}

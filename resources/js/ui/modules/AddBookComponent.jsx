@@ -24,7 +24,8 @@ class AddBookComponent extends BaseComponent {
 };
 
 AddBookComponent.propTypes = {
-    serverData: PropTypes.object.isRequired
+    serverData: PropTypes.object.isRequired,
+    globalEvents:  PropTypes.object.isRequired
 };
 
 export default AddBookComponent;

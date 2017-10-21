@@ -30,7 +30,10 @@ class RootComponent extends BaseComponent {
     }
 
     _bindEvents() {
-        window.console.log('bind');
+        
+        const {globalEvents} = this.props;
+        
+        globalEvents.on('hello', () => alert('hello'));
     }
 
     render() {
@@ -48,7 +51,8 @@ class RootComponent extends BaseComponent {
 }
 
 RootComponent.propTypes = {
-    serverData: PropTypes.object.isRequired
+    serverData: PropTypes.object.isRequired,
+    globalEvents:  PropTypes.object.isRequired
 };
 
 export default RootComponent;

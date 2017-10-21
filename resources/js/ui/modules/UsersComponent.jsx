@@ -26,7 +26,8 @@ class UsersComponent extends BaseComponent {
 };
 
 UsersComponent.propTypes = {
-    serverData: PropTypes.object.isRequired
+    serverData: PropTypes.object.isRequired,
+    globalEvents:  PropTypes.object.isRequired
 };
 
 export default UsersComponent;

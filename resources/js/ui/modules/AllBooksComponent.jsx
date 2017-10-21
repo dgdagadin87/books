@@ -24,7 +24,8 @@ class AllBooksComponent extends BaseComponent {
 };
 
 AllBooksComponent.propTypes = {
-    serverData: PropTypes.object.isRequired
+    serverData: PropTypes.object.isRequired,
+    globalEvents:  PropTypes.object.isRequired
 };
 
 export default AllBooksComponent;

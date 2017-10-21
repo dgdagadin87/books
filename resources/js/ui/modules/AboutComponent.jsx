@@ -10,8 +10,11 @@ class AboutComponent extends BaseComponent {
         super(props);
     }
 
-    componentWillReceiveProps(props) {
+    componentDidMount() {
+        
     }
+
+    componentWillReceiveProps(props) {}
 
     render() {
 
@@ -24,7 +27,8 @@ class AboutComponent extends BaseComponent {
 }
 
 AboutComponent.propTypes = {
-    serverData: PropTypes.object.isRequired
+    serverData: PropTypes.object.isRequired,
+    globalEvents: PropTypes.object.isRequired
 };
 
 export default AboutComponent;
