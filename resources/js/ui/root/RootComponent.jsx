@@ -11,7 +11,7 @@ class RootComponent extends BaseComponent {
 
     constructor(props) {
         super(props);
-window.console.log(props);
+
         const {serverData = {}} = this.props;
 
         this.state = {
@@ -35,9 +35,11 @@ window.console.log(props);
 
     render() {
 
+        const {serverData} = this.props;
+
         return (
             <div>
-                <HeaderComponent />
+                <HeaderComponent serverData={serverData} />
                 {this.props.children}
                 <FooterComponent />
             </div>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import BaseComponent from '../../base/BaseComponent.jsx';
 
-class AllBooksComponent extends BaseComponent {
+class NotFoundComponent extends BaseComponent {
 
     constructor(props) {
         super(props);
@@ -17,14 +17,10 @@ class AllBooksComponent extends BaseComponent {
 
         return (
             <div>
-                Все книги
+                404 - ошибка.
             </div>
         );
     }
 };
 
-AllBooksComponent.propTypes = {
-    serverData: PropTypes.object.isRequired
-};
-
-export default AllBooksComponent;
+export default NotFoundComponent;

@@ -1,8 +1,14 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import BaseComponent from '../../base/BaseComponent.jsx';
 
-export default class MyBooksComponent extends BaseComponent {
+class MyBooksComponent extends BaseComponent {
+
+    constructor(props) {
+        super(props);
+    }
 
     componentWillReceiveProps(props) {
     }
@@ -15,4 +21,10 @@ export default class MyBooksComponent extends BaseComponent {
             </div>
         );
     }
-}
+};
+
+MyBooksComponent.propTypes = {
+    serverData: PropTypes.object.isRequired
+};
+
+export default MyBooksComponent;

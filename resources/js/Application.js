@@ -13,6 +13,8 @@ import AboutComponent from './ui/modules/AboutComponent.jsx';
 import AddBookComponent from './ui/modules/AddBookComponent.jsx';
 import AllBooksComponent from './ui/modules/AllBooksComponent.jsx';
 import MyBooksComponent from './ui/modules/MyBooksComponent.jsx';
+import UsersComponent from './ui/modules/UsersComponent.jsx';
+import NotFoundComponent from './ui/modules/NotFoundComponent.jsx';
 
 const rootDomComponent = document.getElementById('root');
 
@@ -33,10 +35,30 @@ ajaxQuery({
                         serverData={data}
                     >
                         <Switch>
-                            <Route path="/about" component={AboutComponent} />
-                            <Route path="/addbook" component={AddBookComponent} />
-                            <Route path="/allbooks" component={AllBooksComponent} />
-                            <Route path="/" component={MyBooksComponent} />
+                            <Route
+                                exact
+                                path="/"
+                                render={ (props) => <MyBooksComponent {...props} serverData={data} /> }
+                            />
+                            <Route
+                                path="/about"
+                                render={ (props) => <AboutComponent {...props} serverData={data} /> }
+                            />
+                            <Route
+                                path="/addbook"
+                                render={ (props) => <AddBookComponent {...props} serverData={data} /> }
+                            />
+                            <Route
+                                path="/allbooks"
+                                render={ (props) => <AllBooksComponent {...props} serverData={data} /> }
+                            />
+                            <Route
+                                path="/users"
+                                render={ (props) => <UsersComponent {...props} serverData={data} /> }
+                            />
+                            <Route
+                                component={NotFoundComponent}
+                            />
                         </Switch>
                     </RootComponent>
                 </BrowserRouter>

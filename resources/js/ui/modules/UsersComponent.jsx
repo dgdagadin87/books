@@ -4,27 +4,29 @@ import PropTypes from 'prop-types';
 
 import BaseComponent from '../../base/BaseComponent.jsx';
 
-class AllBooksComponent extends BaseComponent {
+class UsersComponent extends BaseComponent {
 
     constructor(props) {
         super(props);
     }
 
-    componentWillReceiveProps(props) {
-    }
+    componentWillReceiveProps(props) {}
 
     render() {
 
+        const {serverData} = this.props;
+        const {user} = serverData;
+
         return (
             <div>
-                Все книги
+                {user.userIsAdmin ? 'Пользователи' : 'Access denied'}
             </div>
         );
     }
 };
 
-AllBooksComponent.propTypes = {
+UsersComponent.propTypes = {
     serverData: PropTypes.object.isRequired
 };
 
-export default AllBooksComponent;
+export default UsersComponent;

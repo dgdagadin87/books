@@ -1,4 +1,7 @@
 import React from 'react';
+import _ from 'underscore';
+
+import PropTypes from 'prop-types';
 
 import BaseComponent from '../../base/BaseComponent.jsx';
 
@@ -6,7 +9,48 @@ import MenuLink from '../components/MenuLinkComponent.jsx';
 
 export default class HeaderComponent extends BaseComponent {
 
+    constructor(props) {
+        super(props);
+        
+        const {serverData} = this.props;
+        
+        this.state = {
+            serverData: serverData
+        };
+    }
+
     componentWillReceiveProps(props) {
+        
+        const {serverData} = props;
+        
+        this.setState({
+            serverData: serverData
+        });
+    }
+
+    _renderHeaderUrls() {
+        
+        const {serverData} = this.state;
+        const {user, headers} = serverData
+        const {userIsAdmin} = user;
+        let menuLinks = [];
+        
+        
+        _.each(headers, (item) => {
+            if ((userIsAdmin && item.admin) || !item.admin) {
+                menuLinks.push(
+                    <li>
+                        <MenuLink
+                            activeOnlyWhenExact={item.headerUrl === '/' ? true : false}
+                            to={item.headerUrl}
+                            label={item.headerName}
+                        />
+                    </li>
+                );
+            }
+        });
+        
+        return menuLinks;
     }
 
     render() {
@@ -14,12 +58,13 @@ export default class HeaderComponent extends BaseComponent {
         return (
             <menu>
                 <ul>
-                    <li><MenuLink activeOnlyWhenExact={true} to="/" label="Мои книги" /></li>
-                    <li><MenuLink to="/allbooks" label="Все книги" /></li>
-                    <li><MenuLink to="/addbook" label="Добавить книгу" /></li>
-                    <li><MenuLink to="/about" label="О программе" /></li>
+                    {this._renderHeaderUrls()}
                 </ul>
             </menu>
         );
     }
-}
+};
+
+HeaderComponent.propTypes = {
+    serverData: PropTypes.object.isRequired
+};
