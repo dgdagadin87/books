@@ -11,14 +11,22 @@ class MyBooksComponent extends BaseModule {
         
         const {globalEvents, localData} = props;
 
-        if (localData === false) {
-            globalEvents.trigger('setModuleData', {foo: 'bar'}, 'mybooks');
-        }
+        this.state = {
+            moduleData: localData,
+            disabled: false,
+            globalLoading: false,
+            localLoading: false
+        };
 
         globalEvents.trigger('setTitle', 'Мои книги');
     }
 
-    componentWillReceiveProps(props) {}
+    componentDidMount() {
+        
+        super.componentDidMount();
+    }
+
+    componentWillReceiveProps() {}
 
     render() {
 
