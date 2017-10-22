@@ -10,7 +10,9 @@ class AboutComponent extends BaseModule {
         super(props);
         
         const {globalEvents} = this.props;
-        globalEvents.trigger('setTitle', 'О программе')
+        globalEvents.trigger('setTitle', 'О программе');
+        
+        setTimeout(()=>{this.setState({qqq:'www'})}, 5000);
     }
 
     componentWillReceiveProps() {}
