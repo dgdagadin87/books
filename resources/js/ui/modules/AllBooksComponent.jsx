@@ -2,16 +2,19 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import BaseComponent from '../../base/BaseComponent.jsx';
+import BaseModule from '../../base/BaseModule.jsx';
 
-class AllBooksComponent extends BaseComponent {
+class AllBooksComponent extends BaseModule {
 
     constructor(props) {
         super(props);
+        
+        const {globalEvents} = this.props;
+        
+        globalEvents.trigger('setTitle', 'Все книги');
     }
 
-    componentWillReceiveProps(props) {
-    }
+    componentWillReceiveProps(props) {}
 
     render() {
 

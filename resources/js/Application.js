@@ -10,6 +10,7 @@ import RootComponent from './ui/root/RootComponent.jsx';
 import {defaultSettings, urlSettings} from './config/settings';
 
 import {ajaxQuery, createUrlLink as CUL} from './core/coreUtils';
+import {getDefaultState} from './core/applicationUtils';
 
 import AboutComponent from './ui/modules/AboutComponent.jsx';
 import AddBookComponent from './ui/modules/AddBookComponent.jsx';
@@ -20,15 +21,27 @@ import NotFoundComponent from './ui/modules/NotFoundComponent.jsx';
 
 const rootDomComponent = document.getElementById('root');
 
+let modulesData = {
+    'mybooks': getDefaultState('mybooks'),
+    'addbook': getDefaultState('addbook'),
+    'allbooks': getDefaultState('allbooks'),
+    'users': getDefaultState('users')
+};
+
+let globalEvents = new Events();
+
+globalEvents.on('setModuleData', (data, moduleName) => {
+    modulesData[moduleName] = data;
+});
+
 ajaxQuery({
         url: CUL(defaultSettings, urlSettings['getCommonData'])
     },{
         afterSuccess: (result) => {
 
-            let globalEvents = new Events();
-
             let {data = {}} = result;
             let {
+                title = '',
                 user = {},
                 headers = []
             } = data;
@@ -37,13 +50,14 @@ ajaxQuery({
                 <BrowserRouter>
                     <RootComponent
                         serverData={data}
+                        title={title}
                         globalEvents={globalEvents}
                     >
                         <Switch>
                             <Route
                                 exact
                                 path="/"
-                                render={ (props) => <MyBooksComponent {...props} globalEvents={globalEvents} serverData={data} /> }
+                                render={ (props) => <MyBooksComponent {...props} globalEvents={globalEvents} serverData={data} localData={modulesData['mybooks']} /> }
                             />
                             <Route
                                 path="/about"
@@ -51,16 +65,15 @@ ajaxQuery({
                             />
                             <Route
                                 path="/addbook"
-                                globalEvents={globalEvents}
-                                render={ (props) => <AddBookComponent {...props} globalEvents={globalEvents} serverData={data} /> }
+                                render={ (props) => <AddBookComponent {...props} globalEvents={globalEvents} serverData={data} localData={modulesData['addbook']} /> }
                             />
                             <Route
                                 path="/allbooks"
-                                render={ (props) => <AllBooksComponent {...props} globalEvents={globalEvents} serverData={data} /> }
+                                render={ (props) => <AllBooksComponent {...props} globalEvents={globalEvents} serverData={data} localData={modulesData['allbooks']} /> }
                             />
                             <Route
                                 path="/users"
-                                render={ (props) => <UsersComponent {...props} globalEvents={globalEvents} serverData={data} /> }
+                                render={ (props) => <UsersComponent {...props} globalEvents={globalEvents} serverData={data} localData={modulesData['users']} /> }
                             />
                             <Route
                                 component={NotFoundComponent}

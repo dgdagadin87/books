@@ -2,16 +2,23 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import BaseComponent from '../../base/BaseComponent.jsx';
+import BaseModule from '../../base/BaseModule.jsx';
 
-class MyBooksComponent extends BaseComponent {
+class MyBooksComponent extends BaseModule {
 
     constructor(props) {
         super(props);
+        
+        const {globalEvents, localData} = props;
+
+        if (localData === false) {
+            globalEvents.trigger('setModuleData', {foo: 'bar'}, 'mybooks');
+        }
+
+        globalEvents.trigger('setTitle', 'Мои книги');
     }
 
-    componentWillReceiveProps(props) {
-    }
+    componentWillReceiveProps(props) {}
 
     render() {
 
@@ -25,7 +32,8 @@ class MyBooksComponent extends BaseComponent {
 
 MyBooksComponent.propTypes = {
     serverData: PropTypes.object.isRequired,
-    globalEvents:  PropTypes.object.isRequired
+    globalEvents:  PropTypes.object.isRequired,
+    localData: PropTypes.any.isRequired
 };
 
 export default MyBooksComponent;

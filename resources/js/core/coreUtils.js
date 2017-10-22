@@ -27,6 +27,10 @@ function createUrlLink (settings, url) {
     return settings['serverProtocol'] + '://' + settings['serverHost'] + ':' + settings['serverPort'] + url;
 };
 
+function setDocumentTitle (title) {
+    $('title').text('Приложение "Книги" - ' + title);
+};
+
 function ajaxQuery (config, functions){
     
     let {
@@ -73,4 +77,4 @@ function ajaxQuery (config, functions){
     $.ajax(cfg);
 }
 
-export {isEmpty, emptyFunction, createUrlLink, applyParams, ajaxQuery};
+export {isEmpty, emptyFunction, createUrlLink, applyParams, setDocumentTitle, ajaxQuery};

@@ -2,19 +2,18 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import BaseComponent from '../../base/BaseComponent.jsx';
+import BaseModule from '../../base/BaseModule.jsx';
 
-class AboutComponent extends BaseComponent {
+class AboutComponent extends BaseModule {
 
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount() {
         
+        const {globalEvents} = this.props;
+        globalEvents.trigger('setTitle', 'О программе')
     }
 
-    componentWillReceiveProps(props) {}
+    componentWillReceiveProps() {}
 
     render() {
 
