@@ -39,13 +39,12 @@ export default class HeaderComponent extends BaseComponent {
         _.each(headers, (item, key) => {
             if ((userIsAdmin && item.admin) || !item.admin) {
                 menuLinks.push(
-                    <li key={key}>
-                        <MenuLink
-                            activeOnlyWhenExact={item.headerUrl === '/' ? true : false}
-                            to={item.headerUrl}
-                            label={item.headerName}
-                        />
-                    </li>
+                    <MenuLink
+                        key={key}
+                        activeOnlyWhenExact={item.headerUrl === '/' ? true : false}
+                        to={item.headerUrl}
+                        label={item.headerName}
+                    />
                 );
             }
         });
@@ -55,12 +54,22 @@ export default class HeaderComponent extends BaseComponent {
 
     render() {
 
+        const {serverData} = this.state;
+        const {user} = serverData;
+        const {userName} = user;
+
         return (
-            <menu>
-                <ul>
+            <div className="main-navigation">
+                <div className="main-navigation__top">
+                    <div className="main-navigation__top-left">Приложение "Книги"</div>
+                    <div className="main-navigation__top-right">Привет, {userName}!</div>
+                    <div className="clear-both" />
+                </div>
+                <div className="main-navigation__links">
                     {this._renderHeaderUrls()}
-                </ul>
-            </menu>
+                    <div className="clear-both" />
+                </div>
+            </div>
         );
     }
 };

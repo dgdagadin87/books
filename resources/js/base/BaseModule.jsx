@@ -1,8 +1,8 @@
-import {Component} from 'react';
+import BaseComponent from './BaseComponent.jsx';
 
 import Events from '../core/Events';
 
-export default class BaseModule extends Component {
+export default class BaseModule extends BaseComponent {
 
     constructor(props) {
         

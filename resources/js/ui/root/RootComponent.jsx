@@ -55,7 +55,7 @@ class RootComponent extends BaseComponent {
         const {serverData, title} = this.state;
 
         return (
-            <div>
+            <div className="main-container">
                 <HeaderComponent serverData={serverData} />
                 <TitleComponent title={title} />
                 {this.props.children}

@@ -9,6 +9,8 @@ class MyBooksComponent extends BaseModule {
     constructor(props) {
         super(props);
         
+        this._moduleName = 'mybooks';
+        
         const {globalEvents, localData} = props;
 
         this.state = {
@@ -22,8 +24,18 @@ class MyBooksComponent extends BaseModule {
     }
 
     componentDidMount() {
-        
         super.componentDidMount();
+        
+        let {localData} = this.state;
+        
+        if (localData === false) {
+            this._loadData();
+        }
+    }
+
+    _loadData() {
+        
+        window.console.log('loading...');
     }
 
     componentWillReceiveProps() {}

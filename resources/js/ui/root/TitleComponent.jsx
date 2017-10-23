@@ -30,7 +30,7 @@ class TitleComponent extends BaseComponent {
         const {title} = this.state;
 
         return (
-            <div>
+            <div className="main-title">
                 Раздел {'"' + title + '"'}
             </div>
         );
