@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import BaseModule from '../../base/BaseModule.jsx';
 
+import PreloaderComponent from '../componentse/LargePreloaderComponent.jsx';
+
 class MyBooksComponent extends BaseModule {
 
     constructor(props) {
@@ -16,8 +18,7 @@ class MyBooksComponent extends BaseModule {
         this.state = {
             moduleData: localData,
             disabled: false,
-            globalLoading: false,
-            localLoading: false
+            globalLoading: false
         };
 
         globalEvents.trigger('setTitle', 'Мои книги');

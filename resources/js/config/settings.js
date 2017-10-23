@@ -1,13 +1,13 @@
 
 let defaultSettings = {
     'serverHost' : 'localhost',
-    'serverPort': 9000,
+    'serverPort': 9001,
     'serverProtocol': 'http'
 };
 
 let urlSettings = {
-    'getCommonData' : '/books/common',
-    'getMyBooksData': '/books/mybooks'
+    'getCommonData' : '/common',
+    'getMyBooksData': '/mybooks'
 };
 
 export {defaultSettings, urlSettings};
