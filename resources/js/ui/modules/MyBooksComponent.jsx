@@ -2,9 +2,13 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
+import {ajaxQuery, createUrlLink as CUL} from '../../core/coreUtils';
+import {defaultSettings, urlSettings} from '../../config/settings';
+
 import BaseModule from '../../base/BaseModule.jsx';
 
-import PreloaderComponent from '../componentse/LargePreloaderComponent.jsx';
+import PreloaderComponent from '../components/LargePreloaderComponent.jsx';
+import TablerComponent from '../components/TableComponent.jsx';
 
 class MyBooksComponent extends BaseModule {
 
@@ -26,26 +30,70 @@ class MyBooksComponent extends BaseModule {
 
     componentDidMount() {
         super.componentDidMount();
+
+        let {moduleData} = this.state;
         
-        let {localData} = this.state;
-        
-        if (localData === false) {
+        if (!moduleData.data) {
             this._loadData();
         }
     }
 
     _loadData() {
         
-        window.console.log('loading...');
+        const {moduleData} = this.state;
+        const {globalEvents} = this.props;
+
+        let firstStateData = null;
+        
+        if (!moduleData.data) {
+            firstStateData = {
+                globalLoading: true
+            };
+        }
+        else {
+            firstStateData = {
+                disabled: true
+            };
+        }
+        this.setStats(firstStateData);
+        
+        ajaxQuery(
+            {
+                url: CUL(defaultSettings, urlSettings['getMyBooksData'])
+            },
+            {
+                afterSuccess: (result) => {
+                    if (!result.isSuccess) {
+                        this.setStats({
+                            globalLoading: false,
+                            dsabled: false
+                        });
+                        globalEvents.trigger('showError', result);
+                        return;
+                    }
+                    
+                    this.setStats({
+                        globalLoading: false,
+                        dsabled: false,
+                        moduleData: result
+                    });
+                    
+                    globalEvents.trigger('setModuleData', result, 'mybooks');
+                },
+                afterError: (result) => globalEvents.trigger('showError', result)
+            }
+        );
     }
 
     componentWillReceiveProps() {}
 
     render() {
 
+        const {globalLoading} = this.state;
+
         return (
             <div>
-                Мои книги
+                {globalLoading ? <PreloaderComponent /> : <span>Тут список книг</span>}
             </div>
         );
     }

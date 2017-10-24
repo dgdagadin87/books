@@ -9,7 +9,7 @@ export default class BaseComponent extends Component {
         window.console.log(this);
     }
     
-    setStateCorrectly(state, callback = false) {
+    setStats(state, callback = false) {
 
         let callBack = callback === false ? emptyFunction : callback;
 

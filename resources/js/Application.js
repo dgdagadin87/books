@@ -35,6 +35,10 @@ let globalEvents = new Events();
 globalEvents.on('setModuleData', (data, moduleName) => {
     modulesData[moduleName] = data;
 });
+globalEvents.on('showError', (result) => {
+    window.console.log('error:');
+    window.console.log(result);
+});
 
 ajaxQuery({
         url: CUL(defaultSettings, urlSettings['getCommonData'])
@@ -85,8 +89,5 @@ ajaxQuery({
                 </BrowserRouter>
             ), rootDomComponent);
         },
-        afterError: (result) => {
-            window.console.log('error:');
-            window.console.log(result);
-        }
+        afterError: (result) => globalEvents.trigger('showError', result)
 });
