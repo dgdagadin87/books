@@ -21,6 +21,7 @@ class MyBooksComponent extends BaseModule {
 
         this.state = {
             moduleData: localData,
+            areSelected: false,
             disabled: false,
             globalLoading: false
         };
@@ -89,65 +90,61 @@ class MyBooksComponent extends BaseModule {
 
     _renderMyBooks() {
         
-        const {disabled, moduleData} = this.state;
-        const {collection = [], paging = {}} = moduleData;
+        const {disabled, moduleData, areSelected} = this.state;
+        const {data = {}} = moduleData;
+        const {collection = [], paging = {}, filter = {}} = data;
         const {totalCount = 0} = paging;
-        
+
         let myBooksUI = [];
 
         myBooksUI.push(
             <TableComponent
+                key={1}
                 events={this.events}
                 items={collection}
                 showCheckColumn={true}
-                totalCount={parseInt(totalCount)}
                 loadData={this._loadData.bind(this)}
-                defaultSort="bookName"
+                sortField={filter.sortField}
+                sortType={filter.sortType}
+                areSelected={areSelected}
                 columns={[
                     {
                         name: 'bookName',
                         title: 'Название',
-                        sortable: true,
-                        type: 'usual'
+                        sortable: true
                     },
                     {
                         name: 'bookShortDesc',
                         title: 'О книге',
                         sortable: false,
-                        type: 'click',
-                        symbolsToShow: 30
+                        templateFunction: this._renderShortDesc.bind(this)
                     },
                     {
                         name: 'bookAuthor',
                         title: 'Автор',
-                        sortable: true,
-                        type: 'usual'
+                        sortable: true
                     },
                     {
                         name: 'bookGenre',
                         title: 'Жанр',
-                        sortable: true,
-                        type: 'usual'
+                        sortable: false
                     },
                     {
                         name: 'bookSize',
                         title: 'Размер',
-                        sortable: true,
-                        type: 'numeric'
+                        sortable: true
                     },
                     {
                         name: 'bookParentSite',
-                        title: 'С сайта',
-                        sortable: true,
-                        type: 'link',
-                        linkData: {
-                            url: 'parentSiteUrl',
-                            caption: 'parentSiteName'
-                        }
+                        title: 'Взято с сайта',
+                        sortable: false,
+                        templateFunction: this._renderSiteName.bind(this)
                     }
                 ]}
             />
         );
+
+        return myBooksUI;
     }
 
     render() {
