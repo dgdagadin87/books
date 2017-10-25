@@ -25,10 +25,13 @@ class TableComponent extends BaseComponent {
 
 TableComponent.propTypes = {
     events:  PropTypes.object.isRequired,
-    disabled: PropTypes.bool.isReqired,
-    columns: PropTypes.object.isRequired,
+    disabled: PropTypes.bool,
+    columns: PropTypes.array.isRequired,
     items: PropTypes.array.isRequired,
-    loadData: PropTypes.function
+    defaultSort: PropTypes.string,
+    loadData: PropTypes.func,
+    showCheckColumn: PropTypes.bool,
+    totalCount: PropTypes.number
 };
 
 export default TableComponent;

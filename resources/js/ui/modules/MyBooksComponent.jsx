@@ -8,7 +8,7 @@ import {defaultSettings, urlSettings} from '../../config/settings';
 import BaseModule from '../../base/BaseModule.jsx';
 
 import PreloaderComponent from '../components/LargePreloaderComponent.jsx';
-import TablerComponent from '../components/TableComponent.jsx';
+import TableComponent from '../components/TableComponent.jsx';
 
 class MyBooksComponent extends BaseModule {
 
@@ -87,13 +87,76 @@ class MyBooksComponent extends BaseModule {
 
     componentWillReceiveProps() {}
 
+    _renderMyBooks() {
+        
+        const {disabled, moduleData} = this.state;
+        const {collection = [], paging = {}} = moduleData;
+        const {totalCount = 0} = paging;
+        
+        let myBooksUI = [];
+
+        myBooksUI.push(
+            <TableComponent
+                events={this.events}
+                items={collection}
+                showCheckColumn={true}
+                totalCount={parseInt(totalCount)}
+                loadData={this._loadData.bind(this)}
+                defaultSort="bookName"
+                columns={[
+                    {
+                        name: 'bookName',
+                        title: 'Название',
+                        sortable: true,
+                        type: 'usual'
+                    },
+                    {
+                        name: 'bookShortDesc',
+                        title: 'О книге',
+                        sortable: false,
+                        type: 'click',
+                        symbolsToShow: 30
+                    },
+                    {
+                        name: 'bookAuthor',
+                        title: 'Автор',
+                        sortable: true,
+                        type: 'usual'
+                    },
+                    {
+                        name: 'bookGenre',
+                        title: 'Жанр',
+                        sortable: true,
+                        type: 'usual'
+                    },
+                    {
+                        name: 'bookSize',
+                        title: 'Размер',
+                        sortable: true,
+                        type: 'numeric'
+                    },
+                    {
+                        name: 'bookParentSite',
+                        title: 'С сайта',
+                        sortable: true,
+                        type: 'link',
+                        linkData: {
+                            url: 'parentSiteUrl',
+                            caption: 'parentSiteName'
+                        }
+                    }
+                ]}
+            />
+        );
+    }
+
     render() {
 
         const {globalLoading} = this.state;
 
         return (
             <div>
-                {globalLoading ? <PreloaderComponent /> : <span>Тут список книг</span>}
+                {globalLoading ? <PreloaderComponent /> : this._renderMyBooks()}
             </div>
         );
     }
