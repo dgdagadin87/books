@@ -21,7 +21,6 @@ class MyBooksComponent extends BaseModule {
 
         this.state = {
             moduleData: localData,
-            areSelected: false,
             disabled: false,
             globalLoading: false
         };
@@ -90,7 +89,7 @@ class MyBooksComponent extends BaseModule {
 
     _renderMyBooks() {
         
-        const {disabled, moduleData, areSelected} = this.state;
+        const {disabled, moduleData} = this.state;
         const {data = {}} = moduleData;
         const {collection = [], paging = {}, filter = {}} = data;
         const {totalCount = 0} = paging;
@@ -106,7 +105,6 @@ class MyBooksComponent extends BaseModule {
                 loadData={this._loadData.bind(this)}
                 sortField={filter.sortField}
                 sortType={filter.sortType}
-                areSelected={areSelected}
                 columns={[
                     {
                         name: 'bookName',
