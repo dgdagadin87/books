@@ -9,44 +9,63 @@ class TableComponent extends BaseComponent {
     constructor (props) {
         super(props);
         
+        this.state = {
+            items: props.items || [],
+            sortField: props.sortField || 'bookName',
+            sortType: props.sortType || 'ASC'
+        };
     }
 
-    componentWillReceiveProps() {}
+    componentWillReceiveProps(nextProps) {
+        
+        this.setStats({
+            items: nextProps.items || [],
+            sortField: nextProps.sortField || 'bookName',
+            sortType: nextProps.sortType || 'ASC'
+        });
+    }
 
-    _getColumns() {
+    _getColumnNames() {
         
         const {columns = []} = this.props;
-        return columns;
+        let columnNames = [];
+        
+        for (let i = 0; i < columns.length; i++) {
+            columnNames.push(columns[i].name);
+        }
+        
+        return columnNames;
     }
 
-    _renderRow(item, rowIndex) {
+    _renderHeader(columnData) {
         
+        const {sortField, sortType} = this.state;
+        const {sortable} = columnData;
+        
+        if (!sortable) {
+            return columnData.title;
+        }
+        
+        
+    }
+
+    _renderTableHeaders () {
+
+        const {columns = []} = this.props;
+        const {items = []} = this.state;
+        const columnNames = this._getColumnNames();
         let columnsArray = [];
-        let count = 0;
         
-        for (let index in item) {
-            count++;
+        for (var i = 0; i < columnNames.length; i++) {
             columnsArray.push(
-                <td key={count}>
-                    {item[index]}
+                <td
+                    key={i}
+                    className={'table__header-cell' + ' header-' + columnNames[i]}
+                >
+                    {this._renderHeader(columns[i])}
                 </td>
             );
         }
-        
-        return <tr key={rowIndex}>{columnsArray}</tr>;
-    }
-
-    _renderTableRows () {
-
-        const {items = []} = this.props;
-        let rowsArray = [];
-        console.log(items);
-        for (let i = 0; i < items.length; i++) {
-            let currentItem = items[i];
-            rowsArray.push(this._renderRow(currentItem, i));
-        }
-        
-        return rowsArray;
     }
 
     render() {
@@ -56,7 +75,7 @@ class TableComponent extends BaseComponent {
                 <table cellSpacing="0" cellPadding="0">
                     <thead />
                     <tbody>
-                        {this._renderTableRows()}
+                        {this._renderTableHeaders()}
                     </tbody>
                 </table>
             </div>

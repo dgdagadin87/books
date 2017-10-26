@@ -33,7 +33,7 @@ class MyBooksComponent extends BaseModule {
 
         let {moduleData} = this.state;
         
-        if (!moduleData.data) {
+        if (moduleData.data.collection === false) {
             this._loadData();
         }
     }
@@ -45,7 +45,7 @@ class MyBooksComponent extends BaseModule {
 
         let firstStateData = null;
         
-        if (!moduleData.data) {
+        if (moduleData.data.collection === false) {
             firstStateData = {
                 globalLoading: true
             };
