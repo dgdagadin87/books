@@ -18,12 +18,19 @@ class MyBooksComponent extends BaseModule {
         this._moduleName = 'mybooks';
         
         const {globalEvents, localData} = props;
+        
+        let dataState = this._getStateData(localData);
 
-        this.state = {
-            moduleData: localData,
-            disabled: false,
-            globalLoading: false
-        };
+        let firstState = Object.assign(
+            {},
+            dataState,
+            {
+                disabled: false,
+                globalLoading: false
+            }
+        );
+
+        this.state = firstState;
 
         globalEvents.trigger('setTitle', 'Мои книги');
     }
@@ -31,21 +38,36 @@ class MyBooksComponent extends BaseModule {
     componentDidMount() {
         super.componentDidMount();
 
-        let {moduleData} = this.state;
+        let {collection} = this.state;
         
-        if (moduleData.data.collection === false) {
+        if (collection === false) {
             this._loadData();
         }
     }
 
+    _getStateData(data) {
+        
+        const {collection, filter, paging} = data;
+        
+        return {
+            collection: collection,
+            sortField: filter.sortField,
+            sortType: filter.sortType,
+            searchTerm: filter.searchTerm,
+            page: paging.page,
+            pages: paging.pages,
+            totalCount: paging.totalCount
+        };
+    }
+
     _loadData() {
         
-        const {moduleData} = this.state;
+        const {collection} = this.state;
         const {globalEvents} = this.props;
 
         let firstStateData = null;
-        
-        if (moduleData.data.collection === false) {
+
+        if (collection === false) {
             firstStateData = {
                 globalLoading: true
             };
@@ -66,33 +88,42 @@ class MyBooksComponent extends BaseModule {
                     if (!result.isSuccess) {
                         this.setStats({
                             globalLoading: false,
-                            dsabled: false
+                            disabled: false
                         });
                         globalEvents.trigger('showError', result);
                         return;
                     }
                     
+                    this.setStats(
+                        Object.assign({}, {
+                            globalLoading: false,
+                            disabled: false
+                        }, this._getStateData(result.data))
+                    );
+
+                    globalEvents.trigger('setModuleData', result.data, 'mybooks');
+                },
+                afterError: (result) => {
                     this.setStats({
                         globalLoading: false,
-                        dsabled: false,
-                        moduleData: result
+                        disabled: false
                     });
-                    
-                    globalEvents.trigger('setModuleData', result, 'mybooks');
-                },
-                afterError: (result) => globalEvents.trigger('showError', result)
+                    globalEvents.trigger('showError', result);
+                }
             }
         );
     }
 
     componentWillReceiveProps() {}
 
+    _onSortChange(sortData) {
+
+        this.setStats(sortData, this._loadData());
+    }
+
     _renderMyBooks() {
         
-        const {disabled, moduleData} = this.state;
-        const {data = {}} = moduleData;
-        const {collection = [], paging = {}, filter = {}} = data;
-        const {totalCount = 0} = paging;
+        const {disabled, collection = [], sortField, sortType} = this.state;
 
         let myBooksUI = [];
 
@@ -100,11 +131,12 @@ class MyBooksComponent extends BaseModule {
             <TableComponent
                 key={1}
                 events={this.events}
-                items={collection}
+                items={!collection ? [] : collection}
                 showCheckColumn={true}
-                loadData={this._loadData.bind(this)}
-                sortField={filter.sortField}
-                sortType={filter.sortType}
+                onSortChange={this._onSortChange.bind(this)}
+                sortField={sortField}
+                sortType={sortType}
+                disabled={disabled}
                 columns={[
                     {
                         name: 'bookName',
@@ -114,8 +146,7 @@ class MyBooksComponent extends BaseModule {
                     {
                         name: 'bookShortDesc',
                         title: 'О книге',
-                        sortable: false,
-                        templateFunction: this._renderShortDesc.bind(this)
+                        sortable: false
                     },
                     {
                         name: 'bookAuthor',
@@ -135,8 +166,7 @@ class MyBooksComponent extends BaseModule {
                     {
                         name: 'bookParentSite',
                         title: 'Взято с сайта',
-                        sortable: false,
-                        templateFunction: this._renderSiteName.bind(this)
+                        sortable: true
                     }
                 ]}
             />
