@@ -35,8 +35,8 @@ var config = {
         colors: true,
         historyApiFallback: true,
         inline: true
-    },
-}
+    }
+};
 
 /*
  * If bundling for production, optimize output

@@ -141,6 +141,7 @@ class MyBooksComponent extends BaseModule {
                 events={this.events}
                 items={!collection ? [] : collection}
                 showCheckColumn={true}
+                controlMode="mybooks"
                 onSortChange={this._onSortChange.bind(this)}
                 sortField={sortField}
                 sortType={sortType}
@@ -149,32 +150,38 @@ class MyBooksComponent extends BaseModule {
                     {
                         name: 'bookName',
                         title: 'Название',
-                        sortable: true
+                        sortable: true,
+                        type: 'usual'
                     },
                     {
                         name: 'bookShortDesc',
                         title: 'О книге',
-                        sortable: false
+                        sortable: false,
+                        type: 'description'
                     },
                     {
                         name: 'bookAuthor',
                         title: 'Автор',
-                        sortable: true
+                        sortable: true,
+                        type: 'usual'
                     },
                     {
                         name: 'bookGenre',
                         title: 'Жанр',
-                        sortable: false
+                        sortable: false,
+                        type: 'usual'
                     },
                     {
                         name: 'bookSize',
                         title: 'Размер',
-                        sortable: true
+                        sortable: true,
+                        type: 'usual'
                     },
                     {
                         name: 'bookParentSite',
                         title: 'Взято с сайта',
-                        sortable: true
+                        sortable: true,
+                        type: 'link'
                     }
                 ]}
             />

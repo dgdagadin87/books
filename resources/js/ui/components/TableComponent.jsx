@@ -6,6 +6,8 @@ import {emptyFunction} from '../../core/coreUtils';
 
 import BaseComponent from '../../base/BaseComponent.jsx';
 
+import RowComponent from './TableRowComponent.jsx';
+
 const SORT_ASC = '▲';
 const SORT_DESC = '▼';
 
@@ -102,7 +104,7 @@ class TableComponent extends BaseComponent {
 
     _renderTableHeaders () {
 
-        const {columns = [], showCheckColumn} = this.props;
+        const {columns = [], showCheckColumn, controlMode} = this.props;
         const {disabled} = this.state;
         const columnNames = this._getColumnNames();
 
@@ -137,13 +139,19 @@ class TableComponent extends BaseComponent {
                 </td>
             );
         }
+        
+        if (controlMode === 'mybooks') {
+            columnsArray.push(
+                <td key={columnNames.length} colSpan="3" className={'table__header-cell'}>&nbsp;</td>
+            );
+        }
 
         return <tr>{columnsArray}</tr>;
     }
     
     _renderTableFilters () {
 
-        const {columns = [], showCheckColumn} = this.props;
+        const {columns = [], showCheckColumn, controlMode} = this.props;
         const {disabled} = this.state;
         const columnNames = this._getColumnNames();
 
@@ -162,10 +170,44 @@ class TableComponent extends BaseComponent {
             );
         }
 
+        if (controlMode === 'mybooks') {
+            filtersArray.push(
+                <td key={columnNames.length} colSpan="3" className={'table__filter-cell'}>&nbsp;</td>
+            );
+        }
+
         return <tr>{filtersArray}</tr>;
+    }
+    
+    _renderTableRows () {
+
+        const {items = [], columns = [], showCheckColumn, controlMode} = this.props;
+        const {disabled} = this.state;
+
+        let rowsArray = [];
+        
+        for (let i = 0; i < items.length; i++) {
+            
+            let currentItem = items[i];
+            
+            rowsArray.push(
+                <RowComponent
+                    key={i}
+                    itemData={currentItem}
+                    showCheckColumn={showCheckColumn}
+                    columns={columns}
+                    controlMode={controlMode}
+                    disabled={disabled}
+                />
+            );
+        }
+        
+        return (rowsArray);
     }
 
     render() {
+
+        const {items = []} = this.state;
 
         return (
             <div className="table__container">
@@ -174,22 +216,24 @@ class TableComponent extends BaseComponent {
                     <tbody>
                         {this._renderTableHeaders()}
                         {this._renderTableFilters()}
+                        {this._renderTableRows()}
                     </tbody>
                 </table>
+                {items.length === 0 ? <div className="table__no-data">Нет данных</div> : null}
             </div>
         );
     }
 };
 
 TableComponent.propTypes = {
+    controlMode: PropTypes.string.isRequired,
     events:  PropTypes.object.isRequired,
     disabled: PropTypes.bool,
     columns: PropTypes.array.isRequired,
     items: PropTypes.array.isRequired,
     defaultSort: PropTypes.string,
     onSortChange: PropTypes.func,
-    showCheckColumn: PropTypes.bool,
-    totalCount: PropTypes.number
+    showCheckColumn: PropTypes.bool
 };
 
 export default TableComponent;
