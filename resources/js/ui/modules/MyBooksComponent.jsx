@@ -62,7 +62,7 @@ class MyBooksComponent extends BaseModule {
 
     _loadData() {
         
-        const {collection} = this.state;
+        const {collection, sortField, sortType, page, searchTerm} = this.state;
         const {globalEvents} = this.props;
 
         let firstStateData = null;
@@ -79,9 +79,17 @@ class MyBooksComponent extends BaseModule {
         }
         this.setStats(firstStateData);
         
+        let queryData = {
+            sortField,
+            sortType,
+            page,
+            searchTerm
+        };
+        
         ajaxQuery(
             {
-                url: CUL(defaultSettings, urlSettings['getMyBooksData'])
+                url: CUL(defaultSettings, urlSettings['getMyBooksData']),
+                data: queryData
             },
             {
                 afterSuccess: (result) => {
@@ -101,7 +109,7 @@ class MyBooksComponent extends BaseModule {
                         }, this._getStateData(result.data))
                     );
 
-                    globalEvents.trigger('setModuleData', result.data, 'mybooks');
+                    this.mounted && globalEvents.trigger('setModuleData', result.data, 'mybooks');
                 },
                 afterError: (result) => {
                     this.setStats({

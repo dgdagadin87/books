@@ -61,9 +61,32 @@ body {
 .table {
     width: 100%;
 }
+.table__filter-cell {
+    padding:10px;
+    text-align: center;
+    border: 1px solid #000;
+    border-right: 0;
+    border-top: 0;
+}
+.table__filter-cell:last-child {
+    border-right: 1px solid #000;
+}
+.table__filter-cell input {
+    width: 75%;
+}
 .table__header-cell {
     padding:10px;
     border: 1px solid #000;
+    border-right: 0;
+}
+.table__header-cell:last-child {
+    border-right: 1px solid #000;
+}
+.table__header-check {
+    padding:10px;
+    border: 1px solid #000;
+    border-right: 0;
+    text-align: center;
 }
 .table__header-sortable {
     cursor: pointer;

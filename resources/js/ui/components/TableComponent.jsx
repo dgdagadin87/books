@@ -90,16 +90,39 @@ class TableComponent extends BaseComponent {
             sortType: sortType
         });
     }
+    
+    _checkClickHandler() {
+
+        const {disabled} = this.state;
+        
+        if (disabled) {
+            return false;
+        }
+    }
 
     _renderTableHeaders () {
 
-        const {columns = []} = this.props;
-        const {items = [], disabled} = this.state;
+        const {columns = [], showCheckColumn} = this.props;
+        const {disabled} = this.state;
         const columnNames = this._getColumnNames();
 
         let columnsArray = [];
         
-        for (var i = 0; i < columnNames.length; i++) {
+        if (showCheckColumn) {
+            columnsArray.push(
+                <td
+                    onClick={(event) => this._checkClickHandler(event)}
+                    key={-1}
+                    className={'table__header-check'}
+                >
+                    <span className="table__check-span">
+                        <input disabled={disabled} type="checkbox" className="header-checkbox" />
+                    </span>
+                </td>
+            );
+        }
+        
+        for (let i = 0; i < columnNames.length; i++) {
             
             let currentColumn = columns[i];
             let isSortable = currentColumn.sortable;
@@ -117,6 +140,30 @@ class TableComponent extends BaseComponent {
 
         return <tr>{columnsArray}</tr>;
     }
+    
+    _renderTableFilters () {
+
+        const {columns = [], showCheckColumn} = this.props;
+        const {disabled} = this.state;
+        const columnNames = this._getColumnNames();
+
+        let filtersArray = [];
+        
+        if (showCheckColumn) {
+            filtersArray.push(<td key={-1} className={'table__filter-cell'}>&nbsp;</td>);
+        }
+        
+        for (let i = 0; i < columnNames.length; i++) {
+            
+            filtersArray.push(
+                <td key={i} className={'table__filter-cell'}>
+                    <input disabled={disabled} type="text" />
+                </td>
+            );
+        }
+
+        return <tr>{filtersArray}</tr>;
+    }
 
     render() {
 
@@ -126,6 +173,7 @@ class TableComponent extends BaseComponent {
                     <thead />
                     <tbody>
                         {this._renderTableHeaders()}
+                        {this._renderTableFilters()}
                     </tbody>
                 </table>
             </div>
