@@ -13,6 +13,7 @@ class SendToMailComponent extends BaseComponent {
         
         this.state = {
             bookId: props.bookId,
+            disabled: props.disabled,
             mailValue: '',
             isHidden: true,
             isError: false
@@ -22,8 +23,9 @@ class SendToMailComponent extends BaseComponent {
     componentWillReceiveProps(nextProps) {
 
         this.setStats({
-            value: nextProps.value || '',
-            isHidden: true
+            bookId: nextProps.bookId || '',
+            isHidden: true,
+            disabled: nextProps.disabled
         });
     }
 
@@ -31,7 +33,11 @@ class SendToMailComponent extends BaseComponent {
         
         event.preventDefault();
         
-        const {isHidden} = this.state;
+        const {isHidden, disabled} = this.state;
+        
+        if (disabled) {
+            return;
+        }
         
         this.setStats({
             isHidden: !isHidden
@@ -81,12 +87,12 @@ class SendToMailComponent extends BaseComponent {
 
     render() {
         
-        const {isHidden, mailValue, isError} = this.state;
+        const {isHidden, mailValue, isError, disabled} = this.state;
 
         return (
             <div className="main-sendmail__container">
                 <a
-                    className="main-sendmail__control"
+                    className={'main-sendmail__control' + (disabled ? ' disabled' : '')}
                     onClick={(event) => this._onShowMailClick(event)}
                     href="#"
                 >

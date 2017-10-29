@@ -98,6 +98,7 @@ class TableRowComponent extends BaseComponent {
                     <SendToMailComponent
                         bookId={itemData['bookId']}
                         sendMail={onSendMail}
+                        disabled={disabled}
                     />
                 </td>
             );

@@ -138,8 +138,8 @@ body {
 }
 .table__content-cell .main-sendmail__content {
     position: absolute;
-    top: 20px;
-    right: 0px;
+    top: -20px;
+    right: -20px;
     padding: 10px;
     z-index:100;
     width: 210px;
@@ -147,7 +147,10 @@ body {
     border: 1px solid #000;
 }
 .table__content-cell .main-sendmail__control {
-    color: green;
+    color: black;
+}
+.table__content-cell .main-sendmail__control.disabled {
+    color: grey !important;
 }
 .table__content-cell .main-sendmail__title {
     position: relative;
