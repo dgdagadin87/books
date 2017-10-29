@@ -13,6 +13,10 @@ function emptyFunction () {
     return;
 };
 
+function checkEmail (value) {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+}
+
 function applyParams (object, config) {
     let property;
     if (object) {
@@ -77,4 +81,4 @@ function ajaxQuery (config, functions){
     $.ajax(cfg);
 }
 
-export {isEmpty, emptyFunction, createUrlLink, applyParams, setDocumentTitle, ajaxQuery};
+export {isEmpty, checkEmail, emptyFunction, createUrlLink, applyParams, setDocumentTitle, ajaxQuery};

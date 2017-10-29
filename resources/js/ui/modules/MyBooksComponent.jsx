@@ -129,6 +129,33 @@ class MyBooksComponent extends BaseModule {
         this.setStats(sortData, this._loadData());
     }
 
+    _onSendMail(bookId, emailToSend) {
+        
+        const {globalEvents} = this.props;
+        
+        ajaxQuery(
+            {
+                url: CUL(defaultSettings, urlSettings['sendToMail']) + bookId,
+                method: 'POST',
+                data: JSON.stringify({
+                    email: emailToSend
+                })
+            },
+            {
+                afterSuccess: (result) => {
+                    if (!result.isSuccess) {
+                        globalEvents.trigger('showError', result);
+                        return;
+                    }
+                    alert('Книга успешно отправлена по почте.');
+                },
+                afterError: (result) => {
+                    globalEvents.trigger('showError', result);
+                }
+            }
+        );
+    }
+
     _renderMyBooks() {
         
         const {disabled, collection = [], sortField, sortType} = this.state;
@@ -143,6 +170,7 @@ class MyBooksComponent extends BaseModule {
                 showCheckColumn={true}
                 controlMode="mybooks"
                 onSortChange={this._onSortChange.bind(this)}
+                onSendMail={this._onSendMail.bind(this)}
                 sortField={sortField}
                 sortType={sortType}
                 disabled={disabled}

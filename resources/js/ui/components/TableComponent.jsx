@@ -181,7 +181,7 @@ class TableComponent extends BaseComponent {
     
     _renderTableRows () {
 
-        const {items = [], columns = [], showCheckColumn, controlMode} = this.props;
+        const {items = [], columns = [], showCheckColumn, controlMode, onSendMail} = this.props;
         const {disabled} = this.state;
 
         let rowsArray = [];
@@ -198,6 +198,7 @@ class TableComponent extends BaseComponent {
                     columns={columns}
                     controlMode={controlMode}
                     disabled={disabled}
+                    onSendMail={onSendMail}
                 />
             );
         }
@@ -233,6 +234,7 @@ TableComponent.propTypes = {
     items: PropTypes.array.isRequired,
     defaultSort: PropTypes.string,
     onSortChange: PropTypes.func,
+    onSendMail: PropTypes.func,
     showCheckColumn: PropTypes.bool
 };
 

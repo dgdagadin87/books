@@ -62,7 +62,7 @@ class DescriptionComponent extends BaseComponent {
                     style={{display: isHidden ? 'none' : 'block'}}
                     className="main-description__content"
                 >
-                    {value}
+                    {value + ' ...'}
                 </div>
             </div>
         );

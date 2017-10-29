@@ -122,6 +122,7 @@ body {
     position: relative;
 }
 .table__content-cell .main-description__content {
+    text-align: justify;
     position: absolute;
     top: 20px;
     left: 0;
@@ -131,6 +132,41 @@ body {
     width: 400px;
     background: #ffffff;
     border: 1px solid blue;
+}
+.table__content-cell .main-sendmail__container {
+    position: relative;
+}
+.table__content-cell .main-sendmail__content {
+    position: absolute;
+    top: 20px;
+    right: 0px;
+    padding: 10px;
+    z-index:100;
+    width: 210px;
+    background: #ffffff;
+    border: 1px solid #000;
+}
+.table__content-cell .main-sendmail__control {
+    color: green;
+}
+.table__content-cell .main-sendmail__title {
+    position: relative;
+}
+.table__content-cell .main-sendmail__close {
+    width: 10px;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    position: absolute;
+}
+.table__content-cell .main-sendmail__input {
+    border: 1px solid blue;
+    background: #fff;
+    outline: 0;
+    width: 130px;
+}
+.table__content-cell .main-sendmail__input.error {
+    border-color: red
 }
 
 .main-footer {

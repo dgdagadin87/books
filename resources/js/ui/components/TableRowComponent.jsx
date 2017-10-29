@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import BaseComponent from '../../base/BaseComponent.jsx';
 
 import DescriptionComponent from './DescriptionComponent.jsx';
+import SendToMailComponent from './SendToMailComponent.jsx';
 
 class TableRowComponent extends BaseComponent {
 
@@ -53,7 +54,7 @@ class TableRowComponent extends BaseComponent {
 
     _renderRow() {
         
-        const {showCheckColumn, columns, controlMode} = this.props;
+        const {showCheckColumn, columns, controlMode, onSendMail} = this.props;
         const {disabled, itemData} = this.state;
         
         let columnsArray = [];
@@ -94,7 +95,10 @@ class TableRowComponent extends BaseComponent {
             );
             columnsArray.push(
                 <td key={columns.length + 1} className="table__content-cell">
-                    <a style={{color:'green'}} onClick={(ev)=>{ev.preventDefault();}} href="#">О.</a>
+                    <SendToMailComponent
+                        bookId={itemData['bookId']}
+                        sendMail={onSendMail}
+                    />
                 </td>
             );
             columnsArray.push(
@@ -120,7 +124,8 @@ TableRowComponent.propTypes = {
     disabled: PropTypes.bool,
     columns: PropTypes.array.isRequired,
     itemData: PropTypes.object.isRequired,
-    showCheckColumn: PropTypes.bool
+    showCheckColumn: PropTypes.bool,
+    onSendMail: PropTypes.func
 };
 
 export default TableRowComponent;
