@@ -26,14 +26,7 @@ class RootComponent extends BaseComponent {
         this._bindEvents();
     }
 
-    componentWillReceiveProps() {
-        /*const {serverData = {}, title = ''} = props;
-
-        this.setState({
-            serverData: serverData,
-            title: title
-        }, (title) => setDocumentTitle(title));*/
-    }
+    componentWillReceiveProps() {}
 
     _bindEvents() {
         

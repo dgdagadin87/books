@@ -27,6 +27,10 @@ var config = {
             {
                 test: /\.css$/,
                 loader: 'style!css'
+            },
+            {
+                test: /\.png$/,
+                loader: "url-loader?mimetype=image/png"
             }
         ]
     },
