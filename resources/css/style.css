@@ -118,6 +118,21 @@ body {
     border-right: 1px solid #000;
 }
 
+.table__content-cell .main-description__container {
+    position: relative;
+}
+.table__content-cell .main-description__content {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    padding: 10px;
+    cursor: pointer;
+    z-index:100;
+    width: 400px;
+    background: #ffffff;
+    border: 1px solid blue;
+}
+
 .main-footer {
     margin-top: 30px;
 }

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import BaseComponent from '../../base/BaseComponent.jsx';
 
+import DescriptionComponent from './DescriptionComponent.jsx';
+
 class TableRowComponent extends BaseComponent {
 
     constructor(props) {
@@ -34,8 +36,17 @@ class TableRowComponent extends BaseComponent {
             columnValue = itemData[name] || '';
             return (
                 <span className="table__content-span">
-                {columnValue}
+                    {columnValue}
                 </span>
+            );
+        }
+        
+        if (type === 'description') {
+            columnValue = itemData[name] || '';
+            return (
+                <DescriptionComponent
+                    value={columnValue}
+                />
             );
         }
     }
