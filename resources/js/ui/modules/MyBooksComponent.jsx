@@ -9,6 +9,7 @@ import BaseModule from '../../base/BaseModule.jsx';
 
 import PreloaderComponent from '../components/LargePreloaderComponent.jsx';
 import TableComponent from '../components/TableComponent.jsx';
+import PagingComponent from '../components/PagingComponent.jsx';
 
 class MyBooksComponent extends BaseModule {
 
@@ -248,6 +249,12 @@ class MyBooksComponent extends BaseModule {
                         type: 'link'
                     }
                 ]}
+            />
+        );
+
+        myBooksUI.push(
+            <PagingComponent
+    
             />
         );
 

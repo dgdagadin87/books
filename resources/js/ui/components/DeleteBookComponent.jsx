@@ -2,8 +2,6 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import {checkEmail} from '../../core/coreUtils';
-
 import BaseComponent from '../../base/BaseComponent.jsx';
 
 class DeleteComponent extends BaseComponent {
