@@ -6,6 +6,7 @@ import BaseComponent from '../../base/BaseComponent.jsx';
 
 import DescriptionComponent from './DescriptionComponent.jsx';
 import SendToMailComponent from './SendToMailComponent.jsx';
+import LinkComponent from './LinkComponent.jsx';
 
 class TableRowComponent extends BaseComponent {
 
@@ -47,6 +48,15 @@ class TableRowComponent extends BaseComponent {
             return (
                 <DescriptionComponent
                     value={columnValue}
+                />
+            );
+        }
+        
+        if (type === 'link') {
+            return (
+                <LinkComponent
+                    parentSiteUrl={itemData['parentSiteUrl'] || ''}
+                    parentSiteName={itemData['parentSiteName'] || ''}
                 />
             );
         }
