@@ -155,6 +155,11 @@ class MyBooksComponent extends BaseModule {
             }
         );
     }
+    
+    _onDeleteBook(bookId) {
+        
+        console.log(bookId);
+    }
 
     _renderMyBooks() {
         
@@ -171,6 +176,7 @@ class MyBooksComponent extends BaseModule {
                 controlMode="mybooks"
                 onSortChange={this._onSortChange.bind(this)}
                 onSendMail={this._onSendMail.bind(this)}
+                onDeleteBook={this._onDeleteBook.bind(this)}
                 sortField={sortField}
                 sortType={sortType}
                 disabled={disabled}

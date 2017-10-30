@@ -181,7 +181,7 @@ class TableComponent extends BaseComponent {
     
     _renderTableRows () {
 
-        const {items = [], columns = [], showCheckColumn, controlMode, onSendMail} = this.props;
+        const {items = [], columns = [], showCheckColumn, controlMode, onSendMail, onDeleteBook} = this.props;
         const {disabled} = this.state;
 
         let rowsArray = [];
@@ -199,6 +199,7 @@ class TableComponent extends BaseComponent {
                     controlMode={controlMode}
                     disabled={disabled}
                     onSendMail={onSendMail}
+                    onDeleteBook={onDeleteBook}
                 />
             );
         }
@@ -235,6 +236,7 @@ TableComponent.propTypes = {
     defaultSort: PropTypes.string,
     onSortChange: PropTypes.func,
     onSendMail: PropTypes.func,
+    onDeleteBook: PropTypes.func,
     showCheckColumn: PropTypes.bool
 };
 

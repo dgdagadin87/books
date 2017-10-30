@@ -7,6 +7,7 @@ import BaseComponent from '../../base/BaseComponent.jsx';
 import DescriptionComponent from './DescriptionComponent.jsx';
 import SendToMailComponent from './SendToMailComponent.jsx';
 import LinkComponent from './LinkComponent.jsx';
+import DeleteBookComponent from './DeleteBookComponent.jsx';
 
 class TableRowComponent extends BaseComponent {
 
@@ -64,7 +65,7 @@ class TableRowComponent extends BaseComponent {
 
     _renderRow() {
         
-        const {showCheckColumn, columns, controlMode, onSendMail} = this.props;
+        const {showCheckColumn, columns, controlMode, onSendMail, onDeleteBook} = this.props;
         const {disabled, itemData} = this.state;
         
         let columnsArray = [];
@@ -114,7 +115,11 @@ class TableRowComponent extends BaseComponent {
             );
             columnsArray.push(
                 <td key={columns.length + 2} className="table__content-cell">
-                    <a style={{color:'red'}} onClick={(ev)=>{ev.preventDefault();}} href="#">У.</a>
+                    <DeleteBookComponent
+                        bookId={itemData['bookId']}
+                        deleteBook={onDeleteBook}
+                        disabled={disabled}
+                    />
                 </td>
             );
         }
