@@ -179,6 +179,24 @@ body {
     color: grey !important;
 }
 
+
+.main-paging__container {
+    padding: 10px;
+}
+.main-paging__page {
+    padding: 3px;
+    color: blue;
+}
+.main-paging__page.disabled {
+    color: grey !important;
+}
+.main-paging__current-page {
+    padding: 3px;
+}
+.main-paging__dotted {
+    padding: 3px;
+}
+
 .main-footer {
     margin-top: 30px;
 }

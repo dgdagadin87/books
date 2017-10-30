@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {ajaxQuery, createUrlLink as CUL} from '../../core/coreUtils';
-import {defaultSettings, urlSettings} from '../../config/settings';
+import {defaultSettings, urlSettings, pageSettings} from '../../config/settings';
 
 import BaseModule from '../../base/BaseModule.jsx';
 
@@ -129,6 +129,11 @@ class MyBooksComponent extends BaseModule {
 
         this.setStats(sortData, this._loadData());
     }
+    
+    _onPageChange(pageData) {
+        
+        this.setStats(pageData, this._loadData());
+    }
 
     _onSendMail(bookId, emailToSend) {
         
@@ -194,7 +199,7 @@ class MyBooksComponent extends BaseModule {
 
     _renderMyBooks() {
         
-        const {disabled, collection = [], sortField, sortType} = this.state;
+        const {disabled, collection = [], sortField, sortType, page, pages} = this.state;
 
         let myBooksUI = [];
 
@@ -254,7 +259,12 @@ class MyBooksComponent extends BaseModule {
 
         myBooksUI.push(
             <PagingComponent
-    
+                key={2}
+                pageSettings={pageSettings}
+                page={page}
+                pages={pages}
+                disabled={disabled}
+                onChange={this._onPageChange.bind(this)}
             />
         );
 
