@@ -158,7 +158,37 @@ class MyBooksComponent extends BaseModule {
     
     _onDeleteBook(bookId) {
         
-        console.log(bookId);
+        const {globalEvents} = this.props;
+        
+        if (!confirm('Вы действительно хотите удалить книгу из раздела "Мои книги"?')) {
+            return;
+        }
+        
+        this.setStats({
+            disabled: true
+        });
+        
+        ajaxQuery(
+            {
+                url: CUL(defaultSettings, urlSettings['deleteMyBook']) + bookId
+            },
+            {
+                afterSuccess: (result) => {
+                    if (!result.isSuccess) {
+                        this.setStats({
+                            disabled: false
+                        });
+                        globalEvents.trigger('showError', result);
+                        return;
+                    }
+                    alert('Книга успешно удалена.');
+                    this._loadData();
+                },
+                afterError: (result) => {
+                    globalEvents.trigger('showError', result);
+                }
+            }
+        );
     }
 
     _renderMyBooks() {

@@ -9,7 +9,8 @@ let urlSettings = {
     'getCommonData' : '/common',
     'getMyBooksData': '/mybooks',
     'sendToMail': '/sendtomail/',
-    'downloadBook': '/download/'
+    'downloadBook': '/download/',
+    'deleteMyBook': '/deletemybook/'
 };
 
 export {defaultSettings, urlSettings};
