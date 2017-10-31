@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 import PropTypes from 'prop-types';
 
@@ -14,7 +15,10 @@ class PagingComponent extends BaseComponent {
         this.state = {
             page: props.page || 1,
             pages: props.pages || 1,
-            disabled: props.disabled
+            disabled: props.disabled,
+            isError: false,
+            pageValue: props.page || 1,
+            isWindowHidden: true
         };
     }
 
@@ -23,7 +27,68 @@ class PagingComponent extends BaseComponent {
         this.setStats({
             page: nextProps.page || 1,
             pages: nextProps.pages || 1,
-            disabled: nextProps.disabled
+            disabled: nextProps.disabled,
+            isError: false,
+            pageValue: nextProps.page || 1,
+            isWindowHidden: true
+        });
+    }
+    
+    componentDidMount() {
+
+        super.componentDidMount();
+
+        document.addEventListener('click', this._handlerHidePopup.bind(this));
+    }
+
+    componentWillUnmount() {
+        
+        super.componentWillUnmount();
+
+        document.removeEventListener('click', this._handlerHidePopup.bind(this));
+    }
+    
+    _handlerHidePopup(ev) {
+
+        if ($(ev.target).hasClass('paging-prevent')) {
+            return;
+        }
+
+        let {isWindowHidden} = this.state;
+        
+        if (isWindowHidden) {
+            return;
+        }
+        
+        this.setStats({
+            isWindowHidden: true
+        });
+    }
+
+    _onRefresh() {
+
+        const {onRefresh} = this.props;
+        const {disabled} = this.state;
+        
+        if (disabled) {
+            return;
+        }
+        
+        if (onRefresh) {
+            onRefresh();
+        }
+    }
+    
+    _onToPage() {
+
+        const {isWindowHidden, disabled} = this.state;
+
+        if (disabled) {
+            return;
+        }
+        
+        this.setStats({
+            isWindowHidden: !isWindowHidden
         });
     }
 
@@ -40,8 +105,64 @@ class PagingComponent extends BaseComponent {
         
         if (onChange) {
             onChange({
-                page:pageNumber
+                page: pageNumber
             });
+        }
+    }
+
+    _validatePage() {
+        
+        let {pageValue, pages} = this.state;
+        
+        let isPageError = !pageValue || !Number(pageValue) || (pageValue < 1) || (pageValue > pages);
+        
+        this.setStats({
+            isError: isPageError
+        });
+    }
+
+    _handleInput(event) {
+
+        let value = event.target.value;
+
+        this.setStats({
+            pageValue: value,
+            isError: false
+        }, () => this._validatePage(value));
+    }
+
+    _goToPage() {
+        
+        const {onChange} = this.props;
+        const {disabled, page, pageValue} = this.state;
+        
+        if (disabled) {
+            return;
+        }
+
+        this.setStats({
+            isWindowHidden: true
+        });
+        
+        if (onChange && page !== pageValue) {
+            onChange({
+                page: +pageValue
+            });
+        }
+    }
+
+    _handleKeyPress(event) {
+        
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            
+            const {disabled, isError} = this.state;
+            
+            if (disabled || isError) {
+                return;
+            }
+            
+            this._goToPage();
         }
     }
 
@@ -184,13 +305,51 @@ class PagingComponent extends BaseComponent {
 
     render() {
         
-        const {disabled} = this.state;
+        const {disabled, isError, pageValue, isWindowHidden} = this.state;
 
         return (
             <div className="main-paging__container">
-                {this._renderPrevPage()}
-                {this._renderNumbers()}
-                {this._renderNextPage()}
+                <div className="main-paging__left">
+                    {this._renderPrevPage()}
+                    {this._renderNumbers()}
+                    {this._renderNextPage()}
+                </div>
+                <div className="main-paging__right">
+                    <div
+                        className={'main-paging__refresh' + ( disabled ? ' disabled' : '' )}
+                        onClick={this._onRefresh.bind(this)}
+                        title="Обновить"
+                    >
+                        Обновить
+                    </div>
+                    <div
+                        className={'paging-prevent main-paging__to-page' + ( disabled ? ' disabled' : '' )}
+                        onClick={this._onToPage.bind(this)}
+                        title="Перейти на страницу"
+                    >
+                        Перейти
+                    </div>
+                    <div className="main-paging__to-page-window paging-prevent" style={{display: isWindowHidden ? 'none' : 'block'}}>
+                        <div className="main-paging__to-page-title paging-prevent">На страницу</div>
+                        <div className="main-paging__to-page-form paging-prevent">
+                            <input
+                                type="text"
+                                value={pageValue}
+                                onChange={this._handleInput.bind(this)}
+                                onKeyPress={this._handleKeyPress.bind(this)}
+                                className={'paging-prevent main-paging__to-paging-input' + (isError ? ' error' : '')}
+                            />
+                            <button
+                                onClick={this._goToPage.bind(this)}
+                                disabled={isError || !pageValue}
+                                className="paging-prevent main-paging__to-page-button"
+                            >
+                                OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div className="clear-both" />
             </div>
         );
     }
@@ -201,7 +360,8 @@ PagingComponent.propTypes = {
     pages: PropTypes.number.isRequired,
     pageSettings: PropTypes.object.isRequired,
     disabled: PropTypes.bool.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    onRefresh: PropTypes.func.isRequired
 };
 
 export default PagingComponent;

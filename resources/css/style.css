@@ -183,6 +183,60 @@ body {
 .main-paging__container {
     padding: 10px;
 }
+.main-paging__left {
+    float: left;
+    width: 800px;
+}
+.main-paging__right {
+    width: 200px;
+    margin-left: 800px;
+    position: relative;
+}
+.main-paging__refresh {
+    position: absolute;
+    width: 75px;
+    height: 20px;
+    border: 1px solid black;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    padding-left: 5px;
+}
+.main-paging__refresh.disabled {
+    background: #eee;
+    color: grey;
+}
+.main-paging__to-page {
+    position: absolute;
+    width: 75px;
+    height: 20px;
+    border: 1px solid black;
+    top: 0;
+    left: 95px;
+    cursor: pointer;
+    padding-left: 5px;
+}
+.main-paging__to-page.disabled {
+    background: #eee;
+    color: grey;
+}
+.main-paging__to-page-window {
+    position: absolute;
+    border: 1px solid #000000;
+    top: -45px;
+    right: 20px;
+    z-index: 100;
+    background: #fff;
+    padding: 10px;
+}
+.main-paging__to-paging-input {
+    width: 40px;
+    border: 1px solid #000;
+    outline: 0;
+}
+.main-paging__to-paging-input.error {
+    border: 1px solid red;
+}
 .main-paging__page {
     padding: 3px;
     color: blue;

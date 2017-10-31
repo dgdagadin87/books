@@ -265,6 +265,7 @@ class MyBooksComponent extends BaseModule {
                 pages={pages}
                 disabled={disabled}
                 onChange={this._onPageChange.bind(this)}
+                onRefresh={this._loadData.bind(this)}
             />
         );
 
