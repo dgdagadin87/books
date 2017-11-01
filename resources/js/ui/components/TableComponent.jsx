@@ -2,6 +2,8 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
+import {Link} from 'react-router-dom';
+
 import {emptyFunction} from '../../core/coreUtils';
 
 import BaseComponent from '../../base/BaseComponent.jsx';
@@ -232,6 +234,31 @@ class TableComponent extends BaseComponent {
             </tr>
         );
     }
+    
+    _renderTablePanel () {
+
+        const {controlMode, columns, showCheckColumn, totalCount} = this.props;
+
+        let colSpan = 0;
+        
+        colSpan += columns.length;
+        
+        if (showCheckColumn) {
+            colSpan += 1;
+        }
+
+        if (controlMode === 'mybooks') {
+            colSpan += 3;
+        }
+
+        return (
+            <tr>
+                <td colSpan={colSpan} className="table__panel-cell">
+                    <Link to={'/addbook'}>{'Добавить книгу'}</Link>
+                </td>
+            </tr>
+        );
+    }
 
     render() {
 
@@ -242,8 +269,8 @@ class TableComponent extends BaseComponent {
                 <table cellSpacing="0" cellPadding="0" className="table">
                     <thead />
                     <tbody>
+                        {this._renderTablePanel()}
                         {this._renderTableHeaders()}
-                        {this._renderTableFilters()}
                         {this._renderTableRows()}
                         {this._renderTableTotal()}
                     </tbody>
