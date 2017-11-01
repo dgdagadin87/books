@@ -9,6 +9,7 @@ import {emptyFunction} from '../../core/coreUtils';
 import BaseComponent from '../../base/BaseComponent.jsx';
 
 import RowComponent from './TableRowComponent.jsx';
+import PreloaderComponent from './SmallPreloaderComponent.jsx';
 
 const SORT_ASC = '▲';
 const SORT_DESC = '▼';
@@ -259,6 +260,13 @@ class TableComponent extends BaseComponent {
             </tr>
         );
     }
+    
+    _renderPreloader () {
+
+        const {disabled} = this.state;
+
+        return disabled ? (<PreloaderComponent />) : (null);
+    }
 
     render() {
 
@@ -266,6 +274,7 @@ class TableComponent extends BaseComponent {
 
         return (
             <div className="table__container">
+                {this._renderPreloader()}
                 <table cellSpacing="0" cellPadding="0" className="table">
                     <thead />
                     <tbody>

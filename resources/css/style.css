@@ -286,6 +286,17 @@ body {
     padding: 3px;
 }
 
+.main-preloader__small {
+    position: fixed;
+    left: 50%;
+    top: 50px;
+    width: 150px;
+    padding: 10px;
+    border: 1px solid #000000;
+    z-index: 101;
+    background: #fff;
+}
+
 .main-footer {
     margin-top: 30px;
 }
