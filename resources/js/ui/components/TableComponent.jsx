@@ -177,6 +177,7 @@ class TableComponent extends BaseComponent {
         }
 
         return <tr>{filtersArray}</tr>;
+        
     }
     
     _renderTableRows () {
@@ -206,6 +207,31 @@ class TableComponent extends BaseComponent {
         
         return (rowsArray);
     }
+    
+    _renderTableTotal () {
+
+        const {controlMode, columns, showCheckColumn, totalCount} = this.props;
+
+        let colSpan = 0;
+        
+        colSpan += columns.length;
+        
+        if (showCheckColumn) {
+            colSpan += 1;
+        }
+
+        if (controlMode === 'mybooks') {
+            colSpan += 3;
+        }
+
+        return (
+            <tr>
+                <td colSpan={colSpan} className="table__total-cell">
+                    Всего книг: {totalCount}
+                </td>
+            </tr>
+        );
+    }
 
     render() {
 
@@ -219,6 +245,7 @@ class TableComponent extends BaseComponent {
                         {this._renderTableHeaders()}
                         {this._renderTableFilters()}
                         {this._renderTableRows()}
+                        {this._renderTableTotal()}
                     </tbody>
                 </table>
                 {items.length === 0 ? <div className="table__no-data">Нет данных</div> : null}

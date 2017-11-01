@@ -78,6 +78,7 @@ body {
     padding:10px;
     border: 1px solid #000;
     border-right: 0;
+    background: #fafafa;
 }
 .table__header-cell:last-child {
     border-right: 1px solid #000;
@@ -177,6 +178,13 @@ body {
 }
 .table__content-cell .main-deletebook__control.disabled {
     color: grey !important;
+}
+.table__total-cell {
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid black;
+    border-top: none;
+    background: #fafafa;
 }
 
 

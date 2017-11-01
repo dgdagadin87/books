@@ -199,7 +199,7 @@ class MyBooksComponent extends BaseModule {
 
     _renderMyBooks() {
         
-        const {disabled, collection = [], sortField, sortType, page, pages} = this.state;
+        const {disabled, collection = [], sortField, sortType, page, pages, totalCount} = this.state;
 
         let myBooksUI = [];
 
@@ -209,6 +209,7 @@ class MyBooksComponent extends BaseModule {
                 events={this.events}
                 items={!collection ? [] : collection}
                 showCheckColumn={true}
+                totalCount={totalCount}
                 controlMode="mybooks"
                 onSortChange={this._onSortChange.bind(this)}
                 onSendMail={this._onSendMail.bind(this)}
