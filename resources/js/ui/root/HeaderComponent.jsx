@@ -31,7 +31,7 @@ export default class HeaderComponent extends BaseComponent {
     _renderHeaderUrls() {
         
         const {serverData} = this.state;
-        const {user, headers} = serverData
+        const {user, headers} = serverData;
         const {userIsAdmin} = user;
         let menuLinks = [];
         

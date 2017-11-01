@@ -124,6 +124,41 @@ class TableRowComponent extends BaseComponent {
             );
         }
         
+        if (controlMode === 'allbooks') {
+            const {isAdmin} = this.props;
+            columnsArray.push(
+                <td key={columns.length} className="table__content-cell">
+                    <a onClick={(ev)=>{ev.preventDefault();}} href="#">С.</a>
+                </td>
+            );
+            columnsArray.push(
+                <td key={columns.length + 1} className="table__content-cell">
+                    <SendToMailComponent
+                        bookId={itemData['bookId']}
+                        sendMail={onSendMail}
+                        disabled={disabled}
+                    />
+                </td>
+            );
+            columnsArray.push(
+                <td key={columns.length + 2} className="table__content-cell">
+                    <a onClick={(ev)=>{ev.preventDefault();}} href="#">Д.</a>
+                </td>
+            );
+            if (isAdmin) {
+                columnsArray.push(
+                    <td key={columns.length + 3} className="table__content-cell">
+                        <DeleteBookComponent
+                            bookId={itemData['bookId']}
+                            deleteBook={onDeleteBook}
+                            disabled={disabled}
+                        />
+                    </td>
+                );
+            }
+            
+        }
+        
         return columnsArray;
     }
 
@@ -138,6 +173,7 @@ class TableRowComponent extends BaseComponent {
 TableRowComponent.propTypes = {
     controlMode: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
+    isAdmin: PropTypes.bool,
     columns: PropTypes.array.isRequired,
     itemData: PropTypes.object.isRequired,
     showCheckColumn: PropTypes.bool,

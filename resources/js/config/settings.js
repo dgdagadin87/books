@@ -15,6 +15,7 @@ let pageSettings = {
 let urlSettings = {
     'getCommonData' : '/common',
     'getMyBooksData': '/mybooks',
+    'getAllBooksData': '/allbooks',
     'sendToMail': '/sendtomail/',
     'downloadBook': '/download/',
     'deleteMyBook': '/deletemybook/'

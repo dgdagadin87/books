@@ -205,6 +205,10 @@ class MyBooksComponent extends BaseModule {
 
     _renderMyBooks() {
         
+        const {serverData} = this.props;
+        const {user} = serverData;
+        const {userIsAdmin} = user;
+        
         const {
             disabled,
             collection = [],
@@ -231,6 +235,7 @@ class MyBooksComponent extends BaseModule {
             <TableComponent
                 key={1}
                 events={this.events}
+                isAdmin={userIsAdmin}
                 items={!collection ? [] : collection}
                 showCheckColumn={true}
                 totalCount={totalCount}

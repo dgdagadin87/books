@@ -148,6 +148,13 @@ class TableComponent extends BaseComponent {
                 <td key={columnNames.length} colSpan="3" className={'table__header-cell'}>&nbsp;</td>
             );
         }
+        if (controlMode === 'allbooks') {
+            const {isAdmin = false} = this.props;
+            let allColSpan = isAdmin ? 4 : 3;
+            columnsArray.push(
+                <td key={columnNames.length} colSpan={allColSpan} className={'table__header-cell'}>&nbsp;</td>
+            );
+        }
 
         return <tr>{columnsArray}</tr>;
     }
@@ -178,6 +185,13 @@ class TableComponent extends BaseComponent {
                 <td key={columnNames.length} colSpan="3" className={'table__filter-cell'}>&nbsp;</td>
             );
         }
+        if (controlMode === 'allbooks') {
+            const {isAdmin = false} = this.props;
+            let allColSpan = isAdmin ? 4 : 3;
+            filtersArray.push(
+                <td key={columnNames.length} colSpan={allColSpan} className={'table__header-cell'}>&nbsp;</td>
+            );
+        }
 
         return <tr>{filtersArray}</tr>;
         
@@ -185,7 +199,15 @@ class TableComponent extends BaseComponent {
     
     _renderTableRows () {
 
-        const {items = [], columns = [], showCheckColumn, controlMode, onSendMail, onDeleteBook} = this.props;
+        const {
+            items = [],
+            columns = [],
+            showCheckColumn,
+            controlMode,
+            onSendMail,
+            onDeleteBook,
+            isAdmin
+        } = this.props;
         const {disabled} = this.state;
 
         let rowsArray = [];
@@ -197,6 +219,7 @@ class TableComponent extends BaseComponent {
             rowsArray.push(
                 <RowComponent
                     key={i}
+                    isAdmin={isAdmin}
                     itemData={currentItem}
                     showCheckColumn={showCheckColumn}
                     columns={columns}
@@ -226,6 +249,11 @@ class TableComponent extends BaseComponent {
         if (controlMode === 'mybooks') {
             colSpan += 3;
         }
+        if (controlMode === 'allbooks') {
+            const {isAdmin = false} = this.props;
+            let allColSpan = isAdmin ? 4 : 3;
+            colSpan += allColSpan;
+        }
 
         return (
             <tr>
@@ -250,6 +278,11 @@ class TableComponent extends BaseComponent {
 
         if (controlMode === 'mybooks') {
             colSpan += 3;
+        }
+        if (controlMode === 'allbooks') {
+            const {isAdmin = false} = this.props;
+            let allColSpan = isAdmin ? 4 : 3;
+            colSpan += allColSpan;
         }
 
         return (
@@ -300,7 +333,8 @@ TableComponent.propTypes = {
     onSortChange: PropTypes.func,
     onSendMail: PropTypes.func,
     onDeleteBook: PropTypes.func,
-    showCheckColumn: PropTypes.bool
+    showCheckColumn: PropTypes.bool,
+    isAdmin: PropTypes.bool
 };
 
 export default TableComponent;
