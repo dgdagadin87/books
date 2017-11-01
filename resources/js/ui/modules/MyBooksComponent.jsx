@@ -79,7 +79,7 @@ class MyBooksComponent extends BaseModule {
             };
         }
         this.setStats(firstStateData);
-        
+
         let queryData = {
             sortField,
             sortType,
@@ -127,12 +127,12 @@ class MyBooksComponent extends BaseModule {
 
     _onSortChange(sortData) {
 
-        this.setStats(sortData, this._loadData());
+        this.setState(sortData, this._loadData.bind(this));
     }
     
     _onPageChange(pageData) {
         
-        this.setStats(pageData, this._loadData());
+        this.setStats(pageData, this._loadData.bind(this));
     }
 
     _onSendMail(bookId, emailToSend) {
