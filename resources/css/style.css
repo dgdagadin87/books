@@ -53,6 +53,23 @@ body {
     padding: 10px;
 }
 
+.main-search__container {
+    position: relative;
+    padding: 10px;
+}
+.main-search__text-field {
+    width: 970px;
+    padding: 3px;
+}
+.main-search__button {
+    display: block;
+    position: absolute;
+    z-index: 10;
+    padding: 5px;
+    top: 8px;
+    right: 10px;
+}
+
 .table__container {
     position: relative;
     padding: 10px;
@@ -195,7 +212,7 @@ body {
 }
 .table__panel-cell a {
     text-decoration: none;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .main-paging__container {

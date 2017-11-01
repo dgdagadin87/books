@@ -8,6 +8,7 @@ import {defaultSettings, urlSettings, pageSettings} from '../../config/settings'
 import BaseModule from '../../base/BaseModule.jsx';
 
 import PreloaderComponent from '../components/LargePreloaderComponent.jsx';
+import SearchComponent from '../components/SearchComponent.jsx';
 import TableComponent from '../components/TableComponent.jsx';
 import PagingComponent from '../components/PagingComponent.jsx';
 
@@ -127,12 +128,17 @@ class MyBooksComponent extends BaseModule {
 
     _onSortChange(sortData) {
 
-        this.setState(sortData, this._loadData.bind(this));
+        this.setStats(sortData, this._loadData.bind(this));
     }
     
     _onPageChange(pageData) {
         
         this.setStats(pageData, this._loadData.bind(this));
+    }
+    
+    _onSearch(searchData) {
+
+        this.setStats(searchData, this._loadData.bind(this));
     }
 
     _onSendMail(bookId, emailToSend) {
@@ -199,9 +205,27 @@ class MyBooksComponent extends BaseModule {
 
     _renderMyBooks() {
         
-        const {disabled, collection = [], sortField, sortType, page, pages, totalCount} = this.state;
+        const {
+            disabled,
+            collection = [],
+            sortField,
+            sortType,
+            page,
+            pages,
+            totalCount,
+            searchTerm
+        } = this.state;
 
         let myBooksUI = [];
+
+        myBooksUI.push(
+            <SearchComponent
+                key={0}
+                searchTerm={searchTerm}
+                onSearch={this._onSearch.bind(this)}
+                disabled={disabled}
+            />
+        );
 
         myBooksUI.push(
             <TableComponent
