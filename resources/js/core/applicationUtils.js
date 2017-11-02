@@ -32,5 +32,22 @@ export function getDefaultState(moduleName) {
                     totalCount: 0
                 }
             };
+            
+        case 'addbook':
+            return {
+                isLoaded: false,
+                collection: false,
+                sites: false,
+                filter: {
+                    page: 1,
+                    searchTerm: '',
+                    selectedSiteId: -1
+                },
+                paging: {
+                    page: 1,
+                    pages: 1,
+                    totalCount: 0
+                }
+            };
     }
 };
