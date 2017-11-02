@@ -18,7 +18,9 @@ let urlSettings = {
     'getAllBooksData': '/allbooks',
     'sendToMail': '/sendtomail/',
     'downloadBook': '/download/',
-    'deleteMyBook': '/deletemybook/'
+    'addToMyBooks': '/addtomybooks/',
+    'deleteMyBook': '/deletebook/',
+    'deleteBook': '/deletebook/'
 };
 
 export {defaultSettings, pageSettings, urlSettings};

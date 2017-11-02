@@ -7,6 +7,7 @@ import BaseComponent from '../../base/BaseComponent.jsx';
 import DescriptionComponent from './DescriptionComponent.jsx';
 import SendToMailComponent from './SendToMailComponent.jsx';
 import LinkComponent from './LinkComponent.jsx';
+import AddBookComponent from './AddBookComponent.jsx';
 import DeleteBookComponent from './DeleteBookComponent.jsx';
 
 class TableRowComponent extends BaseComponent {
@@ -65,7 +66,7 @@ class TableRowComponent extends BaseComponent {
 
     _renderRow() {
         
-        const {showCheckColumn, columns, controlMode, onSendMail, onDeleteBook} = this.props;
+        const {showCheckColumn, columns, controlMode, onSendMail, onDeleteBook, onAddBook} = this.props;
         const {disabled, itemData} = this.state;
         
         let columnsArray = [];
@@ -142,7 +143,11 @@ class TableRowComponent extends BaseComponent {
             );
             columnsArray.push(
                 <td key={columns.length + 2} className="table__content-cell">
-                    <a onClick={(ev)=>{ev.preventDefault();}} href="#">Д.</a>
+                    <AddBookComponent
+                        bookId={itemData['bookId']}
+                        addBook={onAddBook}
+                        disabled={disabled}
+                    />
                 </td>
             );
             if (isAdmin) {
@@ -177,7 +182,9 @@ TableRowComponent.propTypes = {
     columns: PropTypes.array.isRequired,
     itemData: PropTypes.object.isRequired,
     showCheckColumn: PropTypes.bool,
-    onSendMail: PropTypes.func
+    onSendMail: PropTypes.func,
+    onAddBook: PropTypes.func,
+    onDeleteBook: PropTypes.func
 };
 
 export default TableRowComponent;

@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import {ajaxQuery, createUrlLink as CUL} from '../../core/coreUtils';
 import {defaultSettings, urlSettings, pageSettings} from '../../config/settings';
 
+import {getDefaultState} from '../../core/applicationUtils';
+
 import BaseModule from '../../base/BaseModule.jsx';
 
 import PreloaderComponent from '../components/LargePreloaderComponent.jsx';
@@ -168,6 +170,47 @@ class AllBooksComponent extends BaseModule {
         );
     }
     
+    _onAddBook(bookId) {
+        
+        const {globalEvents} = this.props;
+
+        if (!confirm('Вы действительно хотите добавить книгу в раздел "Мои книги"?')) {
+            return;
+        }
+
+        this.setStats({
+            disabled: true
+        });
+
+        ajaxQuery(
+            {
+                url: CUL(defaultSettings, urlSettings['addToMyBooks']) + bookId,
+                method: 'GET'
+            },
+            {
+                afterSuccess: (result) => {
+
+                    this.setStats({
+                        disabled: false
+                    });
+                    
+                    if (!result.isSuccess) {
+                        globalEvents.trigger('showError', result);
+                        return;
+                    }
+                    // Перезагружаем модуль "Мои книги", чтоб увидеть изменения
+                    globalEvents.trigger('setModuleData', getDefaultState('mybooks'), 'mybooks');
+                    
+                    // Выводим сообщение об успешности операции
+                    alert('Книга успешно добавлена в раздел "Мои книги".');
+                },
+                afterError: (result) => {
+                    globalEvents.trigger('showError', result);
+                }
+            }
+        );
+    }
+    
     _onDeleteBook(bookId) {
         
         const {globalEvents} = this.props;
@@ -243,6 +286,7 @@ class AllBooksComponent extends BaseModule {
                 onSortChange={this._onSortChange.bind(this)}
                 onSendMail={this._onSendMail.bind(this)}
                 onDeleteBook={this._onDeleteBook.bind(this)}
+                onAddBook={this._onAddBook.bind(this)}
                 sortField={sortField}
                 sortType={sortType}
                 disabled={disabled}

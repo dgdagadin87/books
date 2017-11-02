@@ -205,6 +205,7 @@ class TableComponent extends BaseComponent {
             showCheckColumn,
             controlMode,
             onSendMail,
+            onAddBook,
             onDeleteBook,
             isAdmin
         } = this.props;
@@ -226,6 +227,7 @@ class TableComponent extends BaseComponent {
                     controlMode={controlMode}
                     disabled={disabled}
                     onSendMail={onSendMail}
+                    onAddBook={onAddBook}
                     onDeleteBook={onDeleteBook}
                 />
             );
@@ -332,6 +334,7 @@ TableComponent.propTypes = {
     defaultSort: PropTypes.string,
     onSortChange: PropTypes.func,
     onSendMail: PropTypes.func,
+    onAddBook: PropTypes.func,
     onDeleteBook: PropTypes.func,
     showCheckColumn: PropTypes.bool,
     isAdmin: PropTypes.bool

@@ -10,7 +10,7 @@ export default class PreloaderComponent extends BaseComponent {
 
         return (
             <div className="main-preloader__small">
-                Идет загрузка данных...
+                Выполнение запроса...
             </div>
         );
     }

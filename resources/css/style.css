@@ -189,6 +189,13 @@ body {
 .table__content-cell .main-sendmail__input.error {
     border-color: red;
 }
+.table__content-cell .main-addbook__content {}
+.table__content-cell .main-addbook__control {
+    color: green;
+}
+.table__content-cell .main-addbook__control.disabled {
+    color: grey !important;
+}
 .table__content-cell .main-deletebook__content {}
 .table__content-cell .main-deletebook__control {
     color: red;

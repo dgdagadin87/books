@@ -11,10 +11,10 @@ class AddBookComponent extends BaseModule {
         
         const {globalEvents} = this.props;
         
-        globalEvents.trigger('setTitle', 'Добавить книгу');
+        globalEvents.trigger('setTitle', 'Добавление книги');
     }
 
-    componentWillReceiveProps(props) {}
+    componentWillReceiveProps() {}
 
     render() {
 
