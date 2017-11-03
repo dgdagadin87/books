@@ -271,6 +271,7 @@ class AllBooksComponent extends BaseModule {
                 searchTerm={searchTerm}
                 onSearch={this._onSearch.bind(this)}
                 disabled={disabled}
+                mode="simple"
             />
         );
 

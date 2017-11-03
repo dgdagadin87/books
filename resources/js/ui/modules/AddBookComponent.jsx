@@ -2,13 +2,14 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import {ajaxQuery, createUrlLink as CUL} from '../../core/coreUtils';
+import {isEmpty, ajaxQuery, createUrlLink as CUL} from '../../core/coreUtils';
 import {defaultSettings, urlSettings, pageSettings} from '../../config/settings';
 
 import BaseModule from '../../base/BaseModule.jsx';
 
 import PreloaderComponent from '../components/LargePreloaderComponent.jsx';
 import SelectSiteComponent from '../components/SelectSiteComponent.jsx';
+import SearchComponent from '../components/SearchComponent.jsx';
 
 class AddBookComponent extends BaseModule {
 
@@ -26,7 +27,9 @@ class AddBookComponent extends BaseModule {
             dataState,
             {
                 disabled: false,
-                globalLoading: false
+                globalLoading: false,
+                isSelectError: false,
+                isSearchError: false
             }
         );
 
@@ -132,13 +135,44 @@ class AddBookComponent extends BaseModule {
     }
     
     _onSiteChange(siteId) {
+        this.setStats({
+            isSelectError: parseInt(siteId) === -1 ? true : false,
+            selectedSiteId: siteId
+        });
+    }
+    
+    _onSiteSearch(searchData) {
         
-        console.log(siteId);
+        const {selectedSiteId} = this.state;
+        let {searchTerm} = searchData;
+        let stateObject = {};
+        let error = false;
+
+        stateObject['searchTerm'] = searchTerm;
+        
+        if (isEmpty(searchTerm)) {
+            error = true;
+            stateObject['isSearchError'] = true;
+        }
+        
+        if (parseInt(selectedSiteId) === -1) {
+            error = true;
+            stateObject['isSelectError'] = true;
+        }
+        
+        this.setStats(stateObject);
+        
+        if (error) {
+            return false;
+        }
+        
+        // load data
+        this._loadData();
     }
 
     _renderSearchPanel() {
         
-        const {sites = [], searchTerm, disabled, selectedSiteId} = this.state;
+        const {sites = [], searchTerm, disabled, selectedSiteId, isSelectError, isSearchError} = this.state;
 
         return(
             <div key={0} className="main-addbook__search-panel">
@@ -146,18 +180,46 @@ class AddBookComponent extends BaseModule {
                     Поиск по книгам
                 </div>
                 <div className="main-addbook__search-panel-content">
-                    {sites !== false ?
-                        <SelectSiteComponent
-                            disabled={disabled}
-                            items={sites}
-                            selectedSiteId={selectedSiteId}
-                            onChange={this._onSiteChange.bind(this)}
-                        /> :
-                        null
-                    }
+                    <div className="main-addbook__search-panel-label">
+                        Выбор сайта
+                    </div>
+                    <SelectSiteComponent
+                        disabled={disabled}
+                        items={sites}
+                        isError={isSelectError}
+                        selectedSiteId={selectedSiteId}
+                        onChange={this._onSiteChange.bind(this)}
+                    />
+                    <div className="main-addbook__search-panel-label">
+                        Фраза для поиска
+                    </div>
+                    <SearchComponent
+                        key={0}
+                        searchTerm={searchTerm}
+                        onSearch={this._onSiteSearch.bind(this)}
+                        disabled={disabled}
+                        mode="strict"
+                        isError={isSearchError}
+                    />
                 </div>
             </div>
         );
+    }
+
+    _renderPreloader() {
+        
+        const {globalLoading, disabled} = this.state;
+        
+        if (!globalLoading && disabled) {
+            return (
+                <div  key={1} className="main-addnewbook__preloader">
+                    Подождите...
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
     }
 
     _renderAddBook() {
@@ -167,6 +229,8 @@ class AddBookComponent extends BaseModule {
         let addBookUI = [];
         
         addBookUI.push(this._renderSearchPanel());
+        
+        addBookUI.push(this._renderPreloader());
         
         return addBookUI;
     }

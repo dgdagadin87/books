@@ -1,5 +1,7 @@
 import React from 'react';
 
+import $ from 'jquery';
+
 import PropTypes from 'prop-types';
 
 import BaseComponent from '../../base/BaseComponent.jsx';
@@ -11,7 +13,8 @@ class SelectSiteComponent extends BaseComponent {
         
         this.state = {
             disabled: props.disabled,
-            selectedSiteId: props.selectedSiteId
+            selectedSiteId: props.selectedSiteId,
+            isError:  props.isError
         };
     }
 
@@ -19,19 +22,31 @@ class SelectSiteComponent extends BaseComponent {
 
         this.setStats({
             disabled: nextProps.disabled,
-            selectedSiteId: nextProps.selectedSiteId
+            selectedSiteId: nextProps.selectedSiteId,
+            isError:  nextProps.isError
         });
     }
     
     _changeSite (event) {
         
-        console.log(event.currentTarget);
+        const {onChange} = this.props;
+        
+        let currentTarget = $(event.currentTarget);
+        let value = currentTarget.val() || -1;
+        
+        if (onChange) {
+            onChange(value);
+        }
     }
 
     _renderOptions() {
         
-        const {items = []} = this.props;
         const {selectedSiteId} = this.state;
+        let {items} = this.props;
+        
+        if (items === false) {
+            items = [];
+        }
         
         let optionArray = [];
         
@@ -39,7 +54,6 @@ class SelectSiteComponent extends BaseComponent {
             <option
                 key={0}
                 value={-1}
-                selected={selectedSiteId == -1 ? true : false}
             >
                 Выберите сайт для поиска
             </option>
@@ -51,7 +65,6 @@ class SelectSiteComponent extends BaseComponent {
                 <option
                     key={i}
                     value={currentItem['id']}
-                    selected={selectedSiteId == currentItem['id'] ? true : false}
                 >
                     {currentItem['name']}
                 </option>
@@ -63,13 +76,14 @@ class SelectSiteComponent extends BaseComponent {
 
     render() {
         
-        const {disabled} = this.state;
+        const {disabled, selectedSiteId, isError} = this.state;
 
         return (
             <div className="main-selectsite__container">
                 <select
                     disabled={disabled}
-                    className={'main-selectsite__select'}
+                    defaultValue={selectedSiteId}
+                    className={'main-selectsite__select' + (isError ? ' error' : '')}
                     onChange={this._changeSite.bind(this)}
                 >
                 {this._renderOptions()}
@@ -82,6 +96,7 @@ class SelectSiteComponent extends BaseComponent {
 SelectSiteComponent.propTypes = {
     items: PropTypes.any.isRequired,
     disabled: PropTypes.bool.isRequired,
+    isError: PropTypes.bool.isRequired,
     selectedSiteId: PropTypes.any.isRequired,
     onChange: PropTypes.func.isRequired
 };

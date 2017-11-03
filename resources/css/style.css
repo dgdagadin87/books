@@ -60,6 +60,11 @@ body {
 .main-search__text-field {
     width: 970px;
     padding: 3px;
+    border: 1px solid green;
+}
+.main-search__text-field.error {
+    outline: 0;
+    border-color: red;
 }
 .main-search__button {
     display: block;
@@ -320,6 +325,14 @@ body {
 .main-addnewbook__container .main-addbook__search-panel-content {
     padding: 10px;
     background: #ffffff;
+}
+
+.main-addnewbook__container .main-selectsite__select {
+    border: 1px solid blue;
+}
+.main-addnewbook__container .main-selectsite__select.error {
+    border: 1px solid red;
+    outline: 0;
 }
 
 .main-footer {

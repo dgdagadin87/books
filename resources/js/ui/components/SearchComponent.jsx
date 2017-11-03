@@ -11,7 +11,8 @@ class SearchComponent extends BaseComponent {
         
         this.state = {
             searchTerm: props.searchTerm || '',
-            disabled: props.disabled
+            disabled: props.disabled,
+            isError: props.isError || false
         };
     }
 
@@ -19,26 +20,9 @@ class SearchComponent extends BaseComponent {
 
         this.setStats({
             searchTerm: nextProps.searchTerm || '',
-            disabled: nextProps.disabled
+            disabled: nextProps.disabled,
+            isError: nextProps.isError || false
         });
-    }
-
-    _onPageClick(pageNumber, event) {
-        
-        event.preventDefault();
-
-        const {onChange} = this.props;
-        const {disabled} = this.state;
-        
-        if (disabled) {
-            return;
-        }
-        
-        if (onChange) {
-            onChange({
-                page: pageNumber
-            });
-        }
     }
 
     _handleInput(event) {
@@ -88,7 +72,8 @@ class SearchComponent extends BaseComponent {
 
     render() {
         
-        const {disabled, searchTerm} = this.state;
+        const {mode} = this.props;
+        const {disabled, searchTerm, isError} = this.state;
 
         return (
             <div className="main-search__container">
@@ -100,7 +85,7 @@ class SearchComponent extends BaseComponent {
                         value={searchTerm}
                         onChange={this._handleInput.bind(this)}
                         onKeyPress={this._handleKeyPress.bind(this)}
-                        className="main-search__text-field"
+                        className={'main-search__text-field' + ( (mode === 'strict' && isError) ? ' error' : '')}
                     />
                     <button
                         className="main-search__button"
@@ -118,7 +103,9 @@ class SearchComponent extends BaseComponent {
 SearchComponent.propTypes = {
     searchTerm: PropTypes.any,
     disabled: PropTypes.bool.isRequired,
-    onSearch: PropTypes.func.isRequired
+    mode: PropTypes.string.isRequired,
+    onSearch: PropTypes.func.isRequired,
+    isError: PropTypes.bool
 };
 
 export default SearchComponent;
