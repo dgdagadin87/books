@@ -335,6 +335,12 @@ body {
     outline: 0;
 }
 
+.main-addnewbook__container .main-addnewbook__foundin-panel {
+    margin-top: 10px;
+    border: 1px solid #000000;
+    padding: 10px;
+}
+
 .main-footer {
     margin-top: 30px;
 }

@@ -38,6 +38,8 @@ export function getDefaultState(moduleName) {
                 isLoaded: false,
                 collection: false,
                 sites: false,
+                isFoundInMy: false,
+                isFoundInAll: false,
                 filter: {
                     page: 1,
                     searchTerm: '',

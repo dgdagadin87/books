@@ -2,8 +2,13 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
+import {Link} from 'react-router-dom';
+
+import $ from 'jquery';
+
 import {isEmpty, ajaxQuery, createUrlLink as CUL} from '../../core/coreUtils';
 import {defaultSettings, urlSettings, pageSettings} from '../../config/settings';
+import {getDefaultState} from '../../core/applicationUtils';
 
 import BaseModule from '../../base/BaseModule.jsx';
 
@@ -121,10 +126,12 @@ class AddBookComponent extends BaseModule {
 
     _getStateData(data) {
         
-        const {collection, filter, paging, sites, isLoaded} = data;
+        const {collection, filter, paging, sites, isFoundInMy, isFoundInAll, isLoaded} = data;
         
         return {
             isLoaded: isLoaded,
+            isFoundInMy: isFoundInMy,
+            isFoundInAll: isFoundInAll,
             collection: collection,
             selectedSiteId: filter.selectedSiteId,
             searchTerm: filter.searchTerm,
@@ -160,14 +167,15 @@ class AddBookComponent extends BaseModule {
             stateObject['isSelectError'] = true;
         }
         
-        this.setStats(stateObject);
-        
         if (error) {
-            return false;
+            this.setStats(stateObject);
+            return;
         }
-        
-        // load data
-        this._loadData();
+        else {
+            stateObject.isSelectError = false;
+            stateObject.isSearchError = false;
+            this.setStats(stateObject, this._loadData.bind(this));
+        }
     }
 
     _renderSearchPanel() {
@@ -221,6 +229,83 @@ class AddBookComponent extends BaseModule {
             return null;
         }
     }
+    
+    _renderFoundInThis() {
+        
+        const {globalEvents} = this.props;
+        const {isFoundInMy, isFoundInAll, searchTerm} = this.state;
+
+        if (isFoundInMy || isFoundInAll) {
+            
+            let foundInMy = null, foundInAll = null;
+            
+            if (isFoundInMy) {
+                const linkToMyBooks = (
+                    <a
+                        href='#'
+                        onClick={(event) => {
+                            event.preventDefault();
+                            let linkToMy = $('#addBook-myBooks a:first-child');
+                            let defaultMyBooksData = getDefaultState('mybooks');
+                            defaultMyBooksData.filter.searchTerm = searchTerm;
+                            let callBack = () => {
+                                linkToMy[0].click();
+                            };
+                            globalEvents.trigger('setModuleData', defaultMyBooksData, 'mybooks', callBack.bind(this));
+                        }}
+                    >
+                        Перейти
+                    </a>
+                );
+                foundInMy = (
+                    <div className="main-addnewbook__foundin-item">
+                        Результаты, содержащие {'"' + searchTerm + '"'}, найдены в разделе "Мои книги". {linkToMyBooks}
+                        <div id="addBook-myBooks" style={{display:'none'}}>
+                            <Link to={'/'}>{'Мои книги'}</Link>
+                        </div>
+                    </div>
+                );
+            }
+            
+            if (isFoundInAll) {
+                const linkToAllBooks = (
+                    <a
+                        href='#'
+                        onClick={(event) => {
+                            event.preventDefault();
+                            let linkToAll = $('#addBook-allBooks a:first-child');
+                            let defaultAllBooksData = getDefaultState('allbooks');
+                            defaultAllBooksData.filter.searchTerm = searchTerm;
+                            let callBack = () => {
+                                linkToAll[0].click();
+                            };
+                            globalEvents.trigger('setModuleData', defaultAllBooksData, 'allbooks', callBack.bind(this));
+                        }}
+                    >
+                        Перейти
+                    </a>
+                );
+                foundInAll = (
+                    <div className="main-addnewbook__foundin-item">
+                        Результаты, содержащие {'"' + searchTerm + '"'}, найдены в разделе "Все книги". {linkToAllBooks}
+                        <div id="addBook-allBooks" style={{display:'none'}}>
+                            <Link to={'/allbooks'}>{'Все книги'}</Link>
+                        </div>
+                    </div>
+                );
+            }
+            
+            return (
+                <div  key={2} className="main-addnewbook__foundin-panel">
+                    {foundInMy}
+                    {foundInAll}
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
 
     _renderAddBook() {
         
@@ -231,6 +316,8 @@ class AddBookComponent extends BaseModule {
         addBookUI.push(this._renderSearchPanel());
         
         addBookUI.push(this._renderPreloader());
+        
+        addBookUI.push(this._renderFoundInThis());
         
         return addBookUI;
     }

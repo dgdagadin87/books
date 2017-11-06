@@ -33,8 +33,11 @@ let modulesData = {
 
 let globalEvents = new Events();
 
-globalEvents.on('setModuleData', (data, moduleName) => {
+globalEvents.on('setModuleData', (data, moduleName, callBack = false) => {
     modulesData[moduleName] = data;
+    if (callBack) {
+        callBack();
+    }
 });
 globalEvents.on('showError', (result) => {
     window.console.log('error:');
