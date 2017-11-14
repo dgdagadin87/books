@@ -15,6 +15,7 @@ import BaseModule from '../../base/BaseModule.jsx';
 import PreloaderComponent from '../components/LargePreloaderComponent.jsx';
 import SelectSiteComponent from '../components/SelectSiteComponent.jsx';
 import SearchComponent from '../components/SearchComponent.jsx';
+import ModalComponent from '../components/ModalComponent.jsx';
 
 class AddBookComponent extends BaseModule {
 
@@ -307,6 +308,115 @@ class AddBookComponent extends BaseModule {
         }
     }
 
+    _renderTable() {
+        
+        const {collection} = this.state;
+        
+        let rowsArray = [];
+        
+        for (let i = 0; i < collection.length; i++) {
+            let currentItem = collection[i];
+            
+            rowsArray.push(
+                <tr key={i}>
+                    <td className="item addnewbook-bookname-cell">
+                        {currentItem['name']}
+                    </td>
+                    <td className="item addnewbook-authorname-cell">
+                        {currentItem['author']}
+                    </td>
+                    <td className="item addnewbook-authorname-cell">
+                        {currentItem['genre']}
+                    </td>
+                    <td className="item addnewbook-panel-cell">
+                        <a
+                            href="#"
+                            onClick={(event) => {
+                                event.preventDefault();
+                            }}
+                        >
+                            Скачать        
+                        </a>
+                    </td>
+                    <td className="item addnewbook-panel-cell">
+                        <a
+                            href="#"
+                            onClick={(event) => {
+                                event.preventDefault();
+                            }}
+                        >
+                            Добавить в "Мои книги"        
+                        </a>
+                    </td>
+                </tr>
+            );
+        }
+        
+        return (
+            <div className="main-addnewbook__table-container">
+                <div className="main-addnewbook__table-head">
+                    Результаты, найденные на выбранном сайте
+                </div>
+                <table cellSpacing="0" cellPadding="0" className="main-addnewbook__table">
+                    <thead />
+                    <tbody>
+                        <tr>
+                            <td className="header addnewbook-bookname-head">Название</td>
+                            <td className="header addnewbook-authorname-head">Автор</td>
+                            <td className="header addnewbook-genre-head">Жанр</td>
+                            <td className="header addnewbook-panel-head" colSpan="2"></td>
+                        </tr>
+                        {rowsArray}
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+
+    _renderCollection() {
+        
+        const {collection} = this.state;
+        
+        if (collection === false) {
+            return null;
+        }
+        
+        if (Array.isArray(collection)) {
+            if (collection.length < 1) {
+                return (
+                    <div key={3} className="main-addnewbook__collection-container">
+                        <div className="main-addnewbook__collection-no-data">
+                            Ничего не найдено
+                        </div>
+                    </div>
+                );
+            }
+            else {
+                return (
+                    <div key={3} className="main-addnewbook__collection-container">
+                        {this._renderTable()}
+                    </div>
+                );
+            }
+        }
+        
+        return null;
+    }
+    
+    _renderModal() {
+        
+        const {events} = this.events;
+        
+        return (
+            <ModalComponent
+                key={4}
+                events={events}
+                mode={'download'}
+                step={'first'}
+            />
+        );
+    }
+
     _renderAddBook() {
         
         const {sites, searchTerm} = this.state;
@@ -318,6 +428,10 @@ class AddBookComponent extends BaseModule {
         addBookUI.push(this._renderPreloader());
         
         addBookUI.push(this._renderFoundInThis());
+        
+        addBookUI.push(this._renderCollection());
+        
+        addBookUI.push(this._renderModal());
         
         return addBookUI;
     }
