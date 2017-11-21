@@ -23,7 +23,7 @@ class AddBookComponent extends BaseModule {
         super(props);
 
         this._moduleName = 'allbooks';
-        
+
         const {globalEvents, localData} = props;
         
         let dataState = this._getStateData(localData);
@@ -310,6 +310,7 @@ class AddBookComponent extends BaseModule {
 
     _renderTable() {
         
+        const events = this.events;
         const {collection} = this.state;
         
         let rowsArray = [];
@@ -343,6 +344,7 @@ class AddBookComponent extends BaseModule {
                             href="#"
                             onClick={(event) => {
                                 event.preventDefault();
+                                events.trigger('addInMyBooks', currentItem);
                             }}
                         >
                             Добавить в "Мои книги"        
@@ -376,7 +378,7 @@ class AddBookComponent extends BaseModule {
     _renderCollection() {
         
         const {collection} = this.state;
-        
+
         if (collection === false) {
             return null;
         }
@@ -404,13 +406,11 @@ class AddBookComponent extends BaseModule {
     }
     
     _renderModal() {
-        
-        const {events} = this.events;
-        
+
         return (
             <ModalComponent
                 key={4}
-                events={events}
+                events={this.events}
                 mode={'download'}
                 step={'first'}
             />
@@ -418,9 +418,7 @@ class AddBookComponent extends BaseModule {
     }
 
     _renderAddBook() {
-        
-        const {sites, searchTerm} = this.state;
-        
+
         let addBookUI = [];
         
         addBookUI.push(this._renderSearchPanel());
@@ -438,11 +436,11 @@ class AddBookComponent extends BaseModule {
 
     render() {
 
-        const {globalLoading} = this.state;
+        const {globalLoading, sites} = this.state;
 
         return (
             <div className="main-addnewbook__container">
-                {globalLoading ? <PreloaderComponent /> : this._renderAddBook()}
+                {globalLoading || sites === false ? <PreloaderComponent /> : this._renderAddBook()}
             </div>
         );
     }

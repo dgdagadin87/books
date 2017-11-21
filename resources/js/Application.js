@@ -1,5 +1,6 @@
 import '../css/style.css';
 import '../css/jquery-ui.css';
+import '../css/jquery-ui-component.css';
 
 import React, {Component} from 'react';
 import reactDom from 'react-dom';

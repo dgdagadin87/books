@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
-import 'jquery-ui';
+import 'jquery-ui/ui/widgets/dialog';
 
 import BaseComponent from '../../base/BaseComponent.jsx';
 
@@ -11,11 +11,30 @@ class ModalComponent extends BaseComponent {
 
     constructor(props) {
         super(props);
-        
+
         this.state = {
             mode: props.mode,
             step: 'first'
         };
+        this._bindEvents();
+    }
+
+    _bindEvents() {
+        
+        const {events} = this.props;
+        
+        events.on('addInMyBooks', (bookData) => this._addInMyBooks(bookData));
+    }
+
+    _addInMyBooks(bookData) {
+        window.console.log(bookData);
+        $('#addNewBook_modal').dialog('option', 'title', 'New title');
+        $('#addNewBook_modal').dialog('open');
+    }
+
+    _closeHandler() {
+        $('#addNewBook_modal').dialog('close');
+        console.log('qwerty');
     }
 
     componentWillReceiveProps(nextProps) {
@@ -29,9 +48,13 @@ class ModalComponent extends BaseComponent {
     componentDidMount() {
         
         super.componentDidMount();
-        $('#addNewBook_modal').dialog({
-            autoOpen: false
-        });
+        setTimeout(() => {
+            $('#addNewBook_modal').dialog({
+                autoOpen: false,
+                modal: true,
+                draggable: false
+            });
+        }, 300);
     }
 
     render() {
@@ -46,6 +69,13 @@ class ModalComponent extends BaseComponent {
             >
                 <div>{mode}</div>
                 <div>{step}</div>
+                <div>
+                    <button
+                        onClick={this._closeHandler.bind(this)}
+                    >
+                        Закрыть окно
+                    </button>
+                </div>
             </div>
         );
     }
