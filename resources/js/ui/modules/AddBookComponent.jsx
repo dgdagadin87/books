@@ -343,7 +343,34 @@ class AddBookComponent extends BaseModule {
                             href="#"
                             onClick={(event) => {
                                 event.preventDefault();
-                                globalEvents.trigger('addInMyBooks', currentItem, 'start');
+                                globalEvents.trigger('addInMyBooks', 'start');
+                                
+                                let queryData = {
+                                    bookLink: currentItem['link']
+                                };
+                                
+                                ajaxQuery(
+                                    {
+                                        url: CUL(defaultSettings, urlSettings['addRawBook']),
+                                        data: queryData,
+                                        method: 'POST'
+                                    },
+                                    {
+                                        afterSuccess: (result) => {
+                                            if (!result.isSuccess) {
+                                                globalEvents.trigger('showError', result);
+                                                return;
+                                            }
+                                            let defaultMyBooksData = getDefaultState('mybooks');
+                                            globalEvents.trigger('setModuleData', defaultMyBooksData, 'mybooks');
+                                            globalEvents.trigger('addInMyBooks', 'end');
+                                        },
+                                        afterError: (result) => {
+                                            globalEvents.trigger('showError', result);
+                                        }
+                                    }
+                                );
+                                
                             }}
                         >
                             Добавить в "Мои книги"        

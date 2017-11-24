@@ -21,7 +21,8 @@ let urlSettings = {
     'downloadBook': '/download/',
     'addToMyBooks': '/addtomybooks/',
     'deleteMyBook': '/deletebook/',
-    'deleteBook': '/deletebook/'
+    'deleteBook': '/deletebook/',
+    'addRawBook': '/addrawbook'
 };
 
 export {defaultSettings, pageSettings, urlSettings};
