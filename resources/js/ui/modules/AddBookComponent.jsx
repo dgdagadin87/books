@@ -15,7 +15,6 @@ import BaseModule from '../../base/BaseModule.jsx';
 import PreloaderComponent from '../components/LargePreloaderComponent.jsx';
 import SelectSiteComponent from '../components/SelectSiteComponent.jsx';
 import SearchComponent from '../components/SearchComponent.jsx';
-import ModalComponent from '../components/ModalComponent.jsx';
 
 class AddBookComponent extends BaseModule {
 
@@ -310,7 +309,7 @@ class AddBookComponent extends BaseModule {
 
     _renderTable() {
         
-        const events = this.events;
+        const {globalEvents} = this.props;
         const {collection} = this.state;
         
         let rowsArray = [];
@@ -336,7 +335,7 @@ class AddBookComponent extends BaseModule {
                                 event.preventDefault();
                             }}
                         >
-                            Скачать        
+                            Скачать
                         </a>
                     </td>
                     <td className="item addnewbook-panel-cell">
@@ -344,7 +343,7 @@ class AddBookComponent extends BaseModule {
                             href="#"
                             onClick={(event) => {
                                 event.preventDefault();
-                                events.trigger('addInMyBooks', currentItem);
+                                globalEvents.trigger('addInMyBooks', currentItem, 'start');
                             }}
                         >
                             Добавить в "Мои книги"        
@@ -404,18 +403,6 @@ class AddBookComponent extends BaseModule {
         
         return null;
     }
-    
-    _renderModal() {
-
-        return (
-            <ModalComponent
-                key={4}
-                events={this.events}
-                mode={'download'}
-                step={'first'}
-            />
-        );
-    }
 
     _renderAddBook() {
 
@@ -428,8 +415,6 @@ class AddBookComponent extends BaseModule {
         addBookUI.push(this._renderFoundInThis());
         
         addBookUI.push(this._renderCollection());
-        
-        addBookUI.push(this._renderModal());
         
         return addBookUI;
     }

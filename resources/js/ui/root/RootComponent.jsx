@@ -10,6 +10,8 @@ import HeaderComponent from './HeaderComponent.jsx';
 import TitleComponent from './TitleComponent.jsx';
 import FooterComponent from './FooterComponent.jsx';
 
+import ModalComponent from '../components/ModalComponent.jsx';
+
 class RootComponent extends BaseComponent {
 
     constructor(props) {
@@ -45,6 +47,7 @@ class RootComponent extends BaseComponent {
 
     render() {
 
+        const {globalEvents} = this.props;
         const {serverData, title} = this.state;
 
         return (
@@ -53,6 +56,9 @@ class RootComponent extends BaseComponent {
                 <TitleComponent title={title} />
                 {this.props.children}
                 <FooterComponent />
+                <ModalComponent
+                    events={globalEvents}
+                />
             </div>
         );
     }
