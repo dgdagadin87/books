@@ -175,6 +175,12 @@ body {
 .table__content-cell .main-sendmail__control.disabled {
     color: grey !important;
 }
+.table__content-cell .main-download__control {
+    color: orange;
+}
+.table__content-cell .main-download__control.disabled {
+    color: grey !important;
+}
 .table__content-cell .main-sendmail__title {
     position: relative;
 }
