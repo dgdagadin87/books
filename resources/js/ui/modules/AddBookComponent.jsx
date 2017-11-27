@@ -15,6 +15,7 @@ import BaseModule from '../../base/BaseModule.jsx';
 import PreloaderComponent from '../components/LargePreloaderComponent.jsx';
 import SelectSiteComponent from '../components/SelectSiteComponent.jsx';
 import SearchComponent from '../components/SearchComponent.jsx';
+import PagingComponent from '../components/PagingComponent.jsx';
 
 class AddBookComponent extends BaseModule {
 
@@ -148,6 +149,11 @@ class AddBookComponent extends BaseModule {
         });
     }
     
+    _onPageChange(pageData) {
+        
+        this.setStats(pageData, this._loadData.bind(this));
+    }
+    
     _onSiteSearch(searchData) {
         
         const {selectedSiteId} = this.state;
@@ -233,7 +239,11 @@ class AddBookComponent extends BaseModule {
     _renderFoundInThis() {
         
         const {globalEvents} = this.props;
-        const {isFoundInMy, isFoundInAll, searchTerm} = this.state;
+        const {isFoundInMy, isFoundInAll, searchTerm, disabled} = this.state;
+
+        if (disabled) {
+            return null;
+        }
 
         if (isFoundInMy || isFoundInAll) {
             
@@ -333,6 +343,32 @@ class AddBookComponent extends BaseModule {
                             href="#"
                             onClick={(event) => {
                                 event.preventDefault();
+                                globalEvents.trigger('downloadRawBook', 'start', false);
+                                
+                                let queryData = {
+                                    bookLink: currentItem['link']
+                                };
+                                
+                                ajaxQuery(
+                                    {
+                                        url: CUL(defaultSettings, urlSettings['downloadRawBook']),
+                                        data: queryData,
+                                        method: 'POST'
+                                    },
+                                    {
+                                        afterSuccess: (result) => {
+                                            if (!result.isSuccess) {
+                                                globalEvents.trigger('showError', result);
+                                                return;
+                                            }
+                                            let {data} = result;
+                                            globalEvents.trigger('downloadRawBook', 'end', data.bookId);
+                                        },
+                                        afterError: (result) => {
+                                            globalEvents.trigger('showError', result);
+                                        }
+                                    }
+                                );
                             }}
                         >
                             Скачать
@@ -370,7 +406,6 @@ class AddBookComponent extends BaseModule {
                                         }
                                     }
                                 );
-                                
                             }}
                         >
                             Добавить в "Мои книги"        
@@ -403,7 +438,11 @@ class AddBookComponent extends BaseModule {
 
     _renderCollection() {
         
-        const {collection} = this.state;
+        const {collection, disabled} = this.state;
+
+        if (disabled) {
+            return null;
+        }
 
         if (collection === false) {
             return null;
@@ -431,6 +470,31 @@ class AddBookComponent extends BaseModule {
         return null;
     }
 
+     _renderPaging() {
+        
+        const {page, pages, disabled, collection} = this.state;
+
+        if (collection === false) {
+            return null;
+        }
+        
+        if (disabled) {
+            return null;
+        }
+
+        return (
+            <PagingComponent
+                key={7}
+                pageSettings={pageSettings}
+                page={page}
+                pages={pages}
+                disabled={disabled}
+                onChange={this._onPageChange.bind(this)}
+                onRefresh={this._loadData.bind(this)}
+            />
+        );
+    }
+
     _renderAddBook() {
 
         let addBookUI = [];
@@ -442,6 +506,8 @@ class AddBookComponent extends BaseModule {
         addBookUI.push(this._renderFoundInThis());
         
         addBookUI.push(this._renderCollection());
+        
+        addBookUI.push(this._renderPaging());
         
         return addBookUI;
     }

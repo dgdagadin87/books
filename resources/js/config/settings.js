@@ -22,7 +22,8 @@ let urlSettings = {
     'addToMyBooks': '/addtomybooks/',
     'deleteMyBook': '/deletebook/',
     'deleteBook': '/deletebook/',
-    'addRawBook': '/addrawbook'
+    'addRawBook': '/addrawbook',
+    'downloadRawBook': '/downloadrawbook'
 };
 
 export {defaultSettings, pageSettings, urlSettings};

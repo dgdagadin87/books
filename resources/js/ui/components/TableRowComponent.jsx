@@ -102,7 +102,10 @@ class TableRowComponent extends BaseComponent {
         if (controlMode === 'mybooks') {
             columnsArray.push(
                 <td key={columns.length} className="table__content-cell">
-                    <a onClick={(ev)=>{ev.preventDefault();}} href="#">С.</a>
+                    <a onClick={(ev)=>{
+                        ev.preventDefault();
+                        window.location.href = '/downloadmybook/' + itemData['bookId'];
+                    }} href="#">С.</a>
                 </td>
             );
             columnsArray.push(
@@ -129,7 +132,10 @@ class TableRowComponent extends BaseComponent {
             const {isAdmin} = this.props;
             columnsArray.push(
                 <td key={columns.length} className="table__content-cell">
-                    <a onClick={(ev)=>{ev.preventDefault();}} href="#">С.</a>
+                    <a onClick={(ev)=>{
+                        ev.preventDefault();
+                        window.location.href = '/downloadallbook/' + itemData['bookId'];
+                    }} href="#">С.</a>
                 </td>
             );
             columnsArray.push(
