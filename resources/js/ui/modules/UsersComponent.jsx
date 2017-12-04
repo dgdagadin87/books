@@ -193,6 +193,18 @@ class UsersComponent extends BaseModule {
                 ]}
             />
         );
+
+        usersArray.push(
+            <PagingComponent
+                key={2}
+                pageSettings={pageSettings}
+                page={page}
+                pages={pages}
+                disabled={disabled}
+                onChange={this._onPageChange.bind(this)}
+                onRefresh={this._loadData.bind(this)}
+            />
+        );
         
         <div>
             {globalLoading ? <PreloaderComponent /> : usersArray}

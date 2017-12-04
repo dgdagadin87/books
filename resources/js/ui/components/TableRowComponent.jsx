@@ -203,8 +203,8 @@ class TableRowComponent extends BaseComponent {
                         if (disabled) {
                             return;
                         }
-                        window.location.href = '/adduser/add';
-                    }} href="#">Д.</a>
+                        window.location.href = '/edituser/' + itemData['userId'];
+                    }} href="#">Р.</a>
                 </td>
             );
             columnsArray.push(
