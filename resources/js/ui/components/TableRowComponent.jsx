@@ -45,6 +45,15 @@ class TableRowComponent extends BaseComponent {
             );
         }
         
+        if (type === 'bool') {
+            columnValue = itemData[name] ? true : false;
+            return (
+                <span className="table__content-span">
+                    {columnValue ? 'Да' : 'Нет'}
+                </span>
+            );
+        }
+        
         if (type === 'description') {
             columnValue = itemData[name] || '';
             return (
@@ -80,6 +89,17 @@ class TableRowComponent extends BaseComponent {
                     <span className="table__check-span">
                         <input disabled={disabled} type="checkbox" className="content-checkbox" />
                     </span>
+                </td>
+            );
+        }
+        
+        if (controlMode === 'users') {
+            columnsArray.push(
+                <td
+                    key={-7}
+                    className={'table__content-check'}
+                >
+                    <div className="users__avatar" />
                 </td>
             );
         }
@@ -173,7 +193,31 @@ class TableRowComponent extends BaseComponent {
                     </td>
                 );
             }
-            
+        }
+        
+        if (controlMode === 'users') {
+            columnsArray.push(
+                <td key={columns.length} className="table__content-cell">
+                    <a className={'main-download__control' + (disabled ? ' disabled' : '')} onClick={(ev)=>{
+                        ev.preventDefault();
+                        if (disabled) {
+                            return;
+                        }
+                        window.location.href = '/adduser/add';
+                    }} href="#">Д.</a>
+                </td>
+            );
+            columnsArray.push(
+                <td key={columns.length + 1} className="table__content-cell">
+                    <a className={'main-download__control' + (disabled ? ' disabled' : '')} onClick={(ev)=>{
+                        ev.preventDefault();
+                        if (disabled) {
+                            return;
+                        }
+                        window.location.href = '/adduser/' + itemData['userId'];
+                    }} href="#">У.</a>
+                </td>
+            );
         }
         
         return columnsArray;

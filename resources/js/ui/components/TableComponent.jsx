@@ -127,6 +127,12 @@ class TableComponent extends BaseComponent {
             );
         }
         
+        if (controlMode === 'users') {
+            columnsArray.push(
+                <td key={-7} className={'table__header-cell'}>&nbsp;</td>
+            );
+        }
+        
         for (let i = 0; i < columnNames.length; i++) {
             
             let currentColumn = columns[i];
@@ -153,6 +159,11 @@ class TableComponent extends BaseComponent {
             let allColSpan = isAdmin ? 4 : 3;
             columnsArray.push(
                 <td key={columnNames.length} colSpan={allColSpan} className={'table__header-cell'}>&nbsp;</td>
+            );
+        }
+        if (controlMode === 'users') {
+            columnsArray.push(
+                <td key={columnNames.length} colSpan="2" className={'table__header-cell'}>&nbsp;</td>
             );
         }
 
@@ -240,6 +251,10 @@ class TableComponent extends BaseComponent {
 
         const {controlMode, columns, showCheckColumn, totalCount} = this.props;
 
+        if (controlMode === 'users') {
+            return null;
+        }
+
         let colSpan = 0;
         
         colSpan += columns.length;
@@ -269,6 +284,10 @@ class TableComponent extends BaseComponent {
     _renderTablePanel () {
 
         const {controlMode, columns, showCheckColumn, totalCount} = this.props;
+
+        if (controlMode === 'users') {
+            return null;
+        }
 
         let colSpan = 0;
         
@@ -334,6 +353,7 @@ TableComponent.propTypes = {
     defaultSort: PropTypes.string,
     onSortChange: PropTypes.func,
     onSendMail: PropTypes.func,
+    onDeleteUser: PropTypes.func,
     onAddBook: PropTypes.func,
     onDeleteBook: PropTypes.func,
     showCheckColumn: PropTypes.bool,

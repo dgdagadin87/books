@@ -16,7 +16,7 @@ class NotFoundComponent extends BaseComponent {
 
         return (
             <div>
-                404 - ошибка.
+                У вас недостаточно прав для просмотра данной страницы.
             </div>
         );
     }

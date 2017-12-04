@@ -33,6 +33,21 @@ export function getDefaultState(moduleName) {
                 }
             };
             
+        case 'users':
+            return {
+                collection: false,
+                filter: {
+                    sortField: 'userName',
+                    sortType: 'ASC',
+                    page: 1
+                },
+                paging: {
+                    page: 1,
+                    pages: 1,
+                    totalCount: 0
+                }
+            };
+            
         case 'addbook':
             return {
                 isLoaded: false,

@@ -63,7 +63,8 @@ function ajaxQuery (config, functions){
         },
         success: (data, textStatus, jqXHR) => {
             let {errorCode = ''} = data;
-            if (errorCode === 'NOT_AUTH') {
+            let errorCodes = ['NOT_AUTH', 'ACCESS_DENIED'];
+            if (errorCodes.indexOf(errorCode) !== -1) {
                 window.location.href = '/';
                 return false;
             }
