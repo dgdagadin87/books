@@ -151,7 +151,7 @@ class TableComponent extends BaseComponent {
         
         if (controlMode === 'mybooks') {
             columnsArray.push(
-                <td key={columnNames.length} colSpan="3" className={'table__header-cell'}>&nbsp;</td>
+                <td key={columnNames.length} colSpan="3" className={'table__header-cell users_header-avatar'}>&nbsp;</td>
             );
         }
         if (controlMode === 'allbooks') {
@@ -213,11 +213,13 @@ class TableComponent extends BaseComponent {
         const {
             items = [],
             columns = [],
+            routerHistory,
             showCheckColumn,
             controlMode,
             onSendMail,
             onAddBook,
             onDeleteBook,
+            onDeleteUser,
             isAdmin
         } = this.props;
         const {disabled} = this.state;
@@ -231,6 +233,7 @@ class TableComponent extends BaseComponent {
             rowsArray.push(
                 <RowComponent
                     key={i}
+                    routerHistory={routerHistory}
                     isAdmin={isAdmin}
                     itemData={currentItem}
                     showCheckColumn={showCheckColumn}
@@ -240,6 +243,7 @@ class TableComponent extends BaseComponent {
                     onSendMail={onSendMail}
                     onAddBook={onAddBook}
                     onDeleteBook={onDeleteBook}
+                    onDeleteUser={onDeleteUser}
                 />
             );
         }
@@ -286,7 +290,13 @@ class TableComponent extends BaseComponent {
         const {controlMode, columns, showCheckColumn, totalCount} = this.props;
 
         if (controlMode === 'users') {
-            return null;
+            return (
+                <tr>
+                    <td colSpan={11} className="table__panel-cell">
+                        <Link to={'/adduser'}>{'Добавить пользователя'}</Link>
+                    </td>
+                </tr>
+            );
         }
 
         let colSpan = 0;
@@ -347,6 +357,7 @@ class TableComponent extends BaseComponent {
 TableComponent.propTypes = {
     controlMode: PropTypes.string.isRequired,
     events:  PropTypes.object.isRequired,
+    routerHistory: PropTypes.any,
     disabled: PropTypes.bool,
     columns: PropTypes.array.isRequired,
     items: PropTypes.array.isRequired,

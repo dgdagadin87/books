@@ -31,7 +31,7 @@ class UsersComponent extends BaseModule {
         );
 
         this.state = firstState;
-        
+
         globalEvents.trigger('setTitle', 'Пользователи');
     }
 
@@ -41,9 +41,11 @@ class UsersComponent extends BaseModule {
         super.componentDidMount();
 
         let {collection} = this.state;
-        
+
         if (collection === false) {
-            this._loadData();
+            this.setStats({
+                globalLoading: true
+            }, this._loadData.bind(this));
         }
     }
 
@@ -61,11 +63,35 @@ class UsersComponent extends BaseModule {
         
         const {globalEvents} = this.props;
         
-        if (!confirm('Вы действительно хотите удалить выбранного пользователя?')) {
+        if (!confirm('Вы действительно хотите удалить выбранного пользователя?\nПользователь и его книги будут удалены безвозвратно!')) {
             return;
         }
         
-        console.log(userId);
+        this.setStats({
+            disabled: true
+        });
+        
+        ajaxQuery(
+            {
+                url: CUL(defaultSettings, urlSettings['deleteUser']) + userId
+            },
+            {
+                afterSuccess: (result) => {
+                    if (!result.isSuccess) {
+                        this.setStats({
+                            disabled: false
+                        });
+                        globalEvents.trigger('showError', result);
+                        return;
+                    }
+                    alert('Пользователь успешно удален.');
+                    this._loadData();
+                },
+                afterError: (result) => {
+                    globalEvents.trigger('showError', result);
+                }
+            }
+        );
     }
 
     _getStateData(data) {
@@ -87,19 +113,12 @@ class UsersComponent extends BaseModule {
         const {collection, sortField, sortType, page} = this.state;
         const {globalEvents} = this.props;
 
-        let firstStateData = null;
-
-        if (collection === false) {
-            firstStateData = {
-                globalLoading: true
-            };
-        }
-        else {
-            firstStateData = {
+        if (collection !== false) {
+            this.setStats({
                 disabled: true
-            };
+            });
         }
-        this.setStats(firstStateData);
+        
 
         let queryData = {
             sortField,
@@ -145,6 +164,8 @@ class UsersComponent extends BaseModule {
 
     _renderUsers() {
 
+        const {history} = this.props;
+
         const {
             disabled,
             collection = [],
@@ -161,6 +182,7 @@ class UsersComponent extends BaseModule {
         usersArray.push(
             <TableComponent
                 key={1}
+                routerHistory={history}
                 events={this.events}
                 items={!collection ? [] : collection}
                 showCheckColumn={false}
@@ -206,11 +228,11 @@ class UsersComponent extends BaseModule {
             />
         );
         
-        <div>
-            {globalLoading ? <PreloaderComponent /> : usersArray}
-        </div>
-        
-        return usersArray;
+        return (
+            <div>
+                {globalLoading ? <PreloaderComponent /> : usersArray}
+            </div>
+        );
     }
 
     _renderNoAccess() {
@@ -233,7 +255,8 @@ class UsersComponent extends BaseModule {
 
 UsersComponent.propTypes = {
     serverData: PropTypes.object.isRequired,
-    globalEvents:  PropTypes.object.isRequired
+    globalEvents:  PropTypes.object.isRequired,
+    localData: PropTypes.any.isRequired
 };
 
 export default UsersComponent;

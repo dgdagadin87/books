@@ -41,7 +41,7 @@ class MyBooksComponent extends BaseModule {
         super.componentDidMount();
 
         let {collection} = this.state;
-        
+
         if (collection === false) {
             this._loadData();
         }

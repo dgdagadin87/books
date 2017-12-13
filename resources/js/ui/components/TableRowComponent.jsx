@@ -75,7 +75,16 @@ class TableRowComponent extends BaseComponent {
 
     _renderRow() {
         
-        const {showCheckColumn, columns, controlMode, onSendMail, onDeleteBook, onAddBook} = this.props;
+        const {
+            showCheckColumn,
+            columns,
+            routerHistory,
+            controlMode,
+            onSendMail,
+            onDeleteBook,
+            onAddBook,
+            onDeleteUser
+        } = this.props;
         const {disabled, itemData} = this.state;
         
         let columnsArray = [];
@@ -97,7 +106,7 @@ class TableRowComponent extends BaseComponent {
             columnsArray.push(
                 <td
                     key={-7}
-                    className={'table__content-check'}
+                    className={'table__user-avatar'}
                 >
                     <div className="users__avatar" />
                 </td>
@@ -203,7 +212,7 @@ class TableRowComponent extends BaseComponent {
                         if (disabled) {
                             return;
                         }
-                        window.location.href = '/edituser/' + itemData['userId'];
+                        routerHistory.push('/edituser/' + itemData['userId']);
                     }} href="#">Р.</a>
                 </td>
             );
@@ -214,7 +223,9 @@ class TableRowComponent extends BaseComponent {
                         if (disabled) {
                             return;
                         }
-                        window.location.href = '/adduser/' + itemData['userId'];
+                        if (onDeleteUser) {
+                            onDeleteUser(itemData['userId']);
+                        }
                     }} href="#">У.</a>
                 </td>
             );
@@ -235,12 +246,14 @@ TableRowComponent.propTypes = {
     controlMode: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     isAdmin: PropTypes.bool,
+    routerHistory: PropTypes.any,
     columns: PropTypes.array.isRequired,
     itemData: PropTypes.object.isRequired,
     showCheckColumn: PropTypes.bool,
     onSendMail: PropTypes.func,
     onAddBook: PropTypes.func,
-    onDeleteBook: PropTypes.func
+    onDeleteBook: PropTypes.func,
+    onDeleteUser: PropTypes.func
 };
 
 export default TableRowComponent;
