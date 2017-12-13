@@ -22,6 +22,7 @@ import AllBooksComponent from './ui/modules/AllBooksComponent.jsx';
 import MyBooksComponent from './ui/modules/MyBooksComponent.jsx';
 import UsersComponent from './ui/modules/UsersComponent.jsx';
 import AddUserComponent from './ui/modules/AddUserComponent.jsx';
+import EditUserComponent from './ui/modules/EditUserComponent.jsx';
 import NotFoundComponent from './ui/modules/NotFoundComponent.jsx';
 
 const rootDomComponent = document.getElementById('root');
@@ -87,7 +88,7 @@ ajaxQuery({
                                 <Switch>
                                     <Route
                                         path="/users/edituser/:id"
-                                        render={ (props) => <AddUserComponent {...props} globalEvents={globalEvents} serverData={data} /> }
+                                        render={ (props) => <EditUserComponent {...props} globalEvents={globalEvents} serverData={data} /> }
                                     />
                                     <Route
                                         path="/users/adduser"
