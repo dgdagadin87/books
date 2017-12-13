@@ -1,0 +1,161 @@
+import React from 'react';
+
+import PropTypes from 'prop-types';
+
+import {isEmpty} from '../../core/coreUtils';
+
+import BaseComponent from '../../base/BaseComponent.jsx';
+
+class UserFormComponent extends BaseComponent {
+
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            userLogin: props.userLogin || '',
+            userName: props.userName || '',
+            userIsAdmin: props.userIsAdmin,
+            disabled: props.disabled,
+            loginError: false,
+            nameError: false
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        this.setStats({
+            userLogin: nextProps.userLogin || '',
+            userName: nextProps.userName || '',
+            userIsAdmin: nextProps.userIsAdmin,
+            disabled: nextProps.disabled
+        });
+    }
+
+    _handleLoginInput(event) {
+
+        let value = event.target.value;
+        
+        const {setParentState} = this.props;
+
+        this.setStats({
+            userLogin: value
+        }, () => this._validateLoginInput());
+    }
+    
+    _handleNameInput(event) {
+
+        let value = event.target.value;
+        
+        const {setParentState} = this.props;
+
+        this.setStats({
+            userName: value,
+            nameError: false
+        }, () => this._validateNameInput());
+    }
+    
+    _handleAdminInput(event) {
+
+        const {setParentState} = this.props;
+        let {userIsAdmin} = this.state;
+        
+        let newValue = !userIsAdmin;
+
+        this.setStats({
+            userIsAdmin: newValue
+        }, () => setParentState({userIsAdmin: newValue}));
+    }
+
+    _validateLoginInput() {
+        
+        const {setParentState} = this.props;
+        const {userLogin} = this.state;
+        
+        let loginError = false;
+        
+        if (isEmpty(userLogin)) {
+            loginError = true;
+        }
+        
+        this.setStats({
+            loginError: loginError
+        }, () => setParentState({userLogin: userLogin}));
+    }
+
+    _validateNameInput() {
+        
+        const {setParentState} = this.props;
+        const {userName} = this.state;
+        
+        let nameError = false;
+        
+        if (isEmpty(userName)) {
+            nameError = true;
+        }
+        
+        this.setStats({
+            nameError: nameError
+        }, () => setParentState({userName: userName}));
+    }
+
+    render() {
+        
+        const {mode} = this.props;
+        const {disabled, userLogin, userName, userIsAdmin, loginError, nameError} = this.state;
+
+        return (
+            <div className="user-form__container">
+                <div className="user-form__row">
+                    <span className="user-form__label">
+                        Логин пользователя
+                    </span>
+                    <span className="user-form__strict">*</span>
+                    <input
+                        type="text"
+                        placeholder="Введите логин пользователя"
+                        disabled={disabled}
+                        value={userLogin}
+                        onChange={this._handleLoginInput.bind(this)}
+                        className={'user-form__text-field' + ( loginError ? ' error' : '')}
+                    />
+                </div>
+                <div className="user-form__row">
+                    <span className="user-form__label">
+                        Имя пользователя
+                    </span>
+                    <span className="user-form__strict name">*</span>
+                    <input
+                        type="text"
+                        placeholder="Введите имя пользователя"
+                        disabled={disabled}
+                        value={userName}
+                        onChange={this._handleNameInput.bind(this)}
+                        className={'user-form__text-field' + ( nameError ? ' error' : '')}
+                    />
+                </div>
+                <div className="user-form__row">
+                    <span className="user-form__label admin">
+                        Администратор
+                    </span>
+                    <input
+                        type="checkbox"
+                        disabled={disabled}
+                        checked={userIsAdmin}
+                        onChange={this._handleAdminInput.bind(this)}
+                        className={'user-form__checkbox-field'}
+                    />
+                </div>
+            </div>
+        );
+    }
+};
+
+UserFormComponent.propTypes = {
+    userLogin: PropTypes.string,
+    userName: PropTypes.string,
+    userIsAdmin: PropTypes.bool,
+    disabled: PropTypes.bool,
+    setParentState: PropTypes.func
+};
+
+export default UserFormComponent;

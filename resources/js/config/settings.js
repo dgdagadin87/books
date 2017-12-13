@@ -25,6 +25,7 @@ let urlSettings = {
     'deleteBook': '/deletebook/',
     'addRawBook': '/addrawbook',
     'downloadRawBook': '/downloadrawbook',
+    'addUser': '/adduser',
     'deleteUser': '/deleteuser/'
 };
 

@@ -21,6 +21,7 @@ import AddBookComponent from './ui/modules/AddBookComponent.jsx';
 import AllBooksComponent from './ui/modules/AllBooksComponent.jsx';
 import MyBooksComponent from './ui/modules/MyBooksComponent.jsx';
 import UsersComponent from './ui/modules/UsersComponent.jsx';
+import AddUserComponent from './ui/modules/AddUserComponent.jsx';
 import NotFoundComponent from './ui/modules/NotFoundComponent.jsx';
 
 const rootDomComponent = document.getElementById('root');
@@ -82,10 +83,23 @@ ajaxQuery({
                                 path="/allbooks"
                                 render={ (props) => <AllBooksComponent {...props} globalEvents={globalEvents} serverData={data} localData={modulesData['allbooks']} /> }
                             />
-                            <Route
-                                path="/users"
-                                render={ (props) => <UsersComponent {...props} globalEvents={globalEvents} serverData={data} localData={modulesData['users']} /> }
-                            />
+                            <Route path="/users">
+                                <Switch>
+                                    <Route
+                                        path="/users/edituser/:id"
+                                        render={ (props) => <AddUserComponent {...props} globalEvents={globalEvents} serverData={data} /> }
+                                    />
+                                    <Route
+                                        path="/users/adduser"
+                                        render={ (props) => <AddUserComponent {...props} globalEvents={globalEvents} serverData={data} /> }
+                                    />
+                                    <Route
+                                        exact
+                                        path="/users"
+                                        render={ (props) => <UsersComponent {...props} globalEvents={globalEvents} serverData={data} localData={modulesData['users']} /> }
+                                    />
+                                </Switch>
+                            </Route>
                             <Route
                                 component={NotFoundComponent}
                             />

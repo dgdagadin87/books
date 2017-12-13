@@ -293,7 +293,7 @@ class TableComponent extends BaseComponent {
             return (
                 <tr>
                     <td colSpan={11} className="table__panel-cell">
-                        <Link to={'/adduser'}>{'Добавить пользователя'}</Link>
+                        <Link to={'/users/adduser'}>{'Добавить пользователя'}</Link>
                     </td>
                 </tr>
             );

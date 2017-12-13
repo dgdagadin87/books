@@ -390,6 +390,35 @@ body {
     width: 32px;
     height: 32px;
 }
+.user-form__container {
+    padding: 10px;
+}
+.user-form__row {
+    margin: 10px 0;
+}
+.user-form__row.buttons {
+    padding: 10px;
+}
+.user-form__row.buttons button:last-child {
+    margin-left: 10px
+}
+.user-form__strict {
+    color: red;
+    padding-right: 7px;
+}
+.user-form__strict.name {
+    padding-right: 20px;
+}
+.user-form__text-field {
+    width: 70%;
+    outline: none;
+}
+.user-form__label.admin {
+    padding-right: 42px;
+}
+.user-form__text-field.error {
+    border: 1px solid red;
+}
 
 .main-footer {
     margin-top: 30px;

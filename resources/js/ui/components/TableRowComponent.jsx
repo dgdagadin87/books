@@ -212,7 +212,7 @@ class TableRowComponent extends BaseComponent {
                         if (disabled) {
                             return;
                         }
-                        routerHistory.push('/edituser/' + itemData['userId']);
+                        routerHistory.push('/users/edituser/' + itemData['userId']);
                     }} href="#">Р.</a>
                 </td>
             );
