@@ -13,7 +13,7 @@ import PreloaderComponent from '../components/LargePreloaderComponent.jsx';
 import NoAccessModule from '../components/NoAccessComponent.jsx';
 import UserFormComponent from '../components/UserFormComponent.jsx';
 
-class AddUserComponent extends BaseModule {
+class EditUserComponent extends BaseModule {
 
     constructor(props) {
         super(props);
@@ -38,7 +38,7 @@ class AddUserComponent extends BaseModule {
     componentDidMount() {
         super.componentDidMount();
 
-        const {match} = this.props;
+        const {match, globalEvents} = this.props;
         const {params} = match;
         const {id} = params;
         
@@ -70,7 +70,7 @@ class AddUserComponent extends BaseModule {
                         userId: data.userId,
                         userLogin: data.userLogin,
                         userName: data.userName,
-                        userIsAdmin: data.userIAdmin,
+                        userIsAdmin: data.userIsAdmin
                     });
                 },
                 afterError: (result) => {
@@ -93,7 +93,7 @@ class AddUserComponent extends BaseModule {
     _handleClick() {
 
         const {history, globalEvents} = this.props;
-        const {disabled, userLogin, userName, userIsAdmin} = this.state;
+        const {disabled, userLogin, userId, userName, userIsAdmin} = this.state;
 
         if (disabled) {
             return;
@@ -106,9 +106,10 @@ class AddUserComponent extends BaseModule {
         
         ajaxQuery(
             {
-                url: CUL(defaultSettings, urlSettings['addUser']),
+                url: CUL(defaultSettings, urlSettings['editUser']) + userId,
                 method: 'POST',
                 data: JSON.stringify({
+                    userId: userId,
                     userLogin: userLogin,
                     userName: userName,
                     userIsAdmin: userIsAdmin
@@ -135,7 +136,7 @@ class AddUserComponent extends BaseModule {
                         disabled: false
                     });
                     
-                    alert('Пользователь успешно добавлен.');
+                    alert('Пользователь "' + userLogin + '" успешно отредактирован.');
                     
                     let defaultUsersData = getDefaultState('users');
                     let callBack = () => {
@@ -148,6 +149,21 @@ class AddUserComponent extends BaseModule {
                     globalEvents.trigger('showError', result);
                 }
             }
+        );
+    }
+    
+    _renderError() {
+        
+        const {errorText} = this.state;
+        
+        if (isEmpty(errorText)) {
+            return null;
+        }
+        
+        return (
+            <div key={1} className="add-user__error">
+                {errorText}
+            </div>
         );
     }
     
@@ -170,9 +186,11 @@ class AddUserComponent extends BaseModule {
             </div>
         );
 
+        editUserArray.push(this._renderError());
+
         editUserArray.push(
             <UserFormComponent
-                key={1}
+                key={2}
                 disabled={disabled}
                 userLogin={userLogin}
                 userName={userName}
@@ -182,7 +200,7 @@ class AddUserComponent extends BaseModule {
         );
 
         editUserArray.push(
-            <div key={2} className="user-form__row buttons">
+            <div key={3} className="user-form__row buttons">
                 <button
                     className="user-form__button"
                     disabled={disabled || isEmpty(userLogin) || isEmpty(userName)}
@@ -210,15 +228,15 @@ class AddUserComponent extends BaseModule {
 
         return (
             <div>
-                {user.userIsAdmin ? this._renderAddUser() : this._renderNoAccess()}
+                {user.userIsAdmin ? this._renderEditUser() : this._renderNoAccess()}
             </div>
         );
     }
 };
 
-AddUserComponent.propTypes = {
+EditUserComponent.propTypes = {
     serverData: PropTypes.object.isRequired,
     globalEvents:  PropTypes.object.isRequired
 };
 
-export default AddUserComponent;
+export default EditUserComponent;

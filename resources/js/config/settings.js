@@ -13,20 +13,22 @@ let pageSettings = {
 };
 
 let urlSettings = {
-    'getCommonData' : '/common',
-    'getMyBooksData': '/mybooks',
+    'getCommonData'  : '/common',
+    'getMyBooksData' : '/mybooks',
     'getAllBooksData': '/allbooks',
-    'getUsersData': '/users',
-    'getAddBookData': '/addbook',
-    'sendToMail': '/sendtomail/',
-    'downloadBook': '/download/',
-    'addToMyBooks': '/addtomybooks/',
-    'deleteMyBook': '/deletebook/',
-    'deleteBook': '/deletebook/',
-    'addRawBook': '/addrawbook',
+    'getUsersData'   : '/users',
+    'getAddBookData' : '/addbook',
+    'sendToMail'     : '/sendtomail/',
+    'downloadBook'   : '/download/',
+    'addToMyBooks'   : '/addtomybooks/',
+    'deleteMyBook'   : '/deletebook/',
+    'deleteBook'     : '/deletebook/',
+    'addRawBook'     : '/addrawbook',
     'downloadRawBook': '/downloadrawbook',
-    'addUser': '/adduser',
-    'deleteUser': '/deleteuser/'
+    'addUser'        : '/adduser',
+    'getUser'        : '/getuser/',
+    'editUser'       : '/edituser/',
+    'deleteUser'     : '/deleteuser/'
 };
 
 export {defaultSettings, pageSettings, urlSettings};

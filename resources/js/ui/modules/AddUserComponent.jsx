@@ -37,6 +37,21 @@ class AddUserComponent extends BaseModule {
         this.setStats(state);
     }
 
+    _renderError() {
+        
+        const {errorText} = this.state;
+        
+        if (isEmpty(errorText)) {
+            return null;
+        }
+        
+        return (
+            <div key={1} className="add-user__error">
+                {errorText}
+            </div>
+        );
+    }
+
     _renderNoAccess() {
         
         return (<NoAccessModule />);
@@ -122,9 +137,11 @@ class AddUserComponent extends BaseModule {
             </div>
         );
 
+        addUserArray.push(this._renderError());
+
         addUserArray.push(
             <UserFormComponent
-                key={1}
+                key={2}
                 disabled={disabled}
                 userLogin={userLogin}
                 userName={userName}
@@ -134,7 +151,7 @@ class AddUserComponent extends BaseModule {
         );
 
         addUserArray.push(
-            <div key={2} className="user-form__row buttons">
+            <div key={3} className="user-form__row buttons">
                 <button
                     className="user-form__button"
                     disabled={disabled || isEmpty(userLogin) || isEmpty(userName)}
