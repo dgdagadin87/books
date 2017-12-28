@@ -10,10 +10,23 @@ body {
 }
 
 .main-container {
-    border-left: 1px solid #000000;
-    border-right: 1px solid #000000;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    display: table;
+    height: 100%;
     width: 1000px;
     margin: 0 auto;
+    font-family: "Helvetica New",Arial,sans-serif;
+    font-size: 15px;
+    color: #333;
+}
+
+.main-center {
+    width: 1000px;
+    display: table-row;
+    height: 100%;
+    position: relative;
 }
 
 .main-navigation {
@@ -421,7 +434,8 @@ body {
 }
 
 .main-footer {
-    margin-top: 30px;
+    margin-top: 20px;
+    height: 40px;
 }
 
 .clear-both {

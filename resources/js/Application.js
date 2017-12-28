@@ -25,7 +25,7 @@ import AddUserComponent from './ui/modules/AddUserComponent.jsx';
 import EditUserComponent from './ui/modules/EditUserComponent.jsx';
 import NotFoundComponent from './ui/modules/NotFoundComponent.jsx';
 
-const rootDomComponent = document.getElementById('root');
+const rootDomComponent = document.getElementById('main-body');
 
 let modulesData = {
     'mybooks': getDefaultState('mybooks'),

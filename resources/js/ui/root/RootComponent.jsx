@@ -52,9 +52,11 @@ class RootComponent extends BaseComponent {
 
         return (
             <div className="main-container">
-                <HeaderComponent serverData={serverData} />
-                <TitleComponent title={title} />
-                {this.props.children}
+                <div className="main-center">
+                    <HeaderComponent serverData={serverData} />
+                    <TitleComponent title={title} />
+                    {this.props.children}
+                </div>
                 <FooterComponent />
                 <ModalComponent
                     events={globalEvents}
