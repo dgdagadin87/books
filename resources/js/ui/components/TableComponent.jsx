@@ -55,18 +55,21 @@ class TableComponent extends BaseComponent {
         const {sortable, name} = columnData;
         
         if (!sortable) {
-            return <span className="table__no-sort">{columnData.title}</span>;
+            return <div className="table__no-sort">{columnData.title}</div>;
         }
         
-        let sortTypeBlock = '';
+        let sortClass = '';
+
         if (sortField === name) {
-            sortTypeBlock = <span className="table__sort-type">{sortType === 'ASC' ? SORT_ASC : SORT_DESC}</span>;
+            sortClass = sortType === 'ASC' ? 'table-sort-asc' : 'table-sort-desc';
+        }
+        else {
+            sortClass = 'table-sort-empty';
         }
         
         return (
-            <div>
-                {sortTypeBlock}
-                <span className="table__yes-sort">{columnData.title}</span>
+            <div className={sortClass}>
+                {columnData.title}
             </div>
         );
     }
@@ -287,7 +290,7 @@ class TableComponent extends BaseComponent {
     
     _renderTablePanel () {
 
-        const {controlMode, columns, showCheckColumn, totalCount} = this.props;
+        const {controlMode, columns, showCheckColumn, totalCount, routerHistory} = this.props;
 
         if (controlMode === 'users') {
             return (
@@ -300,6 +303,7 @@ class TableComponent extends BaseComponent {
         }
 
         let colSpan = 0;
+        let text = '';
         
         colSpan += columns.length;
         
@@ -309,17 +313,26 @@ class TableComponent extends BaseComponent {
 
         if (controlMode === 'mybooks') {
             colSpan += 3;
+            text = 'Список раздела "Мои книги"';
         }
         if (controlMode === 'allbooks') {
             const {isAdmin = false} = this.props;
             let allColSpan = isAdmin ? 4 : 3;
             colSpan += allColSpan;
+            text = 'Список раздела "Все книги"';
         }
 
         return (
             <tr>
                 <td colSpan={colSpan} className="table__panel-cell">
-                    <Link to={'/addbook'}>{'Добавить книгу'}</Link>
+                    <div className="table__panel-cell-left">
+                        {text}
+                    </div>
+                    <div className="table__panel-cell-right">
+                        <button type="button" className={'main-download__control'} onClick={()=>{
+                            routerHistory.push('/addbook');
+                        }}>Добавить книгу</button>
+                    </div>
                 </td>
             </tr>
         );

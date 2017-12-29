@@ -205,7 +205,7 @@ class MyBooksComponent extends BaseModule {
 
     _renderMyBooks() {
         
-        const {serverData} = this.props;
+        const {serverData, history} = this.props;
         const {user} = serverData;
         const {userIsAdmin} = user;
         
@@ -235,6 +235,7 @@ class MyBooksComponent extends BaseModule {
         myBooksUI.push(
             <TableComponent
                 key={1}
+                routerHistory={history}
                 events={this.events}
                 isAdmin={userIsAdmin}
                 items={!collection ? [] : collection}
@@ -280,7 +281,7 @@ class MyBooksComponent extends BaseModule {
                     },
                     {
                         name: 'bookParentSite',
-                        title: 'Взято с сайта',
+                        title: 'С сайта',
                         sortable: true,
                         type: 'link'
                     }

@@ -76,7 +76,7 @@ class SearchComponent extends BaseComponent {
         const {disabled, searchTerm, isError} = this.state;
 
         return (
-            <div className="main-search__container">
+            <div className="main-search__container" style={{display:'none'}}>
                 <div className="main-search__text-field-container">
                     <input
                         type="text"
