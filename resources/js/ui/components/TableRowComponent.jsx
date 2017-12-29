@@ -114,14 +114,14 @@ class TableRowComponent extends BaseComponent {
         }
         
         for (let i = 0; i < columns.length; i++) {
-            
+
             const currentColumn = columns[i];
             const {name, type} = currentColumn;
             
             columnsArray.push(
                 <td
                     key={i}
-                    className="table__content-cell"
+                    className={'table__content-cell content-' + name}
                 >
                 {this._renderCell(currentColumn)}
                 </td>

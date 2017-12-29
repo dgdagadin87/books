@@ -100,13 +100,29 @@ body {
 }
 
 .main-search__container {
+    width: 980px;
+    margin-top:20px;
+    margin-bottom: 20px;
+    margin-left: 5px;
     position: relative;
     padding: 0px;
 }
 .main-search__text-field {
-    width: 770px;
-    padding: 3px;
-    border: 1px solid green;
+    display: block;
+    width: 890px;
+    height: 34px;
+    padding: 0px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 .main-search__text-field.error {
     outline: 0;
@@ -132,6 +148,15 @@ body {
 .table {
     width: 100%;
 }
+.table .main-description__control {
+    color: #091b9f;
+}
+.table .main-description__control:hover {
+    text-decoration: none;
+}
+.table>tbody>tr:nth-child(odd) {
+    background-color: #fafafa;
+}
 .table__filter-cell {
     padding:10px;
     text-align: center;
@@ -148,7 +173,8 @@ body {
 .table__header-cell {
     padding:0px;
     border: 1px solid #aaaaaa;
-    border-bottom-width: 3px;
+    border-bottom-width: 2px;
+    border-top-width: 2px;
     border-right: 0;
     background: #ffffff;
     font-weight: bold;
@@ -172,12 +198,13 @@ body {
     background-repeat: no-repeat;
 }
 .table__header-cell:last-child {
-    border-right: 1px solid #000;
+    border-right: 1px solid #aaaaaa;
 }
 .table__header-check {
     padding:10px;
     border: 1px solid #aaaaaa;
-    border-bottom-width: 3px;
+    border-bottom-width: 2px;
+    border-top-width: 2px;
     border-right: 0;
     text-align: center;
 }
@@ -190,19 +217,19 @@ body {
 
 .table__content-check {
     padding:10px;
-    border: 1px solid #000;
+    border: 1px solid #aaaaaa;
     border-right: 0;
     border-top: 0;
     text-align: center;
 }
 .table__content-cell {
-    padding:10px;
-    border: 1px solid #000;
+    padding:5px 10px;
+    border: 1px solid #aaaaaa;
     border-right: 0;
     border-top: 0;
 }
 .table__content-cell:last-child {
-    border-right: 1px solid #000;
+    border-right: 1px solid #aaaaaa;
 }
 
 .table__content-cell .main-description__container {
@@ -280,13 +307,14 @@ body {
 }
 .table__total-cell {
     font-weight: bold;
-    padding: 10px;
-    border: 1px solid black;
+    padding: 14px;
+    border: 1px solid #aaaaaa;
     border-top: none;
-    background: #fafafa;
+    background: #f5f5f5;
+    border-radius: 0 0 5px 5px;
 }
 .table__panel-cell {
-    padding: 10px;
+    padding: 5px 10px;
     background-color: #f5f5f5;
     border: 1px solid #aaaaaa;
     border-bottom: 0;
@@ -309,7 +337,7 @@ body {
     background-color: #428bca;
     border-color: #357ebd;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.5;
     border-radius: 3px;
     border: 1px solid #357ebd;
@@ -318,6 +346,28 @@ body {
 .table__panel-cell-right button:hover {
     background-color: #3071a9;
     border-color: #285e8e;
+}
+
+.header-bookName {
+    width: 200px;
+}
+.header-bookShortDesc {
+    width: 80px;
+}
+.header-bookAuthor {
+    width: 150px;
+}
+.header-bookSize {
+    width: 90px;
+}
+.header-bookParentSite {
+    width: 90px;
+}
+.content-bookGenre {
+    font-size: 13px !important;
+}
+.content-bookParentSite a {
+    color: #428bca !important;
 }
 
 .main-paging__container {
