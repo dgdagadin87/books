@@ -28,6 +28,11 @@ export default class HeaderComponent extends BaseComponent {
         });
     }
 
+    _onUserIconClick() {
+        
+        alert('qwerty');
+    }
+
     _renderHeaderUrls() {
         
         const {serverData} = this.state;
@@ -60,15 +65,12 @@ export default class HeaderComponent extends BaseComponent {
 
         return (
             <div className="main-navigation">
-                <div className="main-navigation__top">
-                    <div className="main-navigation__top-left">Приложение "Книги"</div>
-                    <div className="main-navigation__top-right">Привет, {userName}!</div>
-                    <div className="clear-both" />
-                </div>
                 <div className="main-navigation__links">
                     {this._renderHeaderUrls()}
                     <div className="clear-both" />
                 </div>
+                <div onClick={this._onUserIconClick.bind(this)} title={'Вы вошли как '+ userName} className="main-navigation__user-icon" />
+                <div onClick={this._onUserIconClick.bind(this)} title={'Вы вошли как '+ userName} className="main-navigation__user-icon-down" />
             </div>
         );
     }
