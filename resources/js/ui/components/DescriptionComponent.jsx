@@ -54,7 +54,7 @@ class DescriptionComponent extends BaseComponent {
                     className="main-description__control"
                     href="#"
                 >
-                    Смотреть
+                    Читать
                 </a>
                 <div
                     title="Закрыть описание"

@@ -68,7 +68,7 @@ class TableComponent extends BaseComponent {
         }
         
         return (
-            <div className={sortClass}>
+            <div title="Сортировать по этому полю" className={sortClass}>
                 {columnData.title}
             </div>
         );

@@ -15,7 +15,7 @@ body {
     border-right: 1px solid #ffffff;
     display: table;
     height: 100%;
-    width: 1000px;
+    width: 1040px;
     margin: 0 auto;
     font-family: "Helvetica New",Arial,sans-serif;
     font-size: 14px;
@@ -23,7 +23,7 @@ body {
 }
 
 .main-center {
-    width: 1000px;
+    width: 1040px;
     display: table-row;
     height: 100%;
     position: relative;
@@ -32,7 +32,7 @@ body {
 .main-navigation {
     position: relative;
     width: 980px;
-    margin: 5px auto 0;
+    margin: 15px auto 0;
     color: #ffffff;
     font-family:  Arial, sans-serif;
     padding: 0px 5px;
@@ -110,7 +110,7 @@ body {
     width: 980px;
     margin-top:20px;
     margin-bottom: 20px;
-    margin-left: 5px;
+    margin-left: 25px;
     position: relative;
     padding: 0px;
 }
@@ -188,12 +188,11 @@ body {
 }
 .table .main-description__control {
     color: #091b9f;
+    text-decoration:underline;
+    font-weight: normal;
 }
 .table .main-description__control:hover {
     text-decoration: none;
-}
-.table>tbody>tr:nth-child(odd) {
-    background-color: #fafafa;
 }
 .table__filter-cell {
     padding:10px;
@@ -211,29 +210,35 @@ body {
 .table__header-cell {
     padding:0px;
     border: 1px solid #aaaaaa;
-    border-bottom-width: 2px;
-    border-top-width: 2px;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
     border-right: 0;
-    background: #ffffff;
+    background: #f5f5f5;
     font-weight: bold;
 }
 .table__header-cell div {
-    padding:15px 10px;
+    padding:10px 10px;
 }
 .table__header-cell .table-sort-empty {
     background-image: url("../img/sortable.png");
-    background-position: right;
+    background-position: left;
     background-repeat: no-repeat;
+    padding-left: 16px;
+    margin-left:2px;
 }
 .table__header-cell .table-sort-asc {
     background-image: url("../img/sortable-asc.png");
-    background-position: right;
+    background-position: left;
     background-repeat: no-repeat;
+    padding-left: 16px;
+    margin-left:2px;
 }
 .table__header-cell .table-sort-desc {
     background-image: url("../img/sortable-desc.png");
-    background-position: right;
+    background-position: left;
     background-repeat: no-repeat;
+    padding-left: 16px;
+    margin-left:2px;
 }
 .table__header-cell:last-child {
     border-right: 1px solid #aaaaaa;
@@ -241,10 +246,12 @@ body {
 .table__header-check {
     padding:10px;
     border: 1px solid #aaaaaa;
-    border-bottom-width: 2px;
-    border-top-width: 2px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-width: 1px;
     border-right: 0;
     text-align: center;
+    background: #f5f5f5;
 }
 .table__header-sortable {
     cursor: pointer;
@@ -269,22 +276,12 @@ body {
 .table__content-cell:last-child {
     border-right: 1px solid #aaaaaa;
 }
-.table__content-cell .glyphicon {
-    position: relative;
-    top: 1px;
-    display: inline-block;
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-.table__content-cell .glyphicon-trash:before {
-    content: "\e020";
-}
 
 .table__content-cell .main-description__container {
+    background-image: url("../img/more.png");
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-left: 18px;
     position: relative;
 }
 .table__content-cell .main-description__content {
@@ -424,7 +421,7 @@ body {
     font-size: 14px !important;
 }
 .content-bookParentSite a {
-    color: #428bca !important;
+    color: #091b9f !important;
 }
 
 .main-paging__container {
