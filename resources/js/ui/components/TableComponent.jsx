@@ -303,7 +303,6 @@ class TableComponent extends BaseComponent {
         }
 
         let colSpan = 0;
-        let text = '';
         
         colSpan += columns.length;
         
@@ -313,23 +312,23 @@ class TableComponent extends BaseComponent {
 
         if (controlMode === 'mybooks') {
             colSpan += 3;
-            text = 'Список раздела "Мои книги"';
         }
         if (controlMode === 'allbooks') {
             const {isAdmin = false} = this.props;
             let allColSpan = isAdmin ? 4 : 3;
             colSpan += allColSpan;
-            text = 'Список раздела "Все книги"';
         }
 
         return (
             <tr>
                 <td colSpan={colSpan} className="table__panel-cell">
                     <div className="table__panel-cell-left">
-                        {text}
+                        <button type="button" onClick={()=>{
+                            alert('Выберите книги для удаления');
+                        }}>Удалить книги</button>
                     </div>
                     <div className="table__panel-cell-right">
-                        <button type="button" className={'main-download__control'} onClick={()=>{
+                        <button type="button" onClick={()=>{
                             routerHistory.push('/addbook');
                         }}>Добавить книгу</button>
                     </div>
