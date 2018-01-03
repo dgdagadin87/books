@@ -29,10 +29,8 @@ class SendToMailComponent extends BaseComponent {
         });
     }
 
-    _onShowMailClick(event) {
-        
-        event.preventDefault();
-        
+    _onShowMailClick() {
+
         const {isHidden, disabled} = this.state;
         
         if (disabled) {
@@ -91,13 +89,11 @@ class SendToMailComponent extends BaseComponent {
 
         return (
             <div className="main-sendmail__container">
-                <a
+                <div
                     className={'main-sendmail__control' + (disabled ? ' disabled' : '')}
                     onClick={(event) => this._onShowMailClick(event)}
-                    href="#"
-                >
-                    О.
-                </a>
+                    title="Отправить книгу по почте"
+                />
                 <div
                     style={{display: isHidden ? 'none' : 'block'}}
                     className="main-sendmail__content"

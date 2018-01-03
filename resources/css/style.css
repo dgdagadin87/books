@@ -187,7 +187,7 @@ body {
     width: 100%;
 }
 .table .main-description__control {
-    color: #091b9f;
+    color: #357ebd;
     text-decoration:underline;
     font-weight: normal;
 }
@@ -270,7 +270,8 @@ body {
 .table__content-cell {
     padding:5px 10px;
     border: 1px solid #aaaaaa;
-    border-right: 0;
+    border-left: 1px solid #aaaaaa;
+    border-right: 1px solid #ffffff;
     border-top: 0;
 }
 .table__content-cell:last-child {
@@ -281,7 +282,7 @@ body {
     background-image: url("../img/more.png");
     background-position: left;
     background-repeat: no-repeat;
-    padding-left: 18px;
+    padding-left: 14px;
     position: relative;
 }
 .table__content-cell .main-description__content {
@@ -310,16 +311,24 @@ body {
     border: 1px solid #000;
 }
 .table__content-cell .main-sendmail__control {
-    color: black;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    background-image: url("../img/send.png");
 }
 .table__content-cell .main-sendmail__control.disabled {
-    color: grey !important;
+    opacity: 0.5;
+    cursor: default;
 }
 .table__content-cell .main-download__control {
-    color: orange;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    background-image: url("../img/download.png");
 }
 .table__content-cell .main-download__control.disabled {
-    color: grey !important;
+    opacity: 0.5;
+    cursor: default;
 }
 .table__content-cell .main-sendmail__title {
     position: relative;
@@ -349,10 +358,17 @@ body {
 }
 .table__content-cell .main-deletebook__content {}
 .table__content-cell .main-deletebook__control {
-    color: red;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    background-image: url("../img/delete.png");
 }
 .table__content-cell .main-deletebook__control.disabled {
-    color: grey !important;
+   opacity: 0.5;
+   cursor: default;
+}
+.table__content-cell.no-border{
+   border-left-color: #ffffff;
 }
 .table__total-cell {
     font-weight: bold;
@@ -403,7 +419,7 @@ body {
 }
 
 .header-bookName {
-    width: 200px;
+    width: 220px;
 }
 .header-bookShortDesc {
     width: 80px;

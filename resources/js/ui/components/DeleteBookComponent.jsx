@@ -23,10 +23,8 @@ class DeleteComponent extends BaseComponent {
         });
     }
     
-    _deleteBook (event) {
-        
-        event.preventDefault();
-        
+    _deleteBook () {
+
         const {deleteBook} = this.props;
         const {bookId, disabled} = this.state;
         
@@ -45,13 +43,11 @@ class DeleteComponent extends BaseComponent {
 
         return (
             <div className="main-deletebook__container">
-                <a
+                <div
                     className={'main-deletebook__control' + (disabled ? ' disabled' : '')}
                     onClick={(event)=>this._deleteBook(event)}
-                    href="#"
-                >
-                    У.
-                </a>
+                    title="Удалить книгу"
+                />
             </div>
         );
     }

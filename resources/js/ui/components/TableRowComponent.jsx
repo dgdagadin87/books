@@ -59,6 +59,7 @@ class TableRowComponent extends BaseComponent {
             return (
                 <DescriptionComponent
                     value={columnValue}
+                    data={itemData}
                 />
             );
         }
@@ -131,17 +132,16 @@ class TableRowComponent extends BaseComponent {
         if (controlMode === 'mybooks') {
             columnsArray.push(
                 <td key={columns.length} className="table__content-cell">
-                    <a className={'main-download__control' + (disabled ? ' disabled' : '')} onClick={(ev)=>{
-                        ev.preventDefault();
+                    <div title="Скачать книгу" className={'main-download__control' + (disabled ? ' disabled' : '')} onClick={()=>{
                         if (disabled) {
                             return;
                         }
                         window.location.href = '/downloadmybook/' + itemData['bookId'];
-                    }} href="#">С.</a>
+                    }} />
                 </td>
             );
             columnsArray.push(
-                <td key={columns.length + 1} className="table__content-cell">
+                <td key={columns.length + 1} className="table__content-cell no-border">
                     <SendToMailComponent
                         bookId={itemData['bookId']}
                         sendMail={onSendMail}
@@ -150,7 +150,7 @@ class TableRowComponent extends BaseComponent {
                 </td>
             );
             columnsArray.push(
-                <td key={columns.length + 2} className="table__content-cell">
+                <td key={columns.length + 2} className="table__content-cell no-border">
                     <DeleteBookComponent
                         bookId={itemData['bookId']}
                         deleteBook={onDeleteBook}

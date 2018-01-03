@@ -11,6 +11,7 @@ class DescriptionComponent extends BaseComponent {
         
         this.state = {
             value: props.value,
+            data: props.data,
             isHidden: true
         };
     }
@@ -19,6 +20,7 @@ class DescriptionComponent extends BaseComponent {
 
         this.setStats({
             value: nextProps.value || '',
+            data: nextProps.data || {},
             isHidden: true
         });
     }
@@ -45,7 +47,7 @@ class DescriptionComponent extends BaseComponent {
 
     render() {
         
-        const {value, isHidden} = this.state;
+        const {data, isHidden} = this.state;
 
         return (
             <div className="main-description__container">
@@ -54,7 +56,7 @@ class DescriptionComponent extends BaseComponent {
                     className="main-description__control"
                     href="#"
                 >
-                    Читать
+                    {data.bookName}
                 </a>
                 <div
                     title="Закрыть описание"
@@ -62,7 +64,7 @@ class DescriptionComponent extends BaseComponent {
                     style={{display: isHidden ? 'none' : 'block'}}
                     className="main-description__content"
                 >
-                    {value + ' ...'}
+                    {data.bookShortDesc + ' ...'}
                 </div>
             </div>
         );
@@ -70,7 +72,8 @@ class DescriptionComponent extends BaseComponent {
 };
 
 DescriptionComponent.propTypes = {
-    value: PropTypes.string.isRequired
+    value: PropTypes.string.isRequired,
+    data: PropTypes.object.isRequired
 };
 
 export default DescriptionComponent;

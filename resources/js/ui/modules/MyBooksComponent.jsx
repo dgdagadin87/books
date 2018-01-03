@@ -253,14 +253,14 @@ class MyBooksComponent extends BaseModule {
                         name: 'bookName',
                         title: 'Название',
                         sortable: true,
-                        type: 'usual'
+                        type: 'description'
                     },
-                    {
+                    /*{
                         name: 'bookShortDesc',
                         title: 'О книге',
                         sortable: false,
                         type: 'description'
-                    },
+                    },*/
                     {
                         name: 'bookAuthor',
                         title: 'Автор',
