@@ -379,7 +379,7 @@ body {
     padding: 18px;
     border: 1px solid #aaaaaa;
     border-top: none;
-    background: #f5f5f5;
+    background: #f5f5f5 !important;
     border-radius: 0 0 5px 5px;
 }
 .table__panel-cell {
