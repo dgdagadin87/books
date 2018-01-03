@@ -369,6 +369,7 @@ body {
 }
 .table__content-cell.no-border{
    border-left-color: #ffffff;
+   padding-left: 0;
 }
 .table__total-cell {
     font-weight: bold;
