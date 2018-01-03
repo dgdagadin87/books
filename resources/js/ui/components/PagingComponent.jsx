@@ -309,6 +309,7 @@ class PagingComponent extends BaseComponent {
         return (
             <div className="main-paging__container">
                 <div className="main-paging__left">
+                    <span style={{fontSize:'16px',paddingRight:'5px'}}>Страницы</span>
                     {this._renderPrevPage()}
                     {this._renderNumbers()}
                     {this._renderNextPage()}

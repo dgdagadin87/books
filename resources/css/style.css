@@ -433,11 +433,21 @@ body {
     background-color: #d9534f;
     border-color: #d43f3a;
 }
+.table__panel-cell-left button.add-user {
+    background-color: #428bca !important;
+    border-color: #357ebd !important;
+}
 .table__panel-cell-right button:hover {
     background-color: #3071a9;
     border-color: #285e8e;
 }
 
+.header-userAvatar {
+    width: 50px;
+}
+.header-userIsAdmin {
+    width: 150px;
+}
 .header-bookName {
     width: 220px;
 }
@@ -647,16 +657,18 @@ body {
 }
 
 .table__user-avatar {
-    border-left: 1px solid #000000;
-    border-bottom: 1px solid #000000;
+    border-left: 1px solid #aaaaaa;
+    border-bottom: 1px solid #aaaaaa;
 }
 .users__header-avatar {
     width:32px;
 }
 .users__avatar {
     background-image: url("../img/avatar.png");
+    background-repeat: no-repeat;
     width: 32px;
     height: 32px;
+    margin-left: 10px;
 }
 .user-form__container {
     padding: 10px;

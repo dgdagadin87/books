@@ -109,7 +109,7 @@ class TableRowComponent extends BaseComponent {
                     key={-7}
                     className={'table__user-avatar'}
                 >
-                    <div className="users__avatar" />
+                    <div title="Нет аватара" className="users__avatar" />
                 </td>
             );
         }

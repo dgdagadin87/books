@@ -11,9 +11,6 @@ import BaseComponent from '../../base/BaseComponent.jsx';
 import RowComponent from './TableRowComponent.jsx';
 import PreloaderComponent from './SmallPreloaderComponent.jsx';
 
-const SORT_ASC = '▲';
-const SORT_DESC = '▼';
-
 class TableComponent extends BaseComponent {
 
     constructor (props) {
@@ -135,7 +132,7 @@ class TableComponent extends BaseComponent {
         
         if (controlMode === 'users') {
             columnsArray.push(
-                <td key={-7} className={'table__header-cell'}>&nbsp;</td>
+                <td key={-7} className={'table__header-cell header-userAvatar'}>&nbsp;</td>
             );
         }
         
@@ -262,7 +259,13 @@ class TableComponent extends BaseComponent {
         const {controlMode, columns, showCheckColumn, totalCount} = this.props;
 
         if (controlMode === 'users') {
-            return null;
+            return (
+                <tr>
+                    <td colSpan={11} className="table__total-cell">
+                        Всего пользователей: {totalCount}
+                    </td>
+                </tr>
+            );
         }
 
         let colSpan = 0;
@@ -299,7 +302,11 @@ class TableComponent extends BaseComponent {
             return (
                 <tr>
                     <td colSpan={11} className="table__panel-cell">
-                        <Link to={'/users/adduser'}>{'Добавить пользователя'}</Link>
+                        <div className="table__panel-cell-left">
+                            <button className="add-user" type="button" onClick={()=>{
+                                routerHistory.push('/users/adduser');
+                            }}>Добавить пользователя</button>
+                        </div>
                     </td>
                 </tr>
             );

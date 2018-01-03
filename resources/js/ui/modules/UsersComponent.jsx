@@ -179,6 +179,8 @@ class UsersComponent extends BaseModule {
 
         let usersArray = [];
 
+        usersArray.push(<div key={0} style={{marginTop:'20px'}} />);
+
         usersArray.push(
             <TableComponent
                 key={1}
