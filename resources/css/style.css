@@ -221,11 +221,21 @@ body {
     padding:10px 10px;
 }
 .table__header-cell .table-sort-empty {
-    background-image: url("../img/sortable.png");
     background-position: left;
-    background-repeat: no-repeat;
     padding-left: 16px;
     margin-left:2px;
+    position: relative;
+}
+.table__header-cell .sort-empty-label {
+    background-image: url("../img/sortable.png");
+    position: absolute;
+    top:10px;
+    left: 1px;
+    width: 16px;
+    height: 16px;
+    z-index: 2;
+    padding: 0 !important;
+    opacity: 0.3;
 }
 .table__header-cell .table-sort-asc {
     background-image: url("../img/sortable-asc.png");

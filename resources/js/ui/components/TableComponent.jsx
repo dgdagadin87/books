@@ -59,16 +59,19 @@ class TableComponent extends BaseComponent {
         }
         
         let sortClass = '';
+        let absoluteSort = '';
 
         if (sortField === name) {
             sortClass = sortType === 'ASC' ? 'table-sort-asc' : 'table-sort-desc';
         }
         else {
             sortClass = 'table-sort-empty';
+            absoluteSort = <div className="sort-empty-label" />;
         }
         
         return (
             <div title="Сортировать по этому полю" className={sortClass}>
+                {absoluteSort}
                 {columnData.title}
             </div>
         );
