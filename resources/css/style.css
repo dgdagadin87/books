@@ -80,9 +80,9 @@ body {
 .main-navigation__links .link a {
     display: block;
     padding: 13px 16px;
-    color: rgba(255,255,255,.8);
-    font-weight: 400;
-    font-size: 14px;
+    color: rgba(255,255,255,.5);
+    font-weight: 600;
+    font-size: 15px;
     text-decoration: none;
 }
 .main-navigation__links .link a:hover {
@@ -274,7 +274,7 @@ body {
     padding:5px 10px;
     border: 1px solid #aaaaaa;
     border-left: 1px solid #aaaaaa;
-    border-right: 1px solid #ffffff;
+    border-right: 1px solid transparent;
     border-top: 0;
 }
 .table__content-cell:last-child {
@@ -371,8 +371,12 @@ body {
    cursor: default;
 }
 .table__content-cell.no-border{
-   border-left-color: #ffffff;
+   border-left-width: 0;
+   border-right-width: 0;
    padding-left: 0;
+}
+.table__content-cell.no-border:last-child{
+   border-right-width: 1px;
 }
 .table__total-cell {
     font-weight: bold;
