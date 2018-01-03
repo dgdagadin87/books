@@ -279,7 +279,7 @@ body {
     text-align: center;
 }
 .table__content-cell {
-    padding:5px 10px;
+    padding:12px 10px;
     border: 1px solid #aaaaaa;
     border-left: 1px solid #aaaaaa;
     border-right: 1px solid transparent;
