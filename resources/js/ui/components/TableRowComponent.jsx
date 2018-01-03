@@ -164,17 +164,16 @@ class TableRowComponent extends BaseComponent {
             const {isAdmin} = this.props;
             columnsArray.push(
                 <td key={columns.length} className="table__content-cell">
-                    <a className={'main-download__control' + (disabled ? ' disabled' : '')} onClick={(ev)=>{
-                        ev.preventDefault();
+                    <div title="Скачать книгу" className={'main-download__control' + (disabled ? ' disabled' : '')} onClick={()=>{
                         if (disabled) {
                             return;
                         }
-                        window.location.href = '/downloadallbook/' + itemData['bookId'];
-                    }} href="#">С.</a>
+                        window.location.href = '/downloadmybook/' + itemData['bookId'];
+                    }} />
                 </td>
             );
             columnsArray.push(
-                <td key={columns.length + 1} className="table__content-cell">
+                <td key={columns.length + 1} className="table__content-cell no-border">
                     <SendToMailComponent
                         bookId={itemData['bookId']}
                         sendMail={onSendMail}
@@ -183,7 +182,7 @@ class TableRowComponent extends BaseComponent {
                 </td>
             );
             columnsArray.push(
-                <td key={columns.length + 2} className="table__content-cell">
+                <td key={columns.length + 2} className="table__content-cell no-border">
                     <AddBookComponent
                         bookId={itemData['bookId']}
                         addBook={onAddBook}
@@ -193,7 +192,7 @@ class TableRowComponent extends BaseComponent {
             );
             if (isAdmin) {
                 columnsArray.push(
-                    <td key={columns.length + 3} className="table__content-cell">
+                    <td key={columns.length + 3} className="table__content-cell no-border">
                         <DeleteBookComponent
                             bookId={itemData['bookId']}
                             deleteBook={onDeleteBook}

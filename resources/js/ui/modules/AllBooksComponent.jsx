@@ -248,7 +248,7 @@ class AllBooksComponent extends BaseModule {
 
     _renderAllBooks() {
         
-        const {serverData} = this.props;
+        const {serverData, history} = this.props;
         const {user} = serverData;
         const {userIsAdmin} = user;
         
@@ -278,6 +278,7 @@ class AllBooksComponent extends BaseModule {
         allBooksUI.push(
             <TableComponent
                 key={1}
+                routerHistory={history}
                 isAdmin={userIsAdmin}
                 events={this.events}
                 items={!collection ? [] : collection}
@@ -296,14 +297,14 @@ class AllBooksComponent extends BaseModule {
                         name: 'bookName',
                         title: 'Название',
                         sortable: true,
-                        type: 'usual'
+                        type: 'description'
                     },
-                    {
+                    /*{
                         name: 'bookShortDesc',
                         title: 'О книге',
                         sortable: false,
                         type: 'description'
-                    },
+                    },*/
                     {
                         name: 'bookAuthor',
                         title: 'Автор',
@@ -324,7 +325,7 @@ class AllBooksComponent extends BaseModule {
                     },
                     {
                         name: 'bookParentSite',
-                        title: 'Взято с сайта',
+                        title: 'С сайта',
                         sortable: true,
                         type: 'link'
                     }

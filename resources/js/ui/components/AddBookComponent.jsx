@@ -45,13 +45,11 @@ class AddComponent extends BaseComponent {
 
         return (
             <div className="main-addbook__container">
-                <a
+                <div
                     className={'main-addbook__control' + (disabled ? ' disabled' : '')}
                     onClick={(event)=>this._addBook(event)}
-                    href="#"
-                >
-                    Д.
-                </a>
+                    title={'Добавить в "Мои книги"'}
+                />
             </div>
         );
     }

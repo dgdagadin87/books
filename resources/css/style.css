@@ -362,10 +362,14 @@ body {
 }
 .table__content-cell .main-addbook__content {}
 .table__content-cell .main-addbook__control {
-    color: green;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    background-image: url("../img/add.png");
 }
 .table__content-cell .main-addbook__control.disabled {
-    color: grey !important;
+    opacity: 0.5;
+    cursor: default;
 }
 .table__content-cell .main-deletebook__content {}
 .table__content-cell .main-deletebook__control {
