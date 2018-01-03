@@ -172,6 +172,7 @@ class PagingComponent extends BaseComponent {
         
         return (
             <a
+                title={'Перейти на страницу ' + pageNumber}
                 key={keyNumber}
                 href="#"
                 className={'main-paging__page' + ( disabled ? ' disabled' : '' )}
@@ -264,6 +265,7 @@ class PagingComponent extends BaseComponent {
             let prevPage = page - 1;
             return (
                 <a
+                    title="Перейти на предыдущую страницу"
                     key={-7}
                     href="#"
                     className={'main-paging__page' + ( disabled ? ' disabled' : '' )}
@@ -274,9 +276,7 @@ class PagingComponent extends BaseComponent {
             );
         }
         
-        return (
-            <span key={-7}>{'<'}</span>
-        );
+        return (null);
     }
     
     _renderNextPage() {
@@ -288,6 +288,7 @@ class PagingComponent extends BaseComponent {
             let nextPage = page + 1;
             return (
                 <a
+                    title="Перейти на следующую страницу"
                     key={-8}
                     href="#"
                     className={'main-paging__page' + ( disabled ? ' disabled' : '' )}
@@ -298,9 +299,7 @@ class PagingComponent extends BaseComponent {
             );
         }
         
-        return (
-            <span key={-8}>{'>'}</span>
-        );
+        return (null);
     }
 
     render() {
