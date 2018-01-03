@@ -496,34 +496,35 @@ body {
     width: 200px;
     margin-left: 780px;
     position: relative;
+    text-align: right;
 }
 .main-paging__refresh {
-    position: absolute;
-    width: 75px;
-    height: 20px;
-    border: 1px solid black;
-    top: 0;
-    left: 0;
     cursor: pointer;
-    padding-left: 5px;
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 3px;
+    border: 1px solid #aaaaaa;
+    margin-left: 5px;
+    color:#333;
+    text-decoration: none;
 }
-.main-paging__refresh.disabled {
+.main-paging__refresh.disabled, .main-paging__refresh:hover {
     background: #eee;
-    color: grey;
+    color: #23527c;
 }
 .main-paging__to-page {
-    position: absolute;
-    width: 75px;
-    height: 20px;
-    border: 1px solid black;
-    top: 0;
-    left: 95px;
     cursor: pointer;
-    padding-left: 5px;
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 3px;
+    border: 1px solid #aaaaaa;
+    margin-left: 5px;
+    color:#333;
+    text-decoration: none;
 }
-.main-paging__to-page.disabled {
+.main-paging__to-page.disabled, .main-paging__to-page:hover {
     background: #eee;
-    color: grey;
+    color: #23527c;
 }
 .main-paging__to-page-window {
     position: absolute;
