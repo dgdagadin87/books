@@ -331,6 +331,17 @@ body {
     opacity: 0.5;
     cursor: default;
 }
+.table__content-cell .main-edit__control {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    background-image: url("../img/edit.png");
+    margin-left: 5px;
+}
+.table__content-cell .main-edit__control.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
 .table__content-cell .main-download__control {
     width: 16px;
     height: 16px;
@@ -447,6 +458,9 @@ body {
 }
 .header-userIsAdmin {
     width: 150px;
+}
+.header-userLogin {
+    width: 310px;
 }
 .header-bookName {
     width: 220px;

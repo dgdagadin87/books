@@ -205,27 +205,25 @@ class TableRowComponent extends BaseComponent {
         
         if (controlMode === 'users') {
             columnsArray.push(
-                <td key={columns.length} className="table__content-cell">
-                    <a className={'main-download__control' + (disabled ? ' disabled' : '')} onClick={(ev)=>{
-                        ev.preventDefault();
+                <td key={columns.length} className="table__content-cell" style={{width:'38px',paddingRight:'0',textAlign:'center'}}>
+                    <div className={'main-edit__control' + (disabled ? ' disabled' : '')} onClick={()=>{
                         if (disabled) {
                             return;
                         }
                         routerHistory.push('/users/edituser/' + itemData['userId']);
-                    }} href="#">Р.</a>
+                    }} title="Редактировать пользователя" />
                 </td>
             );
             columnsArray.push(
-                <td key={columns.length + 1} className="table__content-cell">
-                    <a className={'main-download__control' + (disabled ? ' disabled' : '')} onClick={(ev)=>{
-                        ev.preventDefault();
+                <td key={columns.length + 1} className="table__content-cell no-border" style={{width:'26px'}}>
+                    <div className={'main-deletebook__control' + (disabled ? ' disabled' : '')} onClick={()=>{
                         if (disabled) {
                             return;
                         }
                         if (onDeleteUser) {
                             onDeleteUser(itemData['userId']);
                         }
-                    }} href="#">У.</a>
+                    }} title="Удалить пользователя" />
                 </td>
             );
         }
