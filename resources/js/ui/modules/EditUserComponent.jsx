@@ -162,7 +162,7 @@ class EditUserComponent extends BaseModule {
         
         return (
             <div key={1} className="add-user__error">
-                {errorText}
+                <strong>Ошибка!</strong> {errorText}
             </div>
         );
     }
@@ -180,13 +180,13 @@ class EditUserComponent extends BaseModule {
         
         let editUserArray = [];
         
+        editUserArray.push(this._renderError());
+        
         editUserArray.push(
             <div key={0} className="add-user__title">
                 Редактирование пользователя
             </div>
         );
-
-        editUserArray.push(this._renderError());
 
         editUserArray.push(
             <UserFormComponent
@@ -227,7 +227,7 @@ class EditUserComponent extends BaseModule {
         const {user} = serverData;
 
         return (
-            <div>
+            <div className="add-user__container">
                 {user.userIsAdmin ? this._renderEditUser() : this._renderNoAccess()}
             </div>
         );

@@ -47,7 +47,7 @@ class AddUserComponent extends BaseModule {
         
         return (
             <div key={1} className="add-user__error">
-                {errorText}
+                <strong>Ошибка!</strong> {errorText}
             </div>
         );
     }
@@ -131,13 +131,13 @@ class AddUserComponent extends BaseModule {
         
         let addUserArray = [];
         
+        addUserArray.push(this._renderError());
+        
         addUserArray.push(
             <div key={0} className="add-user__title">
-                Добавление пользователя
+                Добавление пользователя в систему
             </div>
         );
-
-        addUserArray.push(this._renderError());
 
         addUserArray.push(
             <UserFormComponent
@@ -178,7 +178,7 @@ class AddUserComponent extends BaseModule {
         const {user} = serverData;
 
         return (
-            <div>
+            <div className="add-user__container">
                 {user.userIsAdmin ? this._renderAddUser() : this._renderNoAccess()}
             </div>
         );

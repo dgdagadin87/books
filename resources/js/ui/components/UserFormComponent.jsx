@@ -106,44 +106,59 @@ class UserFormComponent extends BaseComponent {
         return (
             <div className="user-form__container">
                 <div className="user-form__row">
-                    <span className="user-form__label">
-                        Логин пользователя
-                    </span>
-                    <span className="user-form__strict">*</span>
-                    <input
-                        type="text"
-                        placeholder="Введите логин пользователя"
-                        disabled={disabled}
-                        value={userLogin}
-                        onChange={this._handleLoginInput.bind(this)}
-                        className={'user-form__text-field' + ( loginError ? ' error' : '')}
-                    />
+                    <div className="users-form__label-container">
+                        <span className="user-form__label">
+                            Логин пользователя
+                        </span>
+                        <span className="user-form__strict">*</span>
+                    </div>
+                    <div className="users-form__input-container">
+                        <input
+                            type="text"
+                            placeholder="Введите логин пользователя"
+                            disabled={disabled}
+                            value={userLogin}
+                            onChange={this._handleLoginInput.bind(this)}
+                            className={'user-form__text-field' + ( loginError ? ' error' : '')}
+                        />
+                    </div>
+                    <div className="clear-both" />
                 </div>
                 <div className="user-form__row">
-                    <span className="user-form__label">
-                        Имя пользователя
-                    </span>
-                    <span className="user-form__strict name">*</span>
-                    <input
-                        type="text"
-                        placeholder="Введите имя пользователя"
-                        disabled={disabled}
-                        value={userName}
-                        onChange={this._handleNameInput.bind(this)}
-                        className={'user-form__text-field' + ( nameError ? ' error' : '')}
-                    />
+                    <div className="users-form__label-container">
+                        <span className="user-form__label">
+                            Имя пользователя
+                        </span>
+                        <span className="user-form__strict name">*</span>
+                    </div>
+                    <div className="users-form__input-container">
+                        <input
+                            type="text"
+                            placeholder="Введите имя пользователя"
+                            disabled={disabled}
+                            value={userName}
+                            onChange={this._handleNameInput.bind(this)}
+                            className={'user-form__text-field' + ( nameError ? ' error' : '')}
+                        />
+                    </div>
+                    <div className="clear-both" />
                 </div>
                 <div className="user-form__row">
-                    <span className="user-form__label admin">
-                        Администратор
-                    </span>
-                    <input
-                        type="checkbox"
-                        disabled={disabled}
-                        checked={userIsAdmin}
-                        onChange={this._handleAdminInput.bind(this)}
-                        className={'user-form__checkbox-field'}
-                    />
+                    <div className="users-form__label-container">
+                        <span className="user-form__label admin">
+                            Администратор
+                        </span>
+                    </div>
+                    <div className="users-form__input-container">
+                        <input
+                            type="checkbox"
+                            disabled={disabled}
+                            checked={userIsAdmin}
+                            onChange={this._handleAdminInput.bind(this)}
+                            className={'user-form__checkbox-field'}
+                        />
+                    </div>
+                    <div className="clear-both" />
                 </div>
             </div>
         );
