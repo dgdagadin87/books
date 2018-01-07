@@ -578,6 +578,9 @@ body {
     -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+.user-form__text-field:disabled {
+    background: #eeeeee;
+}
 .user-form__label.admin {
     padding-right: 42px;
 }

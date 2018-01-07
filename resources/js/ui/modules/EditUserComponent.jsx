@@ -42,6 +42,10 @@ class EditUserComponent extends BaseModule {
         const {params} = match;
         const {id} = params;
         
+        this.setStats({
+            disabled: true
+        });
+        
         ajaxQuery(
             {
                 url: CUL(defaultSettings, urlSettings['getUser'] + id),
