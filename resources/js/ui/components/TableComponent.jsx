@@ -370,7 +370,6 @@ class TableComponent extends BaseComponent {
                         {this._renderTableTotal()}
                     </tbody>
                 </table>
-                {items.length === 0 ? <div className="table__no-data">Нет данных</div> : null}
             </div>
         );
     }

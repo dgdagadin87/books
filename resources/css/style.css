@@ -11,7 +11,7 @@ body {
 }
 
 .main-container {
-    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
     border-left: 1px solid #ffffff;
     border-right: 1px solid #ffffff;
     display: table;
@@ -221,7 +221,7 @@ body {
 .table__header-cell {
     padding:0px;
     border: 1px solid #aaaaaa;
-    border-bottom-width: 1px;
+    border-bottom-width: 2px;
     border-top-width: 1px;
     border-right: 0;
     background: #f5f5f5 !important;
@@ -267,7 +267,7 @@ body {
 .table__header-check {
     padding:10px;
     border: 1px solid #aaaaaa;
-    border-bottom-width: 1px;
+    border-bottom-width: 2px;
     border-left-width: 1px;
     border-top-width: 1px;
     border-right: 0;
@@ -413,9 +413,9 @@ body {
 }
 .table__total-cell {
     font-weight: bold;
-    padding: 18px;
+    padding: 10px 18px;
     border: 1px solid #aaaaaa;
-    border-top: none;
+    /*border-top: none;*/
     background: #f5f5f5 !important;
     border-radius: 0 0 5px 5px;
 }
@@ -483,15 +483,23 @@ body {
 }
 .header-bookSize {
     width: 90px;
+    /*border-left-color: transparent;*/
+}
+.header-bookGenre {
+    /*border-left-color: transparent;*/
 }
 .header-bookParentSite {
     width: 90px;
 }
 .content-bookGenre {
     font-size: 14px !important;
+    /*border-left-color: transparent;*/
 }
 .content-bookParentSite a {
     color: #091b9f !important;
+}
+.content-bookSize {
+    /*border-left-color: transparent;*/
 }
 
 .add-user__container {
@@ -765,24 +773,51 @@ body {
     border: 1px solid #aaaaaa;
     border-radius: 4px;
     padding: 10px 7px;
+    width: 300px;
+}
+.main-addnewbook__container .main-selectsite__select:disabled {
+    background: #eee;
 }
 .main-addnewbook__container .main-selectsite__select.error {
     border: 1px solid red;
     outline: 0;
 }
 
+.main-addnewbook__container .main-addnewbook__foundin-title {
+    padding: 11px 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #aaaaaa;
+    color: #333;
+    border-radius: 5px 5px 0 0;
+}
 .main-addnewbook__container .main-addnewbook__foundin-panel {
     margin-top: 10px;
-    border: 1px solid #000000;
-    padding: 10px;
+}
+.main-addnewbook__container .main-addnewbook__foundin-item {
+    padding: 10px 15px;
+    border-left: 1px solid #aaaaaa;
+    border-right: 1px solid #aaaaaa;
+}
+.main-addnewbook__container .main-addnewbook__foundin-item:last-child {
+    border-bottom: 1px solid #aaaaaa;
+    border-radius: 0 0 5px 5px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+.main-addnewbook__container .main-addnewbook__foundin-item a {
+    color: #357ebd;
+}
+.main-addnewbook__container .main-addnewbook__foundin-item a:hover {
+    text-decoration: none;
 }
 
 .main-addnewbook__container .main-addnewbook__table-head {
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 10px;
-    border: 1px solid #000000;
+    border: 1px solid #aaaaaa;
     border-bottom: 0;
-    background: #fafafa;
+    background: #f5f5f5;
+    border-radius: 5px 5px 0 0;
 }
 .main-addnewbook__container .main-addnewbook__table {
     width: 100%;
@@ -791,21 +826,34 @@ body {
 .main-addnewbook__container .main-addnewbook__table .header {
     padding:10px;
     text-align: center;
-    border: 1px solid #000;
+    border: 1px solid #aaaaaa;
     border-right: 0;
+    background: #f5f5f5;
 }
 .main-addnewbook__container .main-addnewbook__table .header:last-child {
-    border: 1px solid #000;
+    border: 1px solid #aaaaaa;
+}
+.main-addnewbook__container .addnewbook-panel-cell a {
+    color: #357ebd;
+}
+.main-addnewbook__container .addnewbook-panel-cell a:hover {
+    text-decoration: none;
 }
 .main-addnewbook__container .main-addnewbook__table .item {
     padding:10px;
     text-align: left;
-    border: 1px solid #000;
+    border: 1px solid #aaaaaa;
     border-top: 0;
     border-right: 0;
 }
+.main-addnewbook__container .main-addnewbook__table tr:last-child .item:first-child {
+    border-radius: 0 0 0 5px;
+}
+.main-addnewbook__container .main-addnewbook__table tr:last-child .item:last-child {
+    border-radius: 0 0 5px 0;
+}
 .main-addnewbook__container .main-addnewbook__table .item:last-child {
-    border-right: 1px solid #000000;
+    border-right: 1px solid #aaaaaa;
 }
 
 .table__user-avatar {

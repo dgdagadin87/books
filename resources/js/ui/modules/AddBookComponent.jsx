@@ -319,6 +319,9 @@ class AddBookComponent extends BaseModule {
             
             return (
                 <div  key={2} className="main-addnewbook__foundin-panel">
+                    <div className="main-addnewbook__foundin-title">
+                        Найденные результаты
+                    </div>
                     {foundInMy}
                     {foundInAll}
                 </div>
@@ -441,7 +444,7 @@ class AddBookComponent extends BaseModule {
                             <td className="header addnewbook-genre-head">Жанр</td>
                             <td className="header addnewbook-panel-head" colSpan="2"></td>
                         </tr>
-                        {rowsArray}
+                        {rowsArray.length > 0 ? rowsArray : <td style={{borderRadius:'0 0 5px 5px'}} className="item" colSpan="5">Результатов, удовлятворяющих критериям поиска, не найдено</td>}
                     </tbody>
                 </table>
             </div>
@@ -461,22 +464,11 @@ class AddBookComponent extends BaseModule {
         }
         
         if (Array.isArray(collection)) {
-            if (collection.length < 1) {
-                return (
-                    <div key={3} className="main-addnewbook__collection-container">
-                        <div className="main-addnewbook__collection-no-data">
-                            Ничего не найдено
-                        </div>
-                    </div>
-                );
-            }
-            else {
-                return (
-                    <div key={3} className="main-addnewbook__collection-container">
-                        {this._renderTable()}
-                    </div>
-                );
-            }
+            return (
+                <div key={3} className="main-addnewbook__collection-container">
+                    {this._renderTable()}
+                </div>
+            );
         }
         
         return null;
