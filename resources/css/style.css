@@ -112,6 +112,10 @@ body {
     position: relative;
     padding: 0px;
 }
+.main-search__container.short {
+    width: 750px;
+    margin-left: 0
+}
 .main-search__text-field {
     display: block;
     width: 890px;
@@ -129,6 +133,9 @@ body {
     -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     outline: none;
+}
+.main-search__text-field.short {
+    width: 700px;
 }
 .main-search__text-field:disabled {
     background-color: #eeeeee;
@@ -168,6 +175,9 @@ body {
     top: 0px;
     right: -8px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.main-search__button.short {
+    right: -45px;
 }
 .main-search__button:disabled {
     color: grey;
@@ -290,10 +300,10 @@ body {
 }
 
 .table__content-cell .main-description__container {
-    background-image: url("../img/more.png");
+    /*background-image: url("../img/more.png");*/
     background-position: left;
     background-repeat: no-repeat;
-    padding-left: 14px;
+    padding-left: 0px;
     position: relative;
 }
 .table__content-cell .main-description__content {
@@ -645,7 +655,7 @@ body {
 }
 .main-paging__right {
     width: 200px;
-    margin-left: 780px;
+    margin-left: 790px;
     position: relative;
     text-align: right;
 }
@@ -721,25 +731,40 @@ body {
 }
 
 .main-addnewbook__container {
-    width: 980px;
+    width: 990px;
     margin: auto;
 }
 .main-addnewbook__container .main-addbook__search-panel {
-    width: 100%;
-    border: 1px solid #000;
+    width: 990px;
+    margin: 20px auto;
 }
 .main-addnewbook__container .main-addbook__search-panel-title {
     padding: 10px;
-    border-bottom: 1px solid #000000;
-    background: #fafafa;
+    border: 1px solid #aaaaaa;
+    background: #f5f5f5;
+    border-radius: 4px 4px 0 0;
 }
 .main-addnewbook__container .main-addbook__search-panel-content {
-    padding: 10px;
-    background: #ffffff;
+    padding: 20px 20px 0;
+    padding-top: 10px;
+    border: 1px solid #aaaaaa;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+}
+.main-addbook__search-panel-label {
+    float: left;
+    width: 150px;
+    font-size: 15px;
+    padding-top: 10px;
+}
+.main-addbook__search-panel-input {
+    margin-left: 150px;
 }
 
 .main-addnewbook__container .main-selectsite__select {
-    border: 1px solid blue;
+    border: 1px solid #aaaaaa;
+    border-radius: 4px;
+    padding: 10px 7px;
 }
 .main-addnewbook__container .main-selectsite__select.error {
     border: 1px solid red;

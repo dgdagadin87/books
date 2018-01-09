@@ -154,7 +154,7 @@ class TableComponent extends BaseComponent {
         
         if (controlMode === 'mybooks') {
             columnsArray.push(
-                <td key={columnNames.length} colSpan="3" className={'table__header-cell users_header-avatar'}>&nbsp;</td>
+                <td key={columnNames.length} colSpan="3" className={'table__header-cell mybooks_header-panel'}>&nbsp;</td>
             );
         }
         if (controlMode === 'allbooks') {

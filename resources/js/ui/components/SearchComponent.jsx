@@ -76,7 +76,7 @@ class SearchComponent extends BaseComponent {
         const {disabled, searchTerm, isError} = this.state;
 
         return (
-            <div className="main-search__container">
+            <div className={'main-search__container' + (mode === 'strict' ? ' short' : '')}>
                 <div className="main-search__text-field-container">
                     <input
                         type="text"
@@ -85,10 +85,10 @@ class SearchComponent extends BaseComponent {
                         value={searchTerm}
                         onChange={this._handleInput.bind(this)}
                         onKeyPress={this._handleKeyPress.bind(this)}
-                        className={'main-search__text-field' + ( (mode === 'strict' && isError) ? ' error' : '')}
+                        className={'main-search__text-field' + (mode === 'strict' ? ' short' : '') + ( (mode === 'strict' && isError) ? ' error' : '')}
                     />
                     <button
-                        className="main-search__button"
+                        className={'main-search__button' + (mode === 'strict' ? ' short' : '') + ( (mode === 'strict' && isError) ? ' error' : '')}
                         disabled={disabled}
                         onClick={this._handleClick.bind(this)}
                     >

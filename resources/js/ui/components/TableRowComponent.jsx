@@ -131,7 +131,7 @@ class TableRowComponent extends BaseComponent {
         
         if (controlMode === 'mybooks') {
             columnsArray.push(
-                <td key={columns.length} className="table__content-cell">
+                <td key={columns.length} className="table__content-cell" style={{width: '26px'}}>
                     <div title="Скачать книгу" className={'main-download__control' + (disabled ? ' disabled' : '')} onClick={()=>{
                         if (disabled) {
                             return;
@@ -141,7 +141,7 @@ class TableRowComponent extends BaseComponent {
                 </td>
             );
             columnsArray.push(
-                <td key={columns.length + 1} className="table__content-cell no-border">
+                <td key={columns.length + 1} className="table__content-cell no-border" style={{width: '26px'}}>
                     <SendToMailComponent
                         bookId={itemData['bookId']}
                         sendMail={onSendMail}
@@ -150,7 +150,7 @@ class TableRowComponent extends BaseComponent {
                 </td>
             );
             columnsArray.push(
-                <td key={columns.length + 2} className="table__content-cell no-border">
+                <td key={columns.length + 2} className="table__content-cell no-border" style={{width: '26px'}}>
                     <DeleteBookComponent
                         bookId={itemData['bookId']}
                         deleteBook={onDeleteBook}
@@ -163,7 +163,7 @@ class TableRowComponent extends BaseComponent {
         if (controlMode === 'allbooks') {
             const {isAdmin} = this.props;
             columnsArray.push(
-                <td key={columns.length} className="table__content-cell">
+                <td key={columns.length} className="table__content-cell" style={{width: '26px'}}>
                     <div title="Скачать книгу" className={'main-download__control' + (disabled ? ' disabled' : '')} onClick={()=>{
                         if (disabled) {
                             return;
@@ -173,7 +173,7 @@ class TableRowComponent extends BaseComponent {
                 </td>
             );
             columnsArray.push(
-                <td key={columns.length + 1} className="table__content-cell no-border">
+                <td key={columns.length + 1} className="table__content-cell no-border" style={{width: '26px'}}>
                     <SendToMailComponent
                         bookId={itemData['bookId']}
                         sendMail={onSendMail}
@@ -182,7 +182,7 @@ class TableRowComponent extends BaseComponent {
                 </td>
             );
             columnsArray.push(
-                <td key={columns.length + 2} className="table__content-cell no-border">
+                <td key={columns.length + 2} className="table__content-cell no-border" style={{width: '26px'}}>
                     <AddBookComponent
                         bookId={itemData['bookId']}
                         addBook={onAddBook}
@@ -192,7 +192,7 @@ class TableRowComponent extends BaseComponent {
             );
             if (isAdmin) {
                 columnsArray.push(
-                    <td key={columns.length + 3} className="table__content-cell no-border">
+                    <td key={columns.length + 3} className="table__content-cell no-border" style={{width: '26px'}}>
                         <DeleteBookComponent
                             bookId={itemData['bookId']}
                             deleteBook={onDeleteBook}

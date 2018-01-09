@@ -55,6 +55,7 @@ class DescriptionComponent extends BaseComponent {
                     onClick={(event) => this._onShowDescriptionClick(event)}
                     className="main-description__control"
                     href="#"
+                    title="Смотреть краткое описание"
                 >
                     {data.bookName}
                 </a>
