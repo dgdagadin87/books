@@ -194,7 +194,7 @@ class AddBookComponent extends BaseModule {
                     Поиск по книгам
                 </div>
                 <div className="main-addbook__search-panel-content">
-                    <div>
+                    <div style={{marginTop:'10px'}}>
                         <div className="main-addbook__search-panel-label">
                             <span>Выбор сайта</span>
                             <span className="user-form__strict">*</span>
@@ -276,12 +276,12 @@ class AddBookComponent extends BaseModule {
                             globalEvents.trigger('setModuleData', defaultMyBooksData, 'mybooks', callBack.bind(this));
                         }}
                     >
-                        Перейти
+                        Мои книги
                     </a>
                 );
                 foundInMy = (
                     <div className="main-addnewbook__foundin-item">
-                        Результаты, содержащие {'"' + searchTerm + '"'}, найдены в разделе "Мои книги". {linkToMyBooks}
+                        Результаты, содержащие введенную фразу для поиска (<strong>{searchTerm}</strong>), найдены в разделе {linkToMyBooks} 
                         <div id="addBook-myBooks" style={{display:'none'}}>
                             <Link to={'/'}>{'Мои книги'}</Link>
                         </div>
@@ -304,12 +304,12 @@ class AddBookComponent extends BaseModule {
                             globalEvents.trigger('setModuleData', defaultAllBooksData, 'allbooks', callBack.bind(this));
                         }}
                     >
-                        Перейти
+                        Все книги
                     </a>
                 );
                 foundInAll = (
                     <div className="main-addnewbook__foundin-item">
-                        Результаты, содержащие {'"' + searchTerm + '"'}, найдены в разделе "Все книги". {linkToAllBooks}
+                        Результаты, содержащие введенную фразу для поиска (<strong>{searchTerm}</strong>), найдены в разделе {linkToAllBooks} 
                         <div id="addBook-allBooks" style={{display:'none'}}>
                             <Link to={'/allbooks'}>{'Все книги'}</Link>
                         </div>
@@ -353,7 +353,7 @@ class AddBookComponent extends BaseModule {
                     <td className="item addnewbook-authorname-cell">
                         {currentItem['genre']}
                     </td>
-                    <td className="item addnewbook-panel-cell">
+                    <td className="item addnewbook-panel-cell" style={{width:'75px'}}>
                         <a
                             href="#"
                             onClick={(event) => {
@@ -389,7 +389,7 @@ class AddBookComponent extends BaseModule {
                             Скачать
                         </a>
                     </td>
-                    <td className="item addnewbook-panel-cell">
+                    <td className="item addnewbook-panel-cell" style={{width:'200px'}}>
                         <a
                             href="#"
                             onClick={(event) => {

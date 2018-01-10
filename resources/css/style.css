@@ -136,6 +136,7 @@ body {
 }
 .main-search__text-field.short {
     width: 700px;
+    border-color: #777;
 }
 .main-search__text-field:disabled {
     background-color: #eeeeee;
@@ -178,6 +179,7 @@ body {
 }
 .main-search__button.short {
     right: -45px;
+    border-left-color: #777;
 }
 .main-search__button:disabled {
     color: grey;
@@ -626,7 +628,7 @@ body {
 .main-paging__left a {
     display: inline-block;
     padding: 5px 8px;
-    border-radius: 0px;
+    border-radius: 3px;
     border: 1px solid #aaaaaa;
     margin-left: 5px;
     color:#333;
@@ -650,7 +652,7 @@ body {
 .main-paging__left span.main-paging__current-page {
     display: inline-block;
     padding: 5px 8px;
-    border-radius: 0px;
+    border-radius: 3px;
     border: 1px solid #337ab7;
     margin-left: 5px;
     color:#fff;
@@ -671,7 +673,7 @@ body {
     cursor: pointer;
     display: inline-block;
     padding: 5px 8px;
-    border-radius: 0px;
+    border-radius: 3px;
     border: 1px solid #aaaaaa;
     margin-left: 5px;
     color:#333;
@@ -685,7 +687,7 @@ body {
     cursor: pointer;
     display: inline-block;
     padding: 5px 8px;
-    border-radius: 0px;
+    border-radius: 3px;
     border: 1px solid #aaaaaa;
     margin-left: 5px;
     color:#333;
@@ -764,16 +766,17 @@ body {
     width: 150px;
     font-size: 15px;
     padding-top: 10px;
+    text-align: left;
 }
 .main-addbook__search-panel-input {
     margin-left: 150px;
 }
 
 .main-addnewbook__container .main-selectsite__select {
-    border: 1px solid #aaaaaa;
+    border: 1px solid #777;
     border-radius: 0px;
-    padding: 10px 7px;
-    width: 300px;
+    padding: 9px 7px;
+    width: 400px;
 }
 .main-addnewbook__container .main-selectsite__select:disabled {
     background: #eee;
@@ -794,7 +797,7 @@ body {
     margin-top: 10px;
 }
 .main-addnewbook__container .main-addnewbook__foundin-item {
-    padding: 10px 15px;
+    padding: 10px 15px 0px;
     border-left: 1px solid #aaaaaa;
     border-right: 1px solid #aaaaaa;
 }
@@ -825,13 +828,19 @@ body {
 
 .main-addnewbook__container .main-addnewbook__table .header {
     padding:10px;
-    text-align: center;
+    text-align: left;
     border: 1px solid #aaaaaa;
+    border-bottom-width: 2px;
     border-right: 0;
     background: #f5f5f5;
+    font-weight: bold;
 }
 .main-addnewbook__container .main-addnewbook__table .header:last-child {
     border: 1px solid #aaaaaa;
+    border-bottom-width: 2px;
+}
+.main-addnewbook__container .addnewbook-panel-cell {
+    text-align: center !important;
 }
 .main-addnewbook__container .addnewbook-panel-cell a {
     color: #357ebd;
