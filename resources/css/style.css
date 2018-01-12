@@ -11,9 +11,9 @@ body {
 }
 
 .main-container {
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
-    border-left: 1px solid #ffffff;
-    border-right: 1px solid #ffffff;
+    /*box-shadow: 0 0 5px rgba(0,0,0,0.5);*/
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
     display: table;
     height: 100%;
     width: 1040px;
@@ -883,6 +883,84 @@ body {
 .main-footer {
     margin-top: 20px;
     height: 40px;
+}
+
+.main-footer {
+    margin-top:20px;
+    height: 40px;
+}
+.under-footer {
+    width:990px;
+    margin:auto;
+    height: 39px;
+    background:#fff;
+    border-top: 1px solid #aaa;
+    font-size: 14px;
+    position: relative;
+    color:#333;
+}
+.under-footer a {
+    color: #091b9f;
+    text-decoration: underline;
+}
+.under-footer a:hover {
+    color: #cf1557;
+    text-decoration: none;
+}
+.under-footer .left-one {
+    height: 34px;
+    background:#fff;
+    position: absolute;
+    width:300px;
+    left:5px;
+    top:5px;
+}
+.under-footer .left-one > div,
+.under-footer .right-one > div {
+/*    margin-top:3px;*/
+}
+.under-footer .right-one > div {
+    text-align:right;
+}
+.under-footer .right-one {
+    height: 34px;
+    background:#fff;
+    position: absolute;
+    width:250px;
+    right:5px;
+    top:5px;
+}
+.under-footer .center-one {
+    background:#fff;
+    width:100px;
+    text-align:center;
+    margin:7px auto 0;
+}
+
+.main-preloader__large {
+    position: relative;
+}
+.main-preloader__large .preloader {
+    position: fixed;
+    top:30px;
+    background: #fff;
+    z-index:25;
+    padding:5px 0;
+    width:200px;
+    border:1px solid #aaaaaa;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+    border-radius: 3px;
+    text-align:center;
+}
+.main-preloader__large .preloader .image {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: transparent url('../img/pre-mini.gif') no-repeat;
+    vertical-align: middle;
+}
+.main-preloader__large .preloader .text {
+    display: inline-block;
 }
 
 .clear-both {

@@ -10,7 +10,10 @@ export default class PreloaderComponent extends BaseComponent {
 
         return (
             <div className="main-preloader__large">
-                Подождите, идет загрузка данных...
+                <div className="preloader" style="display:none;">
+                    <span className="image"></span>
+                    <span className="text">Загрузка...</span>
+                </div>
             </div>
         );
     }
