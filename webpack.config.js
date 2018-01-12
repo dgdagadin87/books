@@ -31,6 +31,10 @@ var config = {
             {
                 test: /\.png$/,
                 loader: "url-loader?mimetype=image/png"
+            },
+            {
+                test: /\.gif$/,
+                loader: "url-loader?mimetype=image/gif"
             }
         ]
     },

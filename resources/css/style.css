@@ -941,7 +941,7 @@ body {
     position: relative;
 }
 .main-preloader__large .preloader {
-    position: fixed;
+    position: absolute;
     top:30px;
     background: #fff;
     z-index:25;
@@ -951,6 +951,7 @@ body {
     box-shadow: 0 0 3px rgba(0,0,0,0.5);
     border-radius: 3px;
     text-align:center;
+    left: 430px;
 }
 .main-preloader__large .preloader .image {
     display: inline-block;
