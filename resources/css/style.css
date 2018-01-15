@@ -729,17 +729,6 @@ body {
     padding: 3px;
 }
 
-.main-preloader__small {
-    position: fixed;
-    left: 50%;
-    top: 50px;
-    width: 150px;
-    padding: 10px;
-    border: 1px solid #000000;
-    z-index: 101;
-    background: #fff;
-}
-
 .main-addnewbook__container {
     width: 990px;
     margin: auto;
@@ -937,10 +926,10 @@ body {
     margin:7px auto 0;
 }
 
-.main-preloader__large {
+.main-preloader__large, .main-preloader__small {
     position: relative;
 }
-.main-preloader__large .preloader {
+.main-preloader__large .preloader, .main-preloader__small .preloader {
     position: absolute;
     top:30px;
     background: #fff;
@@ -951,16 +940,31 @@ body {
     box-shadow: 0 0 3px rgba(0,0,0,0.5);
     border-radius: 3px;
     text-align:center;
-    left: 430px;
 }
-.main-preloader__large .preloader .image {
+.main-preloader__large .preloader {
+    border:1px solid #ffffff;
+    box-shadow: 0 0 0px rgba(0,0,0,0.5);
+    left: 430px;
+    font-size: 15px;
+}
+.main-preloader__small .preloader {
+    position: fixed;
+    top:105px;
+}
+.main-preloader__large .preloader .image, .main-preloader__small .preloader .image  {
     display: inline-block;
     width: 20px;
     height: 20px;
     background: transparent url('../img/pre-mini.gif') no-repeat;
     vertical-align: middle;
 }
-.main-preloader__large .preloader .text {
+.main-preloader__large .preloader .image  {
+    width: 29px;
+    height: 29px;
+    background: transparent url('../img/pre-normal.gif') no-repeat;
+    margin-right: 5px;
+}
+.main-preloader__large .preloader .text, .main-preloader__small .preloader .text {
     display: inline-block;
 }
 
