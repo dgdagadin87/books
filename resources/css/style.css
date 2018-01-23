@@ -38,8 +38,7 @@ body {
     font-family:  Arial, sans-serif;
     padding: 0px 5px;
     border-radius: 0px 0px 0 0;
-    background-color: #222;
-    border-color: #080808;
+    background-color: #333;
 
 }
 .main-navigation__user-icon{
@@ -75,12 +74,12 @@ body {
 .main-navigation__links .link a {
     display: block;
     padding: 15px 15px;
-    color: #9d9d9d;
+    color: #ffffff;
     font-weight: 400;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font: 15px/15px "Helvetica Neue Light",Arial,Tahoma,sans-serif;
     font-size: 15px;
     text-decoration: none;
-    text-shadow: 1px 1px 1px black, 0 0 1em #000000;
+    /*text-shadow: 1px 1px 1px black, 0 0 1em #000000;*/
 }
 .main-navigation__links .link a:hover {
     background: #080808;
@@ -318,7 +317,9 @@ body {
     z-index:100;
     width: 400px;
     background: #ffffff;
-    border: 1px solid blue;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    border: 1px solid #aaaaaa;
+    border-radius: 2px;
 }
 .table__content-cell .main-sendmail__container {
     position: relative;
@@ -697,23 +698,6 @@ body {
     background: #eee;
     color: #23527c;
 }
-.main-paging__to-page-window {
-    position: absolute;
-    border: 1px solid #000000;
-    top: -45px;
-    right: 20px;
-    z-index: 100;
-    background: #fff;
-    padding: 10px;
-}
-.main-paging__to-paging-input {
-    width: 40px;
-    border: 1px solid #000;
-    outline: 0;
-}
-.main-paging__to-paging-input.error {
-    border: 1px solid red;
-}
 .main-paging__page {
     padding: 3px;
     color: blue;
@@ -966,6 +950,47 @@ body {
 }
 .main-preloader__large .preloader .text, .main-preloader__small .preloader .text {
     display: inline-block;
+}
+
+.main-paging__to-page-window {
+    border:1px solid #999;
+    width:95px;
+    height:50px;
+    z-index:20;
+    position:absolute;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+    border-radius: 3px;
+    top:-55px;
+    right:-10px;
+    background:#ffffff;
+    font-family: "Helvetica New",Arial,sans-serif;
+    text-align: left !important;
+}
+.main-paging__to-page-title {
+    margin-left:3px;
+    color:#666;
+    font-size:14px;
+    font-weight: bold;
+}
+.main-paging__to-page-form {
+    margin-left:4px;
+    margin-top:3px;
+}
+.main-paging__to-paging-input {
+    height: 21px;
+    width: 40px;
+    font-size:14px;
+    padding:0 2px;
+    outline: 0;
+}
+.main-paging__to-page-button {
+    height: 26px;
+    width: 36px;
+    font-size:14px;
+    margin-left: 4px;
+}
+.main-paging__to-paging-input.error {
+    border: 1px solid red;
 }
 
 .clear-both {
