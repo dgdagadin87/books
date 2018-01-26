@@ -328,11 +328,13 @@ body {
     position: absolute;
     top: -20px;
     right: -20px;
-    padding: 10px;
+    padding: 5px;
     z-index:100;
-    width: 210px;
+    width: 226px;
     background: #ffffff;
-    border: 1px solid #000;
+    border: 1px solid #999;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+    border-radius: 3px;
 }
 .table__content-cell .main-sendmail__control {
     width: 16px;
@@ -367,22 +369,37 @@ body {
 }
 .table__content-cell .main-sendmail__title {
     position: relative;
+    font-weight: bold;
+    color: #666;
+}
+.table__content-cell .main-sendmail__main {
+    padding-top: 5px;
 }
 .table__content-cell .main-sendmail__close {
-    width: 10px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
+    background-image: url("../img/close.png");
     top: 0;
     right: 0;
     position: absolute;
 }
 .table__content-cell .main-sendmail__input {
-    border: 1px solid blue;
-    background: #fff;
+    height: 21px;
+    width: 140px;
+    font-size: 14px;
+    padding: 2px 2px;
     outline: 0;
-    width: 130px;
+    border: 1px solid #999;
+    background: #ffffff;
 }
 .table__content-cell .main-sendmail__input.error {
-    border-color: red;
+    border: 1px solid red;
+}
+.table__content-cell .main-sendmail__button {
+    height: 26px;
+    font-size: 14px;
+    margin-left: 4px;
 }
 .table__content-cell .main-addbook__content {}
 .table__content-cell .main-addbook__control {
@@ -980,8 +997,9 @@ body {
     height: 21px;
     width: 40px;
     font-size:14px;
-    padding:0 2px;
+    padding:2px 2px;
     outline: 0;
+    border: 1px solid #777;
 }
 .main-paging__to-page-button {
     height: 26px;

@@ -103,14 +103,12 @@ class SendToMailComponent extends BaseComponent {
                             onClick={(event) => this._onCloseMailClick(event)}
                             className="main-sendmail__close"
                             title="Закрыть окно"
-                        >
-                            X
-                        </div>
+                        />
                         Отправить книгу по почте
                     </div>
                     <div className="main-sendmail__main">
-                        E-mail:
                         <input
+                            placeholder="Е-mail"
                             type="text"
                             value={mailValue}
                             onChange={this._handleInput.bind(this)}
