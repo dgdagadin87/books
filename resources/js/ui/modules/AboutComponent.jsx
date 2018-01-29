@@ -18,8 +18,13 @@ class AboutComponent extends BaseModule {
     render() {
 
         return (
-            <div>
-                О программе
+            <div className="main-about__panel">
+                <div className="main-about__title">
+                    О программе "Книги"
+                </div>
+                <div className="main-about__content">
+                    О программе
+                </div>
             </div>
         );
     }

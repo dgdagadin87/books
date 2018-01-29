@@ -62,10 +62,8 @@ class ModalComponent extends BaseComponent {
         }, stateCallback.bind(this));
     }
 
-     _downloadHandler(event) {
-        
-        event.preventDefault();
-        
+     _downloadHandler() {
+
         const {bookId} = this.state;
         
         window.location.href = '/downloadrawbook/' + bookId;
@@ -103,7 +101,7 @@ class ModalComponent extends BaseComponent {
             if (step === 'start') {
                 return (
                     <div className="main-addnewbook__modal-start">
-                        Идет добавление книги...<br />
+                        Идет добавление книги...
                         Это может занять некоторое время.
                         Пожалуйста, не закрывайте браузер.
                     </div>
@@ -112,14 +110,15 @@ class ModalComponent extends BaseComponent {
             else {
                 return (
                     <div className="main-addnewbook__modal-end">
-                        Книга успешно добавлена в "Мои книги".
-                        <div>
-                            <button
-                                onClick={this._closeHandler.bind(this)}
-                            >
-                                Закрыть окно
-                            </button>
+                        <div style={{paddingBottom:'25px'}}>
+                            Книга успешно добавлена в "Мои книги".
                         </div>
+                        <button
+                            className="button"
+                            onClick={this._closeHandler.bind(this)}
+                        >
+                            Закрыть окно
+                        </button>
                     </div>
                 );
             }
@@ -129,7 +128,7 @@ class ModalComponent extends BaseComponent {
             if (step === 'start') {
                 return (
                     <div className="main-addnewbook__modal-start">
-                        Идет формирование файла книги для скачивания...<br />
+                        Идет формирование файла книги для скачивания...
                         Это может занять некоторое время.
                         Пожалуйста, не закрывайте браузер.
                     </div>
@@ -138,20 +137,21 @@ class ModalComponent extends BaseComponent {
             else {
                 return (
                     <div className="main-addnewbook__modal-end">
-                        <a
-                            href="#"
-                            className="main-addnewbook__modal-link"
+                        <div style={{paddingBottom:'25px'}}>
+                            Файл книги сформирован для скачивания.
+                        </div>
+                        <button
+                            className="button"
                             onClick={this._downloadHandler.bind(this)}
                         >
                             Скачать книгу
-                        </a>
-                        <div>
-                            <button
-                                onClick={this._closeHandler.bind(this)}
-                            >
-                                Закрыть окно
-                            </button>
-                        </div>
+                        </button>
+                        <button
+                            className="button button-last"
+                            onClick={this._closeHandler.bind(this)}
+                        >
+                            Закрыть окно
+                        </button>
                     </div>
                 );
             }
