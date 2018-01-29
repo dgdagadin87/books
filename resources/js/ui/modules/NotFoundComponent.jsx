@@ -15,8 +15,13 @@ class NotFoundComponent extends BaseComponent {
     render() {
 
         return (
-            <div>
-                404 - ошибка.
+            <div className="main-about__panel">
+                <div className="main-about__title">
+                    404 - ошибка
+                </div>
+                <div className="main-about__content">
+                    <span style={{color:'red'}}>Вы попали на несуществующую страницу.</span>
+                </div>
             </div>
         );
     }
