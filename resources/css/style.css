@@ -1063,6 +1063,30 @@ body {
     border-right: 1px solid #aaaaaa;
 }
 
+.header__popup-window {
+    border:1px solid #999;
+    width:140px;
+    height:60px;
+    z-index:20;
+    position:absolute;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+    border-radius: 3px;
+    top:35px;
+    right:10px;
+    background:#ffffff;
+    font-family: "Helvetica New",Arial,sans-serif;
+    text-align: left !important;
+    color: #333;
+    padding: 5px;
+}
+.header__popup-window a {
+    color: #333;
+    font-size: 14px;
+}
+.header__popup-window a:hover {
+    text-decoration: none;
+}
+
 .clear-both {
     clear: both;
 }
