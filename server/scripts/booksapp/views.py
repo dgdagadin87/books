@@ -1,10 +1,6 @@
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + 'include'))
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + 'include/controllers'))
+from .include.miscutils.sessions import BooksSessions
+from .include.controllers.central import central_controller
 
-from sessions import BooksSessions
-from gui import GuiController
 
-def gui(request):
-	return GuiController(BooksSessions, request)
+def central(request):
+    return central_controller(BooksSessions, request)
