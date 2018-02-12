@@ -1,3 +1,9 @@
+*.pyc
+*~
+__pycache__
+server/scripts/booksenv
+server/scripts/booksapp/migrations
+server/scripts/.idea
 node_modules
 npm-debug.log
 .DS_Store

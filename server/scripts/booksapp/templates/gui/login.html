@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+    <head>
+        <title>Войти в систему</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta content="ie=edge" http-equiv="x-ua-compatible">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="http://allfont.ru/allfont.css?fonts=pt-sans" rel="stylesheet" type="text/css" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            html, body {
+                height: 100%;
+            }
+            body {
+                overflow-y: scroll;
+            }
+
+            .fs--login-container {
+                display: table;
+                height: 100%;
+                width: 1000px;
+                margin: 0 auto;
+                font-family: "Helvetica New",Arial,sans-serif;
+                font-size:15px;
+            }
+            .fs--login-center {
+                width:1000px;
+                display: table-cell;
+                height: 100%;
+                position:relative;
+                vertical-align: middle;
+            }
+            .fs--login-block {
+                width: 400px;
+                margin: auto;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+            .fs--login-block .label {
+                color:#444;
+                margin-bottom: 2px;
+            }
+            .fs--login-block .password {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .fs--login-header {
+                background: #f5f5f5;
+                padding: 10px 15px;
+                color: #444444;
+                border-bottom: 1px solid #ccc;
+                font-weight: bold;
+                font-size:16px;
+            }
+            .fs--login-container .controls-container {
+                padding: 10px 20px 10px 17px;
+            }
+            .fs--login-container .buttons {
+                margin-bottom: 10px;
+            }
+            .fs--login-container .buttons a {
+                display: inline-block;
+                background: #f0f0f0;
+                color: #000;
+                border: 1px solid #aaaaaa;
+                text-decoration: none;
+                padding: 4px 35px;
+            }
+            .fs--login-container .buttons a:hover {
+                border: 1px solid #333333;
+            }
+            .fs--login-container .buttons a.disabled {
+                display: inline-block;
+                background: #f0f0f0;
+                color: #aaa;
+                border: 1px solid #eee;
+                text-decoration: none;
+                padding: 4px 35px;
+            }
+            .fs--login-container .controls-container input[type="text"],
+            .fs--login-container .controls-container input[type="password"]{
+                display: block;
+                width: 100%;
+                height: 30px;
+                font-size: 15px;
+                background: #ffffff;
+                border: 1px solid #888;
+                padding-left:3px;
+            }
+            .fs--login-container .controls-container input[type="text"]:focus,
+            .fs--login-container .controls-container input[type="password"]:focus {
+                border: 1px solid #29B0D9;
+            }
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script type="text/javascript">
+            var functionObject = {
+                isEmpty: function(value) {
+                    return (value === null || value === undefined || value === '') ? true : false;
+                },
+                clearErrors: function(){
+                    $('#errors').hide();
+                },
+                showErrors: function(errors){
+                    var errorString = '';
+                    $.each(errors, function(key, error){
+                        errorString += '<div>'+error+'</div>';
+                    });
+                    $('#errors').html(errorString);
+                    $('#errors').show();
+                },
+                afterSuccess: function(data, textStatus, jqXHR){
+                    var success = data.success || false;
+                    var message = data.message || 'Ошибка';
+                    if (!success) {
+                        this.showErrors([message]);
+                        return false;
+                    }
+                    window.location.href = '/';
+                },
+                afterError: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                },
+                afterComplete: function(jqXHR, textStatus){
+                    $('#submit').removeClass('disabled');
+                    $('#reset').removeClass('disabled');;
+                }
+            };
+            $(document).ready(function() {
+                $('#submit').click(function(event) {
+                    event.preventDefault();
+                    
+                    if ($(this).hasClass('disabled')) {
+                        return false;
+                    }
+                    
+                    var login = $('#login').val();
+                    var password = $('#password').val();
+                    
+                    functionObject.clearErrors();
+                    
+                    if (functionObject.isEmpty(login) || functionObject.isEmpty(password)) {
+                        functionObject.showErrors(['Введите логин и пароль']);
+                        return false;
+                    }
+ 
+                    $('#submit').addClass('disabled');
+                    $('#reset').addClass('disabled');
+ 
+                    var queryConfig = {
+                        url: '/api/login',
+                        type: 'POST',
+                        async: true,
+                        cache: false,
+                        dataType: 'json',
+                        data: {
+                            login: login,
+                            pass: password
+                        },
+                        headers: {},
+                        success: function(data, textStatus, jqXHR){
+                            functionObject.afterSuccess(data, textStatus, jqXHR);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            functionObject.afterError(jqXHR, textStatus, errorThrown);
+                        },
+                        complete: function(jqXHR, textStatus){
+                            functionObject.afterComplete(jqXHR, textStatus);
+                        }
+                    };
+                    $.ajax(queryConfig);
+                    
+                });
+                $('#reset').click(function(event) {
+                    event.preventDefault();
+                    $('#login').val('');
+                    $('#password').val('');
+                });
+}           );
+        </script>
+    </head>
+    <body>
+        <div class="fs--login-container">
+            <div class="fs--login-center">
+                <div class="fs--login-block">
+                    <div class="fs--login-header">
+                        Авторизация в системе
+                    </div>
+                    <div class="controls-container">
+                        <div id="errors" class="login-error-block" style="display:none;"></div>
+                        <div class="login">
+                            <div class="label">Имя пользователя</div>
+                            <input type="text" id="login" name="app-login" value="" placeholder="Введите логин" />
+                        </div>
+                        <div class="password">
+                            <div class="label">Пароль</div>
+                            <input type="password" id="password" name="app-password" value="" placeholder="Введите пароль" />
+                        </div>
+                        <div class="buttons">
+                            <a href="#" id="submit">войти</a>
+                            <a href="#" id="reset">очистить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
