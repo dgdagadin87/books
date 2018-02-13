@@ -2,7 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-	url(r'^$', views.central, name='central'),
-	#url(r'api/login^$', views.login, name='login'),
+	url(r'^$', views.gui_central, name='gui_central'),
+	url(r'^api/login$', views.api_login, name='api_login'),
 	#url(r'api/logout^$', views.logout, name='logout')
 ]
