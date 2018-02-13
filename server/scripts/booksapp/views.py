@@ -10,4 +10,4 @@ def gui_central(request):
 
 @csrf_exempt
 def api_login(request):
-    return api_login_controller(BooksSessions, request)
+    return api_login_controller(request)
