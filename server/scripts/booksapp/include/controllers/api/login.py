@@ -3,6 +3,7 @@ from django.http import JsonResponse
 
 def api_login_controller(request, helpers):
 
+    # Если метод не POST
     if request.method != 'POST':
         return JsonResponse({
             'success': False,
@@ -14,6 +15,7 @@ def api_login_controller(request, helpers):
     login_value = post_values.get('login')
     password_value = post_values.get('pass')
 
+    # Если не заполнены поля
     if not login_value or not password_value:
         return JsonResponse({
             'success': False,
@@ -23,6 +25,7 @@ def api_login_controller(request, helpers):
 
     hashed_password = helpers.hash_string(password_value)
 
+    # Если нет совпадения полей в БД
     if login_value != 'Medved' or hashed_password != '38b83c928065fff501bb2cdf1275faba7ea498cf':
         return JsonResponse({
             'success': False,
@@ -30,6 +33,7 @@ def api_login_controller(request, helpers):
             'data': []
         })
 
+    # Корректный результат
     return JsonResponse({
         'success': True,
         'message': '',
