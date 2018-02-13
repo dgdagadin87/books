@@ -1,8 +1,7 @@
 from django.http import JsonResponse
-import hashlib
 
 
-def api_login_controller(request):
+def api_login_controller(request, helpers):
 
     if request.method != 'POST':
         return JsonResponse({
@@ -22,9 +21,7 @@ def api_login_controller(request):
             'data': []
         })
 
-    encoded_password = password_value.encode('utf-8')
-    hashed_object = hashlib.sha1(encoded_password)
-    hashed_password = hashed_object.hexdigest()
+    hashed_password = helpers.hash_string(password_value)
 
     if login_value != 'Medved' or hashed_password != '38b83c928065fff501bb2cdf1275faba7ea498cf':
         return JsonResponse({
