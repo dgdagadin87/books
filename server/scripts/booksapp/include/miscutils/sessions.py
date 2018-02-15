@@ -1,4 +1,5 @@
 from .helpers import BooksHelpers
+from booksapp.models import Users
 
 
 class BooksSessions(object):
@@ -15,13 +16,21 @@ class BooksSessions(object):
 
         # Переводим из json в объект
         parsed_cookie = BooksHelpers.json2object(auth_cookie)
+        cookie_user_name = parsed_cookie.userName
+        cookie_secret_key = parsed_cookie.secretKey
 
         # Если нет ее элементов
-        if parsed_cookie.userName is None or parsed_cookie.secretKey is None:
+        if cookie_user_name is None or cookie_secret_key is None:
             return False
 
         # Проверяем секретный ключ на корректность
-        # ...
+        try:
+            user = Users.objects.get(user_login=cookie_user_name, user_secret_key=cookie_secret_key)
+        except Users.DoesNotExist:
+            user = False
+
+        if user is False:
+            return False
 
         # Если все нормально
         return True
