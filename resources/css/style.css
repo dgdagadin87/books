@@ -490,7 +490,7 @@ body {
 .table tr:hover .table__content-cell,
 .table tr:hover .table__content-check,
 .table tr:hover .table__user-avatar {
-    background: #fcf8e3;
+    background: #c4e2ff;
 }
 
 .header-userAvatar {
