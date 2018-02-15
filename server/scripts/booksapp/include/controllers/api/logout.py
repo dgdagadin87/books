@@ -1,17 +1,16 @@
-class BooksSessions():
+from django.http import JsonResponse
 
-    def checkIfAuthorized(self, request):
 
-        # Получаем авторизационую куку
-        authCookie = request.COOKIES.get('authCookie')
+def api_logout_controller():
 
-        # Если ее вообще нет
-        if authCookie == None:
-            return False
+    # Корректный результат
+    response = JsonResponse({
+        'success': True,
+        'message': '',
+        'data': []
+    })
 
-        # Если нет ее элементов
-        if authCookie.userName == None or authCookie.secretKey == None:
-            return False
+    # Удаление авторизационной куки
+    response.delete_cookie('authCookie')
 
-        # Проверяем секретный ключ на корректность
-        # ...
+    return response

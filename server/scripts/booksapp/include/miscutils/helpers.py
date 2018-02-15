@@ -1,5 +1,6 @@
 import hashlib
 
+
 class BooksHelpers(object):
 
     @staticmethod

@@ -1,4 +1,6 @@
 from django.http import JsonResponse
+from booksapp.models import Users
+import json
 
 
 def api_login_controller(request, helpers):
@@ -25,8 +27,17 @@ def api_login_controller(request, helpers):
 
     hashed_password = helpers.hash_string(password_value)
 
+    # Получение пользователя из БД
+    try:
+        user = Users.objects.get(user_login=login_value, user_password=hashed_password)
+    except Users.DoesNotExist:
+        user = Users()
+
+    db_user_login = user.user_login
+    db_user_password = user.user_password
+
     # Если нет совпадения полей в БД
-    if login_value != 'Medved' or hashed_password != '38b83c928065fff501bb2cdf1275faba7ea498cf':
+    if login_value != db_user_login or hashed_password != db_user_password:
         return JsonResponse({
             'success': False,
             'message': 'Неправильно заполнены логин/пароль',
@@ -34,8 +45,16 @@ def api_login_controller(request, helpers):
         })
 
     # Корректный результат
-    return JsonResponse({
+    response = JsonResponse({
         'success': True,
         'message': '',
         'data': []
     })
+
+    # Авторизационная кука
+    response.set_cookie('authCookie', json.dumps({
+        'userName': db_user_login,
+        'secretKey': user.user_secret_key
+    }))
+
+    return response
