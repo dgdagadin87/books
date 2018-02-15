@@ -1,14 +1,4 @@
-import json
-from collections import namedtuple
-
-
-# json_decode
-def _json_object_hook(d):
-    return namedtuple('X', d.keys())(*d.values())
-
-
-def json2obj(data):
-    return json.loads(data, object_hook=_json_object_hook)
+from .helpers import BooksHelpers
 
 
 class BooksSessions(object):
@@ -24,7 +14,7 @@ class BooksSessions(object):
             return False
 
         # Переводим из json в объект
-        parsed_cookie = json2obj(auth_cookie)
+        parsed_cookie = BooksHelpers.json2object(auth_cookie)
 
         # Если нет ее элементов
         if parsed_cookie.userName is None or parsed_cookie.secretKey is None:

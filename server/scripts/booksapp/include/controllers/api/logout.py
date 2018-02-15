@@ -1,14 +1,11 @@
-from django.http import JsonResponse
+from django.http import HttpResponse
+from django.shortcuts import redirect
 
 
 def api_logout_controller():
 
-    # Корректный результат
-    response = JsonResponse({
-        'success': True,
-        'message': '',
-        'data': []
-    })
+    # редирект
+    response = redirect('/')
 
     # Удаление авторизационной куки
     response.delete_cookie('authCookie')
