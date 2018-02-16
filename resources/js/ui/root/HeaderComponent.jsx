@@ -109,7 +109,7 @@ export default class HeaderComponent extends BaseComponent {
                     <div style={{marginBottom:'3px'}}>Вы вошли как</div>
                     <strong>{userName}</strong>
                     <div style={{marginBottom:'3px', marginTop:'3px', borderTop:'1px solid #dddddd'}} />
-                    <a href="/logout">Выйти из программы</a>
+                    <a href="api/logout">Выйти из программы</a>
                 </div>
             </div>
         );
