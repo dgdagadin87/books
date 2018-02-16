@@ -5,7 +5,7 @@ from booksapp.models import Users
 class BooksSessions(object):
 
     @staticmethod
-    def check_if_authorized(request):
+    def check_if_authorized(request, return_user=False):
 
         # Получаем авторизационую куку
         auth_cookie = request.COOKIES.get('authCookie')
@@ -33,5 +33,7 @@ class BooksSessions(object):
             return False
 
         # Если все нормально
-        return True
-
+        if return_user is False:
+            return True
+        else:
+            return user
