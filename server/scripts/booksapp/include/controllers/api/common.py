@@ -21,14 +21,16 @@ def api_common_controller(sessions, request):
 
     # объект возврата
     return_object = {
-        'user': {
-            'userId': user_info.user_id,
-            'userLogin': user_info.user_login,
-            'userName': user_info.user_name,
-            'userIsAdmin': user_info.user_is_admin
-        },
-        'title': api_common_get_title(),
-        'headers': api_common_get_headers(user_info)
+        'data': {
+            'user': {
+                'userId': user_info.user_id,
+                'userLogin': user_info.user_login,
+                'userName': user_info.user_name,
+                'userIsAdmin': True if user_info.user_is_admin == 'yes' else False
+            },
+            'title': api_common_get_title(),
+            'headers': api_common_get_headers(user_info)
+        }
     }
 
     # Возврат
@@ -36,8 +38,6 @@ def api_common_controller(sessions, request):
 
 
 def api_common_get_headers(user_info):
-
-    print(user_info.user_is_admin)
 
     headers_list = list()
 

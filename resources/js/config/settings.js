@@ -1,7 +1,7 @@
 
 let defaultSettings = {
-    'serverHost' : 'localhost',
-    'serverPort': 9001,
+    'serverHost' : '127.0.0.1',
+    'serverPort': 8000,
     'serverProtocol': 'http'
 };
 
@@ -13,9 +13,9 @@ let pageSettings = {
 };
 
 let urlSettings = {
-    'getCommonData'  : '/common',
+    'getCommonData'  : '/api/common',
     'getMyBooksData' : '/mybooks',
-    'getAllBooksData': '/allbooks',
+    'getAllBooksData': '/api/allbooks',
     'getUsersData'   : '/users',
     'getAddBookData' : '/addbook',
     'sendToMail'     : '/sendtomail/',

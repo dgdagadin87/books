@@ -5,6 +5,7 @@ from .include.controllers.gui.central import gui_central_controller
 from .include.controllers.api.login import api_login_controller
 from .include.controllers.api.logout import api_logout_controller
 from .include.controllers.api.common import api_common_controller
+from .include.controllers.api.allbooks import api_allbooks_controller
 
 
 def gui_central(request):
@@ -24,3 +25,8 @@ def api_logout(request):
 @csrf_exempt
 def api_common(request):
     return api_common_controller(BooksSessions, request)
+
+
+@csrf_exempt
+def api_allbooks(request):
+    return api_allbooks_controller(BooksSessions, request)
