@@ -8,7 +8,7 @@ from .include.controllers.api.common import api_common_controller
 from .include.controllers.api.allbooks import api_allbooks_controller
 
 
-def gui_central(request):
+def gui_central(request, url=''):
     return gui_central_controller(BooksSessions, request)
 
 
