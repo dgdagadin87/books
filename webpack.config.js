@@ -49,7 +49,7 @@ var config = {
 /*
  * If bundling for production, optimize output
  */
-if (process.env.NODE_ENV === 'production') {
+//if (process.env.NODE_ENV === 'production') {
     config.devtool = false;
     config.plugins = [
         new webpack.optimize.OccurenceOrderPlugin(),
@@ -58,6 +58,6 @@ if (process.env.NODE_ENV === 'production') {
             'process.env': {NODE_ENV: JSON.stringify('production')}
         })
     ];
-};
+//};
 
 module.exports = config;
