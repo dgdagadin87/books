@@ -113,14 +113,13 @@ def api_allbooks_get_collection(filter, pagination):
 
     page = pagination['page']
 
-    sites_list = []
+    sites_list = dict()
     sites_collection = Sites.objects.all()
     for current_site in sites_collection:
-        sites_list.append({
-            'site_id': current_site.site_id,
+        sites_list[int(current_site.site_id)] = {
             'site_name': current_site.site_name,
             'site_url': current_site.site_url
-        })
+        }
 
     books_list = []
 
@@ -142,6 +141,10 @@ def api_allbooks_get_collection(filter, pagination):
     ).order_by(sort_preffix+correct_sort_field)[limit_value:offset_value]
 
     for current_book in books_collection:
+
+        parent_site_id = int(current_book.parent_site_id)
+        parent_site = sites_list[parent_site_id]
+
         books_list.append({
             'bookId': current_book.book_id,
             'bookName': current_book.book_name,
@@ -149,8 +152,8 @@ def api_allbooks_get_collection(filter, pagination):
             'bookGenre': current_book.book_genre,
             'bookShortDesc': current_book.book_short_desc,
             'bookSize': current_book.book_size,
-            'parentSiteUrl': "http://knijky.ru",
-            'parentSiteName': "knijky.ru"
+            'parentSiteUrl': parent_site['site_url'],
+            'parentSiteName': parent_site['site_name']
         })
 
     return books_list
