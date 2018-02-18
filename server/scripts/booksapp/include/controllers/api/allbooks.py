@@ -151,9 +151,18 @@ def api_allbooks_get_collection(filter, pagination):
             'bookAuthor': current_book.book_author,
             'bookGenre': current_book.book_genre,
             'bookShortDesc': current_book.book_short_desc,
-            'bookSize': current_book.book_size,
+            'bookSize': api_allbooks_get_size(current_book.book_size),
             'parentSiteUrl': parent_site['site_url'],
             'parentSiteName': parent_site['site_name']
         })
 
     return books_list
+
+
+def api_allbooks_get_size(size):
+    if size < 1024:
+        return size + ' Байт'
+    elif size >= 1024 and size < 1024*1024:
+        return str(ceil(size/1024)) + ' КБайт'
+    elif size >= 1024*1024:
+        return str(ceil(size/(1024*1024))) + ' МБайт'
