@@ -1,4 +1,7 @@
 from django.http import JsonResponse
+from booksapp.models import Books, Sites
+from django.db.models import Q
+from math import ceil
 
 
 def api_allbooks_controller(sessions, request):
@@ -6,53 +9,148 @@ def api_allbooks_controller(sessions, request):
     # Ответ
     response = JsonResponse
 
+    # Если не авторизованы
+    user_info = sessions.check_if_authorized(request)
+    if user_info is False:
+        return response({
+            'success': False,
+            'message': 'Неизвестная ошибка',
+            'data': {
+                'errorCode': 'NOT_AUTH'
+            }
+        })
+
+    # Объект ответа
+    return_data = dict()
+
+    # Получение объекта постраничной навигации
+    pagination_data = api_allbooks_get_pagination(request)
+    return_data['paging'] = pagination_data
+
+    # Получение объекта фильтра
+    filter_data = api_allbooks_get_filter(request, pagination_data)
+    return_data['filter'] = filter_data
+
+    # Получение списка книг
+    return_data['collection'] = api_allbooks_get_collection(filter_data, pagination_data)
+
     # Возврат
     return response({
-        'data': {
-            'collection': [
-                {
-                    'bookId': 1,
-                    'bookName': "Синяя Бородочка",
-                    'bookAuthor': "Шарль Перро",
-                    'bookGenre': "Детская литература, Сказки",
-                    'bookShortDesc': "Шарль Перро. Синяя Борода Давным-давно жил один человек. Он был очень богат: у него были прекрасные дома, множество слуг, золотая и серебряная посуда, золочёные кареты и великолепные кони. Но, к несчастью, борода у этого человека была синяя. Эта борода делала его таким безобразным и страшным, что все девушки и женщины, увидав его, пугались и прятались по домам. Человеку этому дали прозвище — Синяя Борода. У одной его соседки было две дочери, замечательные красавицы. Синяя Борода захотел",
-                    'bookSize': "77 Кбайт",
-                    'parentSiteUrl': "http://knijky.ru",
-                    'parentSiteName': "knijky.ru"
-                },
-                {
-                    'bookId': 2,
-                    'bookName': "Синее пламя",
-                    'bookAuthor': "Алексей Пехов",
-                    'bookGenre': "Фэнтези, Героическое фэнтези, Русское фэнтези",
-                    'bookShortDesc': "Алексей Пехов. Синее пламя Синее пламя - 2   Пустой дом   Служанка захлебывалась рыданиями, и Бланка Эрбет с трудом сдерживала ярость. Ей хотелось со всей силы залепить этой плаксивой дуре пощечину, так, чтобы у той зазвенело в пустой башке. Но Бланка не стала этого делать. Ее холодное лицо оставалось спокойным, а в темных глазах даже был намек на симпатию. Она с участием протянула служанке дорогой кружевной платок, и та, благодарно всхлипывая, стала в него сморкаться. Пришлось подавить",
-                    'bookSize': "78 Кбайт",
-                    'parentSiteUrl': "http://knijky.ru",
-                    'parentSiteName': "knijky.ru"
-                },
-                {
-                    'bookId': 3,
-                    'bookName': "За синей рекой",
-                    'bookAuthor': "Елена Хаецкая",
-                    'bookGenre': "Фэнтези, Русское фэнтези",
-                    'bookShortDesc': "Елена Хаецкая. За синей рекой За синей рекой - 2       Глава первая     Марион было всего десять лет, когда отец впервые отпустил ее на ярмарку одну. Мать была слишком занята с младшей сестрой Лоттой, а кухарке Элизе нездоровилось. Конечно, отец не мог поручить девочке купить припасов на всю неделю, но с небольшим поручением она вполне могла справиться. Что купить к обеду – уж как-нибудь сообразит. Вручив дочери гульден, отец, далекий от домашних забот, буркнул:     – Смотри, не",
-                    'bookSize': "78 Кбайт",
-                    'parentSiteUrl': "http://knijky.ru",
-                    'parentSiteName': "knijky.ru"
-                }
-            ],
-            'filter': {
-                'sortField': "bookAuthor",
-                'sortType': "DESC",
-                'searchTerm': "",
-                'page': 1
-            },
-            'paging': {
-                'page': 1,
-                'pages': 10,
-                'totalCount': 77
-            }
-        },
-        'isSuccess': True,
-        'message': None
+        'data': return_data,
+        'message': None,
+        'isSuccess': True
     })
+
+
+def api_allbooks_get_filter(request, pagination):
+
+    # Сортировка
+    sort_type = request.GET.get('sortType')
+    sort_field = request.GET.get('sortField')
+
+    sort_type = 'ASC' if sort_type == 'ASC' else 'DESC'
+    sort_fields = ['bookName', 'bookAuthor', 'bookSize', 'bookParentSite']
+    sort_field = sort_field if sort_field in sort_fields else 'bookName'
+
+    # Строка поиска
+    search_term = str(request.GET.get('searchTerm'))
+
+    return {
+        'sortField': sort_field,
+        'sortType': sort_type,
+        'searchTerm': search_term,
+        'page': pagination['page']
+    }
+
+
+def api_allbooks_get_correct_sort_field(sort_field):
+
+    sort_assocs = {
+        'bookName': 'book_name',
+        'bookAuthor': 'book_author',
+        'bookSize': 'book_size',
+        'bookParentSite': 'parent_site_id'
+    }
+
+    return sort_assocs[sort_field]
+
+
+def api_allbooks_get_pagination(request):
+
+    search_term = str(request.GET.get('searchTerm'))
+
+    page = request.GET.get('page')
+    page = int(page)
+
+    books_count = Books.objects.filter(
+        Q(book_name__icontains=search_term)
+        |
+        Q(book_author__icontains=search_term)
+        |
+        Q(book_genre__icontains=search_term)
+        |
+        Q(book_short_desc__icontains=search_term)
+    ).count()
+    books_count = int(books_count)
+
+    num_of_pages = 1 if books_count < 1 else ceil(books_count/10)
+
+    if page < 1:
+        page = 1
+    elif page > num_of_pages:
+        page = num_of_pages
+
+    return {
+        'page': page,
+        'pages': num_of_pages,
+        'totalCount': books_count
+    }
+
+
+def api_allbooks_get_collection(filter, pagination):
+
+    search_term = filter['searchTerm']
+
+    page = pagination['page']
+
+    sites_list = []
+    sites_collection = Sites.objects.all()
+    for current_site in sites_collection:
+        sites_list.append({
+            'site_id': current_site.site_id,
+            'site_name': current_site.site_name,
+            'site_url': current_site.site_url
+        })
+
+    books_list = []
+
+    limit_value = 10*(page - 1)
+    offset_value = 10*page
+
+    sort_preffix = '' if filter['sortType'] == 'ASC' else '-'
+
+    correct_sort_field = api_allbooks_get_correct_sort_field(filter['sortField'])
+
+    books_collection = Books.objects.filter(
+        Q(book_name__icontains=search_term)
+        |
+        Q(book_author__icontains=search_term)
+        |
+        Q(book_genre__icontains=search_term)
+        |
+        Q(book_short_desc__icontains=search_term)
+    ).order_by(sort_preffix+correct_sort_field)[limit_value:offset_value]
+
+    for current_book in books_collection:
+        books_list.append({
+            'bookId': current_book.book_id,
+            'bookName': current_book.book_name,
+            'bookAuthor': current_book.book_author,
+            'bookGenre': current_book.book_genre,
+            'bookShortDesc': current_book.book_short_desc,
+            'bookSize': current_book.book_size,
+            'parentSiteUrl': "http://knijky.ru",
+            'parentSiteName': "knijky.ru"
+        })
+
+    return books_list
