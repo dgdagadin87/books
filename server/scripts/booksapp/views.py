@@ -6,6 +6,7 @@ from .include.controllers.api.login import api_login_controller
 from .include.controllers.api.logout import api_logout_controller
 from .include.controllers.api.common import api_common_controller
 from .include.controllers.api.allbooks import api_allbooks_controller
+from .include.controllers.api.mybooks import api_mybooks_controller
 from .include.controllers.api.users import api_users_controller
 
 
@@ -31,6 +32,12 @@ def api_common(request):
 @csrf_exempt
 def api_allbooks(request):
     return api_allbooks_controller(BooksSessions, request)
+
+
+@csrf_exempt
+def api_mybooks(request):
+    return api_mybooks_controller(BooksSessions, request)
+
 
 @csrf_exempt
 def api_users(request):

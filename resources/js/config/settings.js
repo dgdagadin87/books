@@ -14,7 +14,7 @@ let pageSettings = {
 
 let urlSettings = {
     'getCommonData'  : '/api/common',
-    'getMyBooksData' : '/mybooks',
+    'getMyBooksData' : '/api/mybooks',
     'getAllBooksData': '/api/allbooks',
     'getUsersData'   : '/api/users',
     'getAddBookData' : '/addbook',

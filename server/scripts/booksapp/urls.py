@@ -9,5 +9,6 @@ urlpatterns = [
 	url(r'^api/logout$', views.api_logout, name='api_logout'),
 	url(r'^api/common', views.api_common, name='api_common'),
 	url(r'^api/allbooks', views.api_allbooks, name='api_allbooks'),
+	url(r'^api/mybooks', views.api_mybooks, name='api_mybooks'),
 	url(r'^api/users', views.api_users, name='api_users'),
 ]
