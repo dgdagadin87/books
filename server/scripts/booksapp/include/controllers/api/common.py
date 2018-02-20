@@ -8,7 +8,6 @@ def api_common_controller(sessions, request):
 
     # Пользователь
     user_dict = sessions.check_if_authorized(request, True)
-    print(user_dict)
 
     # Если ошибка в БД
     user_error = user_dict['user_error']
