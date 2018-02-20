@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.db import OperationalError
 from booksapp.models import Users
 import json
 
@@ -30,6 +31,8 @@ def api_login_controller(request, helpers):
     # Получение пользователя из БД
     try:
         user = Users.objects.get(user_login=login_value, user_password=hashed_password)
+    except OperationalError:
+        return JsonResponse({'success': False, 'message': 'Произошла непредвиденная ошибка'})
     except Users.DoesNotExist:
         user = Users()
 

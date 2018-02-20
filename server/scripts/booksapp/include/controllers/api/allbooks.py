@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from booksapp.models import Books, Sites
 from django.db.models import Q
 from math import ceil
+from django.db import OperationalError
 
 
 def api_allbooks_controller(sessions, request):
@@ -9,8 +10,19 @@ def api_allbooks_controller(sessions, request):
     # Ответ
     response = JsonResponse
 
+    # Пользователь
+    user_dict = sessions.check_if_authorized(request, True)
+
+    # Если ошибка в БД
+    user_error = user_dict['user_error']
+    if user_error is True:
+        return response({
+            'success': False,
+            'message': 'Произошла непредвиденная ошибка'
+        })
+
     # Если не авторизованы
-    user_info = sessions.check_if_authorized(request)
+    user_info = user_dict['user']
     if user_info is False:
         return response({
             'success': False,
@@ -25,6 +37,8 @@ def api_allbooks_controller(sessions, request):
 
     # Получение объекта постраничной навигации
     pagination_data = api_allbooks_get_pagination(request)
+    if pagination_data is False:
+        return response({'success': False, 'message': 'Произошла непредвиденная ошибка'})
     return_data['paging'] = pagination_data
 
     # Получение объекта фильтра
@@ -32,7 +46,10 @@ def api_allbooks_controller(sessions, request):
     return_data['filter'] = filter_data
 
     # Получение списка книг
-    return_data['collection'] = api_allbooks_get_collection(filter_data, pagination_data)
+    collection_data = api_allbooks_get_collection(filter_data, pagination_data)
+    if collection_data is False:
+        return response({'success': False, 'message': 'Произошла непредвиденная ошибка'})
+    return_data['collection'] = collection_data
 
     # Возврат
     return response({
@@ -82,16 +99,21 @@ def api_allbooks_get_pagination(request):
     page = request.GET.get('page')
     page = int(page)
 
-    books_count = Books.objects.filter(
-        Q(book_name__icontains=search_term)
-        |
-        Q(book_author__icontains=search_term)
-        |
-        Q(book_genre__icontains=search_term)
-        |
-        Q(book_short_desc__icontains=search_term)
-    ).count()
-    books_count = int(books_count)
+    try:
+        books_count = Books.objects.filter(
+            Q(book_name__icontains=search_term)
+            |
+            Q(book_author__icontains=search_term)
+            |
+            Q(book_genre__icontains=search_term)
+            |
+            Q(book_short_desc__icontains=search_term)
+        ).count()
+        books_count = int(books_count)
+    except OperationalError:
+        return False
+    except Books.DoesNotExist:
+        return False
 
     num_of_pages = 1 if books_count < 1 else ceil(books_count/10)
 
@@ -130,15 +152,20 @@ def api_allbooks_get_collection(filter, pagination):
 
     correct_sort_field = api_allbooks_get_correct_sort_field(filter['sortField'])
 
-    books_collection = Books.objects.filter(
-        Q(book_name__icontains=search_term)
-        |
-        Q(book_author__icontains=search_term)
-        |
-        Q(book_genre__icontains=search_term)
-        |
-        Q(book_short_desc__icontains=search_term)
-    ).order_by(sort_preffix+correct_sort_field)[limit_value:offset_value]
+    try:
+        books_collection = Books.objects.filter(
+            Q(book_name__icontains=search_term)
+            |
+            Q(book_author__icontains=search_term)
+            |
+            Q(book_genre__icontains=search_term)
+            |
+            Q(book_short_desc__icontains=search_term)
+        ).order_by(sort_preffix+correct_sort_field)[limit_value:offset_value]
+    except OperationalError:
+        return False
+    except Books.DoesNotExist:
+        return False
 
     for current_book in books_collection:
 

@@ -7,7 +7,18 @@ def api_common_controller(sessions, request):
     response = JsonResponse
 
     # Пользователь
-    user_info = sessions.check_if_authorized(request, True)
+    user_dict = sessions.check_if_authorized(request, True)
+    print(user_dict)
+
+    # Если ошибка в БД
+    user_error = user_dict['user_error']
+    if user_error is True:
+        return response({
+            'success': False,
+            'message': 'Произошла непредвиденная ошибка'
+        })
+
+    user_info = user_dict['user']
 
     # Если не авторизованы
     if user_info is False:
