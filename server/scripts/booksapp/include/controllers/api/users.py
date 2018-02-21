@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from booksapp.models import Users
 from math import ceil
-from django.db import OperationalError
 
 
 def api_users_controller(sessions, request):
@@ -100,9 +99,7 @@ def api_users_get_pagination(request):
     try:
         users_count = Users.objects.count()
         users_count = int(users_count)
-    except OperationalError:
-        return False
-    except Users.DoesNotExist:
+    except Exception:
         return False
 
     num_of_pages = 1 if users_count < 1 else ceil(users_count/10)
@@ -134,9 +131,7 @@ def api_users_get_collection(filter, pagination):
 
     try:
         users_collection = Users.objects.filter().order_by(sort_preffix+correct_sort_field)[limit_value:offset_value]
-    except OperationalError:
-        return False
-    except Users.DoesNotExist:
+    except Exception:
         return False
 
     for current_user in users_collection:

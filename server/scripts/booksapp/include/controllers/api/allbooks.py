@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from booksapp.models import Books, Sites
 from django.db.models import Q
 from math import ceil
-from django.db import OperationalError
 
 
 def api_allbooks_controller(sessions, request):
@@ -110,9 +109,7 @@ def api_allbooks_get_pagination(request):
             Q(book_short_desc__icontains=search_term)
         ).count()
         books_count = int(books_count)
-    except OperationalError:
-        return False
-    except Books.DoesNotExist:
+    except Exception:
         return False
 
     num_of_pages = 1 if books_count < 1 else ceil(books_count/10)
@@ -162,9 +159,7 @@ def api_allbooks_get_collection(filter, pagination):
             |
             Q(book_short_desc__icontains=search_term)
         ).order_by(sort_preffix+correct_sort_field)[limit_value:offset_value]
-    except OperationalError:
-        return False
-    except Books.DoesNotExist:
+    except Exception:
         return False
 
     for current_book in books_collection:

@@ -1,6 +1,5 @@
 from .helpers import BooksHelpers
 from booksapp.models import Users
-from django.db import OperationalError
 
 
 class BooksSessions(object):
@@ -35,13 +34,12 @@ class BooksSessions(object):
         # Проверяем секретный ключ на корректность
         try:
             user = Users.objects.get(user_login=cookie_user_name, user_secret_key=cookie_secret_key)
-        except OperationalError:
+        except Exception:
             return {
                 'user_error': True,
                 'error_type': 'dbError',
                 'user': False
             }
-        except Users.DoesNotExist:
             user = False
 
         if user is False:
