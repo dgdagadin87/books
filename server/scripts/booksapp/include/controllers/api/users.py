@@ -3,7 +3,7 @@ from booksapp.models import Users
 from math import ceil
 
 
-def api_users_controller(sessions, request):
+def api_users_controller(helpers, sessions, request):
 
     # Ответ
     response = JsonResponse
@@ -11,31 +11,10 @@ def api_users_controller(sessions, request):
     # Пользователь
     user_dict = sessions.check_if_authorized(request, True)
 
-    # Если ошибка в БД
-    user_error = user_dict['user_error']
-    if user_error is True:
-        return response({'success': False, 'message': 'Произошла непредвиденная ошибка'})
-
-    # Если не авторизованы
-    user_info = user_dict['user']
-    if user_info is False:
-        return response({
-            'success': False,
-            'message': 'Неизвестная ошибка',
-            'data': {
-                'errorCode': 'NOT_AUTH'
-            }
-        })
-
-    # Если пользователь не админ
-    if user_info.user_is_admin != 'yes':
-        return response({
-            'success': False,
-            'message': 'Неизвестная ошибка',
-            'data': {
-                'errorCode': 'ACCESS_DENIED'
-            }
-        })
+    # Базовые проверки
+    base_checks = helpers.base_auth_checks(user_dict, response, True)
+    if base_checks is not None:
+        return base_checks
 
     # Объект ответа
     return_data = dict()

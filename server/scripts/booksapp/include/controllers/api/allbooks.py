@@ -4,7 +4,7 @@ from django.db.models import Q
 from math import ceil
 
 
-def api_allbooks_controller(sessions, request):
+def api_allbooks_controller(helpers, sessions, request):
 
     # Ответ
     response = JsonResponse
@@ -12,24 +12,10 @@ def api_allbooks_controller(sessions, request):
     # Пользователь
     user_dict = sessions.check_if_authorized(request, True)
 
-    # Если ошибка в БД
-    user_error = user_dict['user_error']
-    if user_error is True:
-        return response({
-            'success': False,
-            'message': 'Произошла непредвиденная ошибка'
-        })
-
-    # Если не авторизованы
-    user_info = user_dict['user']
-    if user_info is False:
-        return response({
-            'success': False,
-            'message': 'Неизвестная ошибка',
-            'data': {
-                'errorCode': 'NOT_AUTH'
-            }
-        })
+    # Базовые проверки
+    base_checks = helpers.base_auth_checks(user_dict, response)
+    if base_checks is not None:
+        return base_checks
 
     # Объект ответа
     return_data = dict()

@@ -28,29 +28,29 @@ def api_logout(request):
 
 @csrf_exempt
 def api_common(request):
-    return api_common_controller(BooksSessions, request)
+    return api_common_controller(BooksHelpers, BooksSessions, request)
 
 
 @csrf_exempt
 def api_allbooks(request):
-    return api_allbooks_controller(BooksSessions, request)
+    return api_allbooks_controller(BooksHelpers, BooksSessions, request)
 
 
 @csrf_exempt
 def api_mybooks(request):
-    return api_mybooks_controller(BooksSessions, request)
+    return api_mybooks_controller(BooksHelpers, BooksSessions, request)
 
 
 @csrf_exempt
 def api_users(request):
-    return api_users_controller(BooksSessions, request)
+    return api_users_controller(BooksHelpers, BooksSessions, request)
 
 
 @csrf_exempt
 def api_addtomybooks(request, id):
-    return api_addtomybooks_controller(BooksSessions, request, id)
+    return api_addtomybooks_controller(BooksHelpers, BooksSessions, request, id)
 
 
 @csrf_exempt
 def api_adduser(request):
-    return api_adduser_controller(BooksSessions, request, BooksHelpers)
+    return api_adduser_controller(BooksHelpers, BooksSessions, request)
