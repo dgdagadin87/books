@@ -25,7 +25,7 @@ let urlSettings = {
     'deleteBook'     : '/deletebook/',
     'addRawBook'     : '/addrawbook',
     'downloadRawBook': '/downloadrawbook',
-    'addUser'        : '/adduser',
+    'addUser'        : '/api/adduser',
     'getUser'        : '/getuser/',
     'editUser'       : '/edituser/',
     'deleteUser'     : '/deleteuser/'
