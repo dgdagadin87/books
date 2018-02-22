@@ -8,6 +8,7 @@ from .include.controllers.api.common import api_common_controller
 from .include.controllers.api.allbooks import api_allbooks_controller
 from .include.controllers.api.mybooks import api_mybooks_controller
 from .include.controllers.api.users import api_users_controller
+from .include.controllers.api.addtomybooks import api_addtomybooks_controller
 
 
 def gui_central(request, url=''):
@@ -42,3 +43,8 @@ def api_mybooks(request):
 @csrf_exempt
 def api_users(request):
     return api_users_controller(BooksSessions, request)
+
+
+@csrf_exempt
+def api_addtomybooks(request, id):
+    return api_addtomybooks_controller(BooksSessions, request, id)
