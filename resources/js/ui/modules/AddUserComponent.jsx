@@ -91,7 +91,6 @@ class AddUserComponent extends BaseModule {
                     let {data = {}} = result;
                     
                     if (data.hasError === true) {
-                        globalEvents.trigger('showError', result);
                         this.setStats({
                             errorText: data.errorText,
                             disabled: false
