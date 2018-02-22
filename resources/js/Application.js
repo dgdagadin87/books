@@ -45,6 +45,13 @@ globalEvents.on('setModuleData', (data, moduleName, callBack = false) => {
 globalEvents.on('showError', (result) => {
     window.console.log('error:');
     window.console.log(result);
+    const {message, statusText} = result;
+    if (statusText) {
+        alert(statusText);
+    }
+    else if (message) {
+        alert(message);
+    }
 });
 
 ajaxQuery({
