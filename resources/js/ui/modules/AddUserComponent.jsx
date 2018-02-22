@@ -75,11 +75,12 @@ class AddUserComponent extends BaseModule {
             {
                 url: CUL(defaultSettings, urlSettings['addUser']),
                 method: 'POST',
-                data: JSON.stringify({
+                dataType: 'json',
+                data: {
                     userLogin: userLogin,
                     userName: userName,
                     userIsAdmin: userIsAdmin
-                })
+                }
             },
             {
                 afterSuccess: (result) => {
