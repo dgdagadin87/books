@@ -21,7 +21,7 @@ let urlSettings = {
     'sendToMail'     : '/sendtomail/',
     'downloadBook'   : '/download/',
     'addToMyBooks'   : '/api/addtomybooks/',
-    'deleteMyBook'   : '/deletebook/',
+    'deleteMyBook'   : '/api/deletemybook/',
     'deleteBook'     : '/deletebook/',
     'addRawBook'     : '/addrawbook',
     'downloadRawBook': '/downloadrawbook',
