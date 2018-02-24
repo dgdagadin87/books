@@ -139,7 +139,7 @@ class TableRowComponent extends BaseComponent {
                         if (disabled) {
                             return;
                         }
-                        window.location.href = CUL(defaultSettings, urlSettings['downloadBook']) + itemData['bookId'];
+                        window.open(CUL(defaultSettings, urlSettings['downloadBook']) + itemData['bookId'], '_blank')
                     }} />
                 </td>
             );
@@ -171,7 +171,7 @@ class TableRowComponent extends BaseComponent {
                         if (disabled) {
                             return;
                         }
-                        window.location.href = CUL(defaultSettings, urlSettings['downloadBook']) + itemData['bookId'];
+                        window.open(CUL(defaultSettings, urlSettings['downloadBook']) + itemData['bookId'], '_blank')
                     }} />
                 </td>
             );
