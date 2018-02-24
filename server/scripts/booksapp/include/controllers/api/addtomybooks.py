@@ -31,7 +31,7 @@ def api_addtomybooks_controller(helpers, sessions, request, book_id):
 
     # Проверка, существует ли кнмга в разделе "Мои книги"
     try:
-        book_count = Books_2_users.objects.filter(book_id=book_to_add_id).filter(user_id=user_info.user_id).count()
+        book_count = Books_2_users.objects.filter(book_id_id=book_to_add_id).filter(user_id_id=user_info.user_id).count()
         books_count = int(book_count)
     except Exception:
         return response({'success': False, 'message': 'Произошла непредвиденная ошибка'})
@@ -40,7 +40,7 @@ def api_addtomybooks_controller(helpers, sessions, request, book_id):
         return response({'success': False, 'message': 'Выбранная книга уже находится в разделе "Мои книги"'})
 
     # Если все нормально, добавляем книгу
-    book_for_adding = Books_2_users(book_id=book_to_add_id, user_id=user_info.user_id)
+    book_for_adding = Books_2_users(book_id_id=book_to_add_id, user_id_id=user_info.user_id)
     try:
         book_for_adding.save()
     except Exception:

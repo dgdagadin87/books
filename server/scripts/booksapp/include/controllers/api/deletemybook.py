@@ -18,7 +18,7 @@ def api_deletemybook_controller(helpers, sessions, request, book_id):
 
     # Если все нормально, удаляем книгу
     try:
-        Books_2_users.objects.filter(book_id=int(book_id), user_id=user_info.user_id).delete()
+        Books_2_users.objects.filter(book_id_id=int(book_id), user_id_id=user_info.user_id).delete()
     except Exception:
         return response({'success': False, 'message': 'Произошла непредвиденная ошибка'})
 

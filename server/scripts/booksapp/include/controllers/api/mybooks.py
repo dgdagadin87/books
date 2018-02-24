@@ -24,7 +24,7 @@ def api_mybooks_controller(helpers, sessions, request):
 
     # Получение полного списка ИД книг
     try:
-        book_ids = Books_2_users.objects.filter(user_id=user_info.user_id).distinct().values_list('book_id', flat=True)
+        book_ids = Books_2_users.objects.filter(user_id_id=user_info.user_id).distinct().values_list('book_id_id', flat=True)
     except Books_2_users.DoesNotExist:
         book_ids = []
     except Exception:
@@ -127,7 +127,7 @@ def api_mybooks_get_collection(filter, pagination, book_ids):
 
     for current_book in books_collection:
 
-        parent_site_id = int(current_book.parent_site_id)
+        parent_site_id = int(current_book.parent_site_id_id)
         parent_site = sites_list[parent_site_id]
 
         books_list.append({

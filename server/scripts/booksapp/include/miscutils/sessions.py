@@ -40,14 +40,6 @@ class BooksSessions(object):
                 'error_type': 'dbError',
                 'user': False
             }
-            user = False
-
-        if user is False:
-            return {
-                'user_error': False,
-                'error_type': None,
-                'user': False
-            }
 
         return_dict = {
             'user_error': False,

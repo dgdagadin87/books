@@ -150,7 +150,7 @@ def api_allbooks_get_collection(filter, pagination):
 
     for current_book in books_collection:
 
-        parent_site_id = int(current_book.parent_site_id)
+        parent_site_id = int(current_book.parent_site_id_id)
         parent_site = sites_list[parent_site_id]
 
         books_list.append({

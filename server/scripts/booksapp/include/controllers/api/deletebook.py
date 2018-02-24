@@ -19,7 +19,7 @@ def api_deletebook_controller(helpers, sessions, request, book_id):
     # Получаем ИД кэшированной книги
     try:
         book_object = Books.objects.get(book_id=book_id)
-        cached_book_id = book_object.cached_book_id
+        cached_book_id = book_object.cached_book_id_id
     except Books.DoesNotExist:
         cached_book_id = 0
 
