@@ -9,6 +9,7 @@ from .include.controllers.api.allbooks import api_allbooks_controller
 from .include.controllers.api.mybooks import api_mybooks_controller
 from .include.controllers.api.users import api_users_controller
 from .include.controllers.api.addtomybooks import api_addtomybooks_controller
+from .include.controllers.api.deletemybook import api_deletemybook_controller
 from .include.controllers.api.adduser import api_adduser_controller
 
 
@@ -54,3 +55,8 @@ def api_addtomybooks(request, id):
 @csrf_exempt
 def api_adduser(request):
     return api_adduser_controller(BooksHelpers, BooksSessions, request)
+
+
+@csrf_exempt
+def api_deletemybook(request, id):
+    return api_deletemybook_controller(BooksHelpers, BooksSessions, request, id)
