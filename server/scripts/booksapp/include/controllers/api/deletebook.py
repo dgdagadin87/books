@@ -22,6 +22,8 @@ def api_deletebook_controller(helpers, sessions, request, book_id):
         cached_book_id = book_object.cached_book_id_id
     except Books.DoesNotExist:
         cached_book_id = 0
+    except Exception:
+        return response({'success': False, 'message': 'Произошла непредвиденная ошибка'})
 
     # Удаляем книгу отовсюду
     try:
