@@ -19,7 +19,7 @@ let urlSettings = {
     'getUsersData'   : '/api/users',
     'getAddBookData' : '/addbook',
     'sendToMail'     : '/sendtomail/',
-    'downloadBook'   : '/download/',
+    'downloadBook'   : '/api/download/',
     'addToMyBooks'   : '/api/addtomybooks/',
     'deleteMyBook'   : '/api/deletemybook/',
     'deleteBook'     : '/api/deletebook/',
