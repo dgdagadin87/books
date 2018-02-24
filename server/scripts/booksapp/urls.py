@@ -13,6 +13,7 @@ urlpatterns = [
 	url(r'^api/mybooks$', views.api_mybooks, name='api_mybooks'),
 	url(r'^api/users$', views.api_users, name='api_users'),
 	url(r'^api/deletemybook/(?P<id>\d+)$', views.api_deletemybook, name='api_deletemybook'),
+	url(r'^api/deletebook/(?P<id>\d+)$', views.api_deletebook, name='api_deletebook'),
 	url(r'^api/adduser$', views.api_adduser, name='api_adduser'),
 	url(r'^api/addtomybooks/(?P<id>\d+)$', views.api_addtomybooks, name='api_addtomybooks'),
 ]
