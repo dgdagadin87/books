@@ -2,6 +2,9 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
+import {reateUrlLink as CUL} from '../../core/coreUtils';
+import {defaultSettings, urlSettings} from '../../config/settings';
+
 import BaseComponent from '../../base/BaseComponent.jsx';
 
 import DescriptionComponent from './DescriptionComponent.jsx';
@@ -136,7 +139,7 @@ class TableRowComponent extends BaseComponent {
                         if (disabled) {
                             return;
                         }
-                        window.location.href = '/downloadmybook/' + itemData['bookId'];
+                        window.location.href = CUL(defaultSettings, urlSettings['downloadBook']) + itemData['bookId'];
                     }} />
                 </td>
             );
@@ -168,7 +171,7 @@ class TableRowComponent extends BaseComponent {
                         if (disabled) {
                             return;
                         }
-                        window.location.href = '/downloadmybook/' + itemData['bookId'];
+                        window.location.href = CUL(defaultSettings, urlSettings['downloadBook']) + itemData['bookId'];
                     }} />
                 </td>
             );
