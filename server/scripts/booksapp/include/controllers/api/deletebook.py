@@ -16,12 +16,19 @@ def api_deletebook_controller(helpers, sessions, request, book_id):
     if base_checks is not None:
         return base_checks
 
+    # Получаем ИД кэшированной книги
+    try:
+        book_object = Books.objects.get(book_id=book_id)
+        cached_book_id = book_object.cached_book_id
+    except Books.DoesNotExist:
+        cached_book_id = 0
+
     # Удаляем книгу отовсюду
     try:
         with transaction.atomic():
             Books_2_users.objects.filter(book_id=int(book_id)).delete()
-            Cached_books.objects.filter(cached_book_id=int(book_id)).delete()
             Books.objects.filter(book_id=int(book_id)).delete()
+            Cached_books.objects.filter(cached_book_id=int(cached_book_id)).delete()
     except IntegrityError:
         return response({'success': False, 'message': 'Произошла непредвиденная ошибка (при удалении книги)'})
 
