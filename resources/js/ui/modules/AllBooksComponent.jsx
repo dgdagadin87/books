@@ -215,7 +215,7 @@ class AllBooksComponent extends BaseModule {
         
         const {globalEvents} = this.props;
         
-        if (!confirm('Вы действительно хотите удалить книгу из раздела "Все книги"?')) {
+        if (!confirm('Вы действительно хотите удалить книгу из раздела "Все книги"?\nКнига будет удалена безвозвратно и ее нельзя будет скачать.')) {
             return;
         }
         
