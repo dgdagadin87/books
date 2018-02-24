@@ -20,7 +20,7 @@ def api_downloadbook_controller(helpers, sessions, request, book_id):
     try:
         book_object = Books.objects.get(book_id=book_id)
         cached_book_id = book_object.cached_book_id_id
-        book_name = 'Book_for_download'
+        book_name = book_object.book_name
     except Books.DoesNotExist:
         cached_book_id = 0
         book_name = 'Not_found'
@@ -38,7 +38,7 @@ def api_downloadbook_controller(helpers, sessions, request, book_id):
 
     # Присваиваем http-ответу необходимые заголовки
     http_response = HttpResponse(base64.b64decode(book_content), content_type='application/octet-stream; charset=utf-8')
-    http_response['Content-Disposition'] = 'attachment; filename="' + book_name + '.fb2"'
+    http_response['Content-Disposition'] = 'attachment; filename="' + helpers.translate(book_name) + '.fb2"'
 
     # Возврат, если все нормально
     return http_response
