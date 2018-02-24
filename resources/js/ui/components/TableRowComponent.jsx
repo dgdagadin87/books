@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import {reateUrlLink as CUL} from '../../core/coreUtils';
+import {createUrlLink as CUL} from '../../core/coreUtils';
 import {defaultSettings, urlSettings} from '../../config/settings';
 
 import BaseComponent from '../../base/BaseComponent.jsx';
