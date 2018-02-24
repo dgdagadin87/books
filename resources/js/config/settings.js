@@ -22,7 +22,7 @@ let urlSettings = {
     'downloadBook'   : '/download/',
     'addToMyBooks'   : '/api/addtomybooks/',
     'deleteMyBook'   : '/api/deletemybook/',
-    'deleteBook'     : '/deletebook/',
+    'deleteBook'     : '/api/deletebook/',
     'addRawBook'     : '/addrawbook',
     'downloadRawBook': '/downloadrawbook',
     'addUser'        : '/api/adduser',
