@@ -236,7 +236,14 @@ class AllBooksComponent extends BaseModule {
                         globalEvents.trigger('showError', result);
                         return;
                     }
+
+                    // Перезагружаем модуль "Мои книги", чтоб увидеть изменения
+                    globalEvents.trigger('setModuleData', getDefaultState('mybooks'), 'mybooks');
+
+                    // Выводим сообщение об успешности операции
                     alert('Книга успешно удалена.');
+
+                    // Перезагружаем текущий модуль, чтобы увидеть изменения
                     this._loadData();
                 },
                 afterError: (result) => {
