@@ -12,6 +12,7 @@ class UserFormComponent extends BaseComponent {
         super(props);
         
         this.state = {
+            mode: props.mode || 'add',
             userLogin: props.userLogin || '',
             userName: props.userName || '',
             userIsAdmin: props.userIsAdmin,
@@ -116,7 +117,7 @@ class UserFormComponent extends BaseComponent {
                         <input
                             type="text"
                             placeholder="Введите логин пользователя"
-                            disabled={disabled}
+                            disabled={disabled || mode === 'edit'}
                             value={userLogin}
                             onChange={this._handleLoginInput.bind(this)}
                             className={'user-form__text-field' + ( loginError ? ' error' : '')}

@@ -9,7 +9,6 @@ import {defaultSettings, urlSettings} from '../../config/settings';
 
 import {getDefaultState} from '../../core/applicationUtils';
 
-import PreloaderComponent from '../components/LargePreloaderComponent.jsx';
 import NoAccessModule from '../components/NoAccessComponent.jsx';
 import UserFormComponent from '../components/UserFormComponent.jsx';
 
@@ -112,12 +111,13 @@ class EditUserComponent extends BaseModule {
             {
                 url: CUL(defaultSettings, urlSettings['editUser']) + userId,
                 method: 'POST',
-                data: JSON.stringify({
+                dataType: 'json',
+                data: {
                     userId: userId,
                     userLogin: userLogin,
                     userName: userName,
                     userIsAdmin: userIsAdmin
-                })
+                }
             },
             {
                 afterSuccess: (result) => {
@@ -196,6 +196,7 @@ class EditUserComponent extends BaseModule {
             <UserFormComponent
                 key={2}
                 disabled={disabled}
+                mode={'edit'}
                 userLogin={userLogin}
                 userName={userName}
                 userIsAdmin={userIsAdmin}
