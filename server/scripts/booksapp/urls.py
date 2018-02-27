@@ -5,6 +5,7 @@ urlpatterns = [
 	url(r'^$', views.gui_central, name='gui_central'),
 	url(r'^(allbooks|addbook|users|about)$', views.gui_central, name='gui_central'),
 	url(r'^(users/adduser)$', views.gui_central, name='gui_central'),
+	url(r'^(users/edituser/(?P<id>\d+))$', views.gui_central, name='gui_central'),
 
 	url(r'^api/login$', views.api_login, name='api_login'),
 	url(r'^api/logout$', views.api_logout, name='api_logout'),
@@ -16,5 +17,6 @@ urlpatterns = [
 	url(r'^api/deletebook/(?P<id>\d+)$', views.api_deletebook, name='api_deletebook'),
 	url(r'^api/download/(?P<id>\d+)$', views.api_downloadbook, name='api_downloadbook'),
 	url(r'^api/adduser$', views.api_adduser, name='api_adduser'),
+	url(r'^api/getuser/(?P<id>\d+)$', views.api_getuser, name='api_getuser'),
 	url(r'^api/addtomybooks/(?P<id>\d+)$', views.api_addtomybooks, name='api_addtomybooks'),
 ]
