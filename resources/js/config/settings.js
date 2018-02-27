@@ -18,7 +18,7 @@ let urlSettings = {
     'getAllBooksData': '/api/allbooks',
     'getUsersData'   : '/api/users',
     'getAddBookData' : '/addbook',
-    'sendToMail'     : '/sendtomail/',
+    'sendToMail'     : '/api/sendtomail/',
     'downloadBook'   : '/api/download/',
     'addToMyBooks'   : '/api/addtomybooks/',
     'deleteMyBook'   : '/api/deletemybook/',
@@ -27,8 +27,8 @@ let urlSettings = {
     'downloadRawBook': '/downloadrawbook',
     'addUser'        : '/api/adduser',
     'getUser'        : '/api/getuser/',
-    'editUser'       : '/edituser/',
-    'deleteUser'     : '/deleteuser/'
+    'editUser'       : '/api/edituser/',
+    'deleteUser'     : '/api/deleteuser/'
 };
 
 export {defaultSettings, pageSettings, urlSettings};
