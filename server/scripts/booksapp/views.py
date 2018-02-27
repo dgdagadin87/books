@@ -14,6 +14,7 @@ from .include.controllers.api.deletebook import api_deletebook_controller
 from .include.controllers.api.downloadbook import api_downloadbook_controller
 from .include.controllers.api.adduser import api_adduser_controller
 from .include.controllers.api.getuser import api_getuser_controller
+from .include.controllers.api.edituser import api_edituser_controller
 
 
 def gui_central(request, url='', id=None):
@@ -63,6 +64,11 @@ def api_adduser(request):
 @csrf_exempt
 def api_getuser(request, id):
     return api_getuser_controller(BooksHelpers, BooksSessions, request, id)
+
+
+@csrf_exempt
+def api_edituser(request, id):
+    return api_edituser_controller(BooksHelpers, BooksSessions, request, id)
 
 
 @csrf_exempt
