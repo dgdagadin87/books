@@ -9,8 +9,7 @@ def api_login_controller(request, helpers):
     if request.method != 'POST':
         return JsonResponse({
             'success': False,
-            'message': 'Неизвестная ошибка',
-            'data': []
+            'message': 'Неизвестная ошибка'
         })
 
     post_values = request.POST
@@ -21,8 +20,7 @@ def api_login_controller(request, helpers):
     if not login_value or not password_value:
         return JsonResponse({
             'success': False,
-            'message': 'Не заполнены логин/пароль',
-            'data': []
+            'message': 'Не заполнены логин/пароль'
         })
 
     hashed_password = helpers.hash_string(password_value)
@@ -30,8 +28,10 @@ def api_login_controller(request, helpers):
     # Получение пользователя из БД
     try:
         user = Users.objects.get(user_login=login_value, user_password=hashed_password)
+    except Users.DoesNotExist:
+        return JsonResponse({'success': False, 'message': 'Пользователь не найден в системе'})
     except Exception:
-        return JsonResponse({'success': False, 'message': 'Произошла непредвиденная ошибка'})
+        return JsonResponse({'success': False, 'message': 'Неизвестная ошибка'})
 
     db_user_login = user.user_login
     db_user_password = user.user_password
