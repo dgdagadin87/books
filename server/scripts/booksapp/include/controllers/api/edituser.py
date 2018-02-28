@@ -36,7 +36,7 @@ def api_edituser_controller(helpers, sessions, request, user_id):
 
     # Получаем информацию по пользователю
     try:
-        Users.objects.get(user_id=int(user_id))
+        user_info = Users.objects.get(user_id=int(user_id))
     except Users.DoesNotExist:
         return response(add_user_standart_json_error('Пользователь не найден в системе. Повторите попытку'))
     except Exception:
@@ -54,7 +54,7 @@ def api_edituser_controller(helpers, sessions, request, user_id):
 
     # Если все нормально, добавляем пользователя
     is_admin = 'yes' if user_is_admin else 'no'
-    user_for_editing = Users(user_id=user_id, user_login=user_login, user_name=user_name, user_is_admin=is_admin)
+    user_for_editing = Users(user_id=user_id, user_login=user_login, user_name=user_name, user_is_admin=is_admin, user_password=user_info.user_password, user_secret_key=user_info.user_secret_key)
     try:
         user_for_editing.save()
     except Exception:
