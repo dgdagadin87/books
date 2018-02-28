@@ -19,5 +19,6 @@ urlpatterns = [
 	url(r'^api/adduser$', views.api_adduser, name='api_adduser'),
 	url(r'^api/getuser/(?P<id>\d+)$', views.api_getuser, name='api_getuser'),
 	url(r'^api/edituser/(?P<id>\d+)$', views.api_edituser, name='api_edituser'),
+	url(r'^api/deleteuser/(?P<id>\d+)$', views.api_deleteuser, name='api_deleteuser'),
 	url(r'^api/addtomybooks/(?P<id>\d+)$', views.api_addtomybooks, name='api_addtomybooks'),
 ]
