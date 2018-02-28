@@ -147,7 +147,7 @@ class BooksHelpers(object):
             (u"э", u"e"),
         )
         # перебираем символы в таблице и заменяем
-        for symb_in, symb_out in transtable:
-            name = name.replace(symb_in, symb_out)
+        for symbol_in, symbol_out in transtable:
+            name = name.replace(symbol_in, symbol_out)
         # возвращаем переменную
         return name
