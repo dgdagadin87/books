@@ -151,9 +151,10 @@ class AllBooksComponent extends BaseModule {
             {
                 url: CUL(defaultSettings, urlSettings['sendToMail']) + bookId,
                 method: 'POST',
-                data: JSON.stringify({
+                dataType: 'json',
+                data: {
                     email: emailToSend
-                })
+                }
             },
             {
                 afterSuccess: (result) => {
