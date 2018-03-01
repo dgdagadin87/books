@@ -1,7 +1,7 @@
-from django.http import JsonResponse
 import base64
+from django.http import JsonResponse
 from booksapp.models import Books, Cached_books
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
 
 def api_sendtomail_controller(helpers, sessions, request, book_id):
@@ -16,6 +16,11 @@ def api_sendtomail_controller(helpers, sessions, request, book_id):
     base_checks = helpers.base_auth_checks(user_dict, response)
     if base_checks is not None:
         return base_checks
+
+    # Куда отправлять
+    email = request.POST.get('email')
+    if email is None or email == '':
+        return response({'success': False, 'message': 'Укажите адрес электронный почты'})
 
     # Если все нормально, получаем данные книги
     try:
@@ -40,8 +45,16 @@ def api_sendtomail_controller(helpers, sessions, request, book_id):
     # Получаем контент книги
     encoded_content = base64.b64decode(book_content)
 
+    # Имя файла
+    file_name = helpers.translate(book_name) + '.fb2'
+
     # Отправка письма
-    send_mail('Subject here', 'Here is the message.', 'from@example.com', ['dgdagadin87@mail.ru'], fail_silently=False)
+    message = EmailMessage('Книга "' + book_name + '"', 'Файл книги можно скачать ниже', 'Приложение "Книги" <FromEmail@example.com>', [email])
+    message.attach(file_name, encoded_content, 'text/plain')
+    try:
+        message.send()
+    except Exception:
+        return response({'message': 'При отправке письма произошла непредвиденная ошибка', 'isSuccess': False})
 
     # Возврат, если все нормально
     return response({
