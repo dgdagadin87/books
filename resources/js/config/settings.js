@@ -17,7 +17,7 @@ let urlSettings = {
     'getMyBooksData' : '/api/mybooks',
     'getAllBooksData': '/api/allbooks',
     'getUsersData'   : '/api/users',
-    'getAddBookData' : '/addbook',
+    'getAddBookData' : '/api/addbook',
     'sendToMail'     : '/api/sendtomail/',
     'downloadBook'   : '/api/download/',
     'addToMyBooks'   : '/api/addtomybooks/',
