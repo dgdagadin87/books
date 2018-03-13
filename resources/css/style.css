@@ -84,12 +84,12 @@ body {
 .main-navigation__links .link a:hover {
     background: #080808;
     color: #ffffff;
-    text-decoration: underline;
+    text-decoration: none;
 }
 .main-navigation__active a {
-    text-decoration: underline !important;
+    text-decoration: none !important;
     color: #ffffff !important;
-    background: #080808;
+    background: #12b2c0;
 }
 
 .main-title {
