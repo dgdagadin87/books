@@ -194,12 +194,8 @@ class AddBookComponent extends BaseModule {
                     Поиск по книгам
                 </div>
                 <div className="main-addbook__search-panel-content">
-                    <div style={{marginTop:'10px'}}>
+                    <div>
                         <div className="main-addbook__search-panel-label">
-                            <span>Выбор сайта</span>
-                            <span className="user-form__strict">*</span>
-                        </div>
-                        <div className="main-addbook__search-panel-input">
                             <SelectSiteComponent
                                 disabled={disabled}
                                 items={sites}
@@ -207,13 +203,6 @@ class AddBookComponent extends BaseModule {
                                 selectedSiteId={selectedSiteId}
                                 onChange={this._onSiteChange.bind(this)}
                             />
-                        </div>
-                        <div className="clear-both" />
-                    </div>
-                    <div>
-                        <div className="main-addbook__search-panel-label">
-                            <span>Фраза для поиска</span>
-                            <span className="user-form__strict">*</span>
                         </div>
                         <div className="main-addbook__search-panel-input">
                             <SearchComponent

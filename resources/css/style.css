@@ -114,7 +114,7 @@ body {
     padding: 0px;
 }
 .main-search__container.short {
-    width: 750px;
+    width: 650px;
     margin-left: 0
 }
 .main-search__text-field {
@@ -136,7 +136,7 @@ body {
     outline: none;
 }
 .main-search__text-field.short {
-    width: 700px;
+    width: 600px;
     border-color: #777;
 }
 .main-search__text-field:disabled {
@@ -183,7 +183,7 @@ body {
 }
 .main-search__button.short {
     right: -45px;
-    border-left-color: #777;
+    border-color: #777;
 }
 .main-search__button:disabled {
     color: grey;
@@ -756,27 +756,27 @@ body {
 }
 .main-addnewbook__container .main-addbook__search-panel-content {
     padding: 20px 20px 0;
-    padding-top: 10px;
     border: 1px solid #aaaaaa;
     border-top: 0;
     border-radius: 0 0 0px 0px;
+    margin-top: -20px;
 }
 .main-addbook__search-panel-label {
     float: left;
-    width: 150px;
+    width: 250px;
     font-size: 15px;
-    padding-top: 10px;
+    padding-top: 0px;
     text-align: left;
 }
 .main-addbook__search-panel-input {
-    margin-left: 150px;
+    margin-left: 250px;
 }
 
 .main-addnewbook__container .main-selectsite__select {
     border: 1px solid #777;
     border-radius: 0px;
     padding: 9px 7px;
-    width: 400px;
+    width: 230px;
 }
 .main-addnewbook__container .main-selectsite__select:disabled {
     background: #eee;
