@@ -54,6 +54,41 @@ class BooksHelpers(object):
         return None
 
     @staticmethod
+    def base_auth_checks_v2(user_data, admin_check=False):
+        # Если ошибка в БД
+        user_error = user_data['user_error']
+        if user_error is True:
+            return {
+                'success': False,
+                'message': 'Произошла непредвиденная ошибка'
+            }
+
+        # Если не авторизованы
+        user_info = user_data['user']
+        if user_info is False:
+            return {
+                'success': False,
+                'message': 'Неизвестная ошибка',
+                'data': {
+                    'errorCode': 'NOT_AUTH'
+                }
+            }
+
+        # Если пользователь не админ
+        if admin_check:
+            if user_info.user_is_admin != 'yes':
+                return {
+                    'success': False,
+                    'message': 'Неизвестная ошибка',
+                    'data': {
+                        'errorCode': 'ACCESS_DENIED'
+                    }
+                }
+
+        # Если все ок
+        return None
+
+    @staticmethod
     def generate_secret_key():
         time_date = datetime.utcnow() - datetime(1970, 1, 1)
         timestamp_microseconds = (time_date.days * 86400 + time_date.seconds) * 10 ** 6 + time_date.microseconds

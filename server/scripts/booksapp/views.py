@@ -1,4 +1,5 @@
 from django.views.decorators.csrf import csrf_exempt
+
 from .include.miscutils.sessions import BooksSessions
 from .include.miscutils.helpers import BooksHelpers
 from .include.controllers.gui.central import gui_central_controller
@@ -101,4 +102,4 @@ def api_sendtomail(request, id):
 
 @csrf_exempt
 def api_addbook(request):
-    return api_addbook_controller(BooksHelpers, BooksSessions, request)
+    return api_addbook_controller(request)
