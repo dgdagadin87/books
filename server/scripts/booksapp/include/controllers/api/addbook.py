@@ -1,5 +1,7 @@
 from ...abstract.base_controller import BaseController
 
+from booksapp.models import Sites
+
 
 def api_addbook_controller(request):
 
@@ -14,6 +16,22 @@ class AddBookController(BaseController):
         if base_checks is not None:
             return base_checks
 
+        # 0)Получение списка сайтов
+        self._get_sites_list()
+
+        # 1)Получение данных пришедших с клиента
+        self._get_client_meta_data()
+
+        # 2)Если это стартовый вызов
+
+
+        # 3)Получение данных по запросу из приложения
+        self._get_from_app_data()
+
+        # 4)Получение данных по запросу с выбранного сайта
+        self._get_from_site_data()
+
+        # 5)Возврат данных
         return self.response_to_client({
             'data': {
                 'collection': False,
@@ -40,3 +58,15 @@ class AddBookController(BaseController):
             'message': None,
             'isSuccess': True
         })
+
+    def _get_sites_list(self):
+        pass
+
+    def _get_client_meta_data(self):
+        pass
+
+    def _get_from_app_data(self):
+        pass
+
+    def _get_from_site_data(self):
+        pass
