@@ -50,6 +50,7 @@ body {
     position: absolute;
     top:11px;
     right: 30px;
+    border-radius: 3px;
 }
 .main-navigation__user-icon-down{
     width: 0;

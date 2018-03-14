@@ -433,7 +433,7 @@ class AddBookComponent extends BaseModule {
                             <td className="header addnewbook-genre-head">Жанр</td>
                             <td className="header addnewbook-panel-head" colSpan="2"></td>
                         </tr>
-                        {rowsArray.length > 0 ? rowsArray : <td style={{borderRadius:'0 0 5px 5px'}} className="item" colSpan="5">Результатов, удовлятворяющих критериям поиска, не найдено</td>}
+                        {rowsArray.length > 0 ? rowsArray : <td style={{borderRadius:'0px'}} className="item" colSpan="5">Результатов, удовлятворяющих критериям поиска, не найдено</td>}
                     </tbody>
                 </table>
             </div>
