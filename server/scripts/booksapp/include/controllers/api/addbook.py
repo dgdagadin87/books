@@ -37,13 +37,7 @@ class AddBookController(BaseController):
                 'collection': False,
                 'isFoundInMy': False,
                 'isFoundInAll': False,
-                'sites': [
-                    {
-                        'id': 1,
-                        'name': "knijki.ru",
-                        'url': "http://knijki.ru"
-                    }
-                ],
+                'sites': self._sites,
                 'filter': {
                     'page': 1,
                     'searchTerm': "",
@@ -60,7 +54,17 @@ class AddBookController(BaseController):
         })
 
     def _get_sites_list(self):
-        pass
+
+        sites_list = []
+        sites_collection = Sites.objects.all()
+
+        for current_site in sites_collection:
+            sites_list.append({
+                'id': current_site.site_id,
+                'name': current_site.site_name,
+                'url': current_site.site_url
+            })
+        self._sites = sites_list
 
     def _get_client_meta_data(self):
         pass
