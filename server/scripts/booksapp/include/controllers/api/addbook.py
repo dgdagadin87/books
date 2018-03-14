@@ -22,32 +22,21 @@ class AddBookController(BaseController):
         # 1)Получение данных пришедших с клиента
         self._get_client_meta_data()
 
-        # 2)Если это стартовый вызов
-
-
-        # 3)Получение данных по запросу из приложения
+        # 2)Получение данных по запросу из приложения
         self._get_from_app_data()
 
-        # 4)Получение данных по запросу с выбранного сайта
+        # 3)Получение данных по запросу с выбранного сайта
         self._get_from_site_data()
 
-        # 5)Возврат данных
+        # 4)Возврат данных
         return self.response_to_client({
             'data': {
-                'collection': False,
-                'isFoundInMy': False,
-                'isFoundInAll': False,
+                'collection': self._collection,
+                'isFoundInMy': self._found_in_app.get('isFoundInMy'),
+                'isFoundInAll': self._found_in_app.get('isFoundInAll'),
                 'sites': self._sites,
-                'filter': {
-                    'page': 1,
-                    'searchTerm': "",
-                    'selectedSiteId': -1
-                },
-                'paging': {
-                    'page': 1,
-                    'pages': 1,
-                    'totalCount': 0
-                }
+                'filter': self._meta.get('filter'),
+                'paging': self._meta.get('paging')
             },
             'message': None,
             'isSuccess': True
@@ -67,10 +56,30 @@ class AddBookController(BaseController):
         self._sites = sites_list
 
     def _get_client_meta_data(self):
-        pass
+
+        search_term = str(self._request.GET.get('searchTerm'))
+        page = int(self._request.GET.get('page'))
+        selected_site_id = int(self._request.GET.get('selectedSiteId'))
+
+        self._meta = {
+            'filter': {
+                'searchTerm': search_term,
+                'page': page,
+                'selectedSiteId': selected_site_id
+            },
+            'paging': {
+                'page': 1,
+                'pages': 1,
+                'totalCount': 0
+            }
+        }
 
     def _get_from_app_data(self):
-        pass
+        self._found_in_app = {
+            'isFoundInMy': True,
+            'isFoundInAll': True,
+        }
 
     def _get_from_site_data(self):
-        pass
+        filter = self._meta.get('filter')
+        self._collection = False if filter.get('selectedSiteId') == -1 else []
