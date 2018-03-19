@@ -41,7 +41,7 @@ class UbookiCollection(object):
         item_dict = {}
         for cell in cell_list:
             if count == 0:
-                item_dict['name'] = cell.text
+                item_dict['name'] = self._get_book_name(cell)
                 item_dict['link'] = self._get_book_url(cell)
                 item_dict['genre'] = self._get_book_genre(cell)
                 count += 1
@@ -52,6 +52,9 @@ class UbookiCollection(object):
                 item_dict = {}
 
         return prepared_list
+
+    def _get_book_name(self, cell):
+        return cell.text
 
     def _get_book_url(self, cell):
         book_link = cell.attrib.get('href')
