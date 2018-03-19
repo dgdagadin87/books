@@ -1,6 +1,7 @@
 from django.db.models import Q
 from ...abstract.base_controller import BaseController
 from booksapp.models import Sites, Books, Books_2_users
+from ...sites.ubooki.controller import UbookiCollection
 
 
 def api_addbook_controller(request):
@@ -35,7 +36,9 @@ class AddBookController(BaseController):
             return self.standart_error()
 
         # 3)Получение данных по запросу с выбранного сайта
-        self._set_from_site_data()
+        get_data_result = self._set_from_site_data()
+        if get_data_result is not None:
+            return self.standart_error()
 
         # 4)Возврат данных
         return self.response_to_client({
@@ -130,10 +133,30 @@ class AddBookController(BaseController):
         return None
 
     def _set_from_site_data(self):
-        self._collection = False if self._is_first_open() else []
+
+        self._collection = False
+
+        if self._is_first_open():
+            return None
+
+        search_term = str(self._request.GET.get('searchTerm'))
+        collection_constructor = self._get_site_collection_constructor()
+        parser = collection_constructor(search_term)
+        collection = parser.get_collection()
+        if collection == False:
+            return False
+
+        self._collection = collection
+
+        return None
 
     def _is_first_open(self):
         filter = self._meta.get('filter')
         return True if filter.get('selectedSiteId') == -1 and filter.get('searchTerm') == '' else False
 
+    def _get_site_collection_constructor(self):
+        selected_site_id = int(self._request.GET.get('selectedSiteId'))
+        if selected_site_id == 1:
+            return UbookiCollection
 
+        return UbookiCollection
