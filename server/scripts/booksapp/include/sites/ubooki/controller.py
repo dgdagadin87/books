@@ -30,7 +30,6 @@ class UbookiCollection(object):
         # Получение тегов списка книг
         book_list = tree.xpath(".//a[@class='books-list-link']")
         prepared_list = self._prepare_raw_list(book_list)
-        print(prepared_list)
 
         return prepared_list
 
@@ -41,11 +40,10 @@ class UbookiCollection(object):
         count = 0
         item_dict = {}
         for cell in cell_list:
-            print(cell)
             if count == 0:
                 item_dict['name'] = cell.text
                 item_dict['link'] = self._get_book_url(cell)
-                item_dict['genre'] = 'Просто жанр'
+                item_dict['genre'] = self._get_book_genre(cell)
                 count += 1
             elif count == 1:
                 item_dict['author'] = cell.text
@@ -58,3 +56,21 @@ class UbookiCollection(object):
     def _get_book_url(self, cell):
         book_link = cell.attrib.get('href')
         return self._host + unquote(book_link)
+
+    def _get_book_genre(self, cell):
+
+        book_link = unquote(cell.attrib.get('href'))
+
+        link_items = book_link.split('/')
+
+        correct_items = []
+        for item in link_items:
+            if not item:
+                continue
+            else:
+                correct_items.append(item)
+
+        if len(correct_items) < 1:
+            return 'Нет жанра'
+
+        return correct_items[0]
