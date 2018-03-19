@@ -1,5 +1,5 @@
 from lxml import html
-import urllib
+from urllib.parse import unquote
 import requests
 
 
@@ -44,7 +44,7 @@ class UbookiCollection(object):
             print(cell)
             if count == 0:
                 item_dict['name'] = cell.text
-                item_dict['link'] = self._host + '/' + urllib.urldecode(cell.attrib.get('href'))
+                item_dict['link'] = self._get_book_url(cell)
                 item_dict['genre'] = 'Просто жанр'
                 count += 1
             elif count == 1:
@@ -54,3 +54,7 @@ class UbookiCollection(object):
                 item_dict = {}
 
         return prepared_list
+
+    def _get_book_url(self, cell):
+        book_link = cell.attrib.get('href')
+        return self._host + unquote(book_link)
