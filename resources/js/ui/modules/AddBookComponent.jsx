@@ -378,7 +378,7 @@ class AddBookComponent extends BaseModule {
                             Скачать
                         </a>
                     </td>
-                    <td className="item addnewbook-panel-cell" style={{width:'200px'}}>
+                    <td className="item addnewbook-panel-cell" style={{width:'75px'}}>
                         <a
                             href="#"
                             onClick={(event) => {
@@ -412,7 +412,15 @@ class AddBookComponent extends BaseModule {
                                 );
                             }}
                         >
-                            Добавить в "Мои книги"        
+                            Добавить
+                        </a>
+                    </td>
+                    <td className="item addnewbook-panel-cell" style={{width:'75px',borderRightWidth:'0'}}>
+                        <a
+                            href={currentItem['link']}
+                            target="_blank"
+                        >
+                            Перейти
                         </a>
                     </td>
                 </tr>
@@ -424,18 +432,20 @@ class AddBookComponent extends BaseModule {
                 <div className="main-addnewbook__table-head">
                     Результаты, найденные на выбранном сайте
                 </div>
-                <table cellSpacing="0" cellPadding="0" className="main-addnewbook__table">
-                    <thead />
-                    <tbody>
-                        <tr>
-                            <td className="header addnewbook-bookname-head">Название</td>
-                            <td className="header addnewbook-authorname-head">Автор</td>
-                            <td className="header addnewbook-genre-head">Жанр</td>
-                            <td className="header addnewbook-panel-head" colSpan="2"></td>
-                        </tr>
-                        {rowsArray.length > 0 ? rowsArray : <td style={{borderRadius:'0px'}} className="item" colSpan="5">Результатов, удовлятворяющих критериям поиска, не найдено</td>}
-                    </tbody>
-                </table>
+                <div className="main-addnewbook__table-scroll-container">
+                    <table cellSpacing="0" cellPadding="0" className="main-addnewbook__table">
+                        <thead />
+                        <tbody>
+                            <tr>
+                                <td className="header addnewbook-bookname-head">Название</td>
+                                <td className="header addnewbook-authorname-head">Автор</td>
+                                <td className="header addnewbook-genre-head">Жанр</td>
+                                <td className="header addnewbook-panel-head" colSpan="3">&nbsp;</td>
+                            </tr>
+                            {rowsArray.length > 0 ? rowsArray : <tr><td style={{borderRadius:'0px'}} className="item" colSpan="6">Результатов, удовлятворяющих критериям поиска, не найдено</td></tr>}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }

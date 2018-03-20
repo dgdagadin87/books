@@ -532,6 +532,12 @@ body {
 .content-bookSize {
     /*border-left-color: transparent;*/
 }
+.addnewbook-bookname-head {
+    width: 220px;
+}
+.addnewbook-authorname-head {
+    width: 200px;
+}
 
 .add-user__container {
     width: 990px;
@@ -823,6 +829,12 @@ body {
     background: #f5f5f5;
     border-radius: 0px 0px 0 0;
 }
+.main-addnewbook__container .main-addnewbook__table-scroll-container {
+    border: 1px solid #aaaaaa;
+    overflow-y: auto;
+    max-height: 500px;
+
+}
 .main-addnewbook__container .main-addnewbook__table {
     width: 100%;
 }
@@ -833,12 +845,22 @@ body {
     border: 1px solid #aaaaaa;
     border-bottom-width: 2px;
     border-right: 0;
+    border-top: 0;
     background: #f5f5f5;
     font-weight: bold;
+}
+.main-addnewbook__container .main-addnewbook__table .header.addnewbook-bookname-head {
+    border-left-width:0;
 }
 .main-addnewbook__container .main-addnewbook__table .header:last-child {
     border: 1px solid #aaaaaa;
     border-bottom-width: 2px;
+    border-right-width: 0;
+}
+.main-addnewbook__container .header.addnewbook-panel-head {
+    width: 30px;
+    border-top-width: 0 !important;
+
 }
 .main-addnewbook__container .addnewbook-panel-cell {
     text-align: center !important;
@@ -855,6 +877,9 @@ body {
     border: 1px solid #aaaaaa;
     border-top: 0;
     border-right: 0;
+}
+.main-addnewbook__container .main-addnewbook__table .item.addnewbook-bookname-cell {
+    border-left-width: 0;
 }
 .main-addnewbook__container .main-addnewbook__table tr:last-child .item:first-child {
     border-radius: 0 0 0 0px;
