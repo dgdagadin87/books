@@ -2,6 +2,8 @@ from lxml import html
 from urllib.parse import unquote
 import requests
 
+from ...miscutils.helpers import BooksHelpers
+
 
 class UbookiCollection(object):
 
@@ -76,4 +78,4 @@ class UbookiCollection(object):
         if len(correct_items) < 1:
             return 'Нет жанра'
 
-        return correct_items[0]
+        return BooksHelpers.get_correct_genre(correct_items[0])
