@@ -330,14 +330,20 @@ class AddBookComponent extends BaseModule {
         
         for (let i = 0; i < collection.length; i++) {
             let currentItem = collection[i];
-            
+
+            let author = currentItem['author'];
+            let correctAuthor = author;
+            if (correctAuthor.length > 50) {
+                correctAuthor = correctAuthor.substr(0, 47) + '...'
+            }
+
             rowsArray.push(
                 <tr key={i}>
                     <td className="item addnewbook-bookname-cell">
                         {currentItem['name']}
                     </td>
                     <td className="item addnewbook-authorname-cell">
-                        {currentItem['author']}
+                        <span title={author}>{correctAuthor}</span>
                     </td>
                     <td className="item addnewbook-authorname-cell">
                         {currentItem['genre']}
@@ -442,7 +448,7 @@ class AddBookComponent extends BaseModule {
                                 <td className="header addnewbook-genre-head">Жанр</td>
                                 <td className="header addnewbook-panel-head" colSpan="3">&nbsp;</td>
                             </tr>
-                            {rowsArray.length > 0 ? rowsArray : <tr><td style={{borderRadius:'0px'}} className="item" colSpan="6">Результатов, удовлятворяющих критериям поиска, не найдено</td></tr>}
+                            {rowsArray.length > 0 ? rowsArray : <tr><td style={{borderRadius:'0px',borderLeft:'0',borderRight:'0'}} className="item" colSpan="6">Результатов, удовлятворяющих критериям поиска, не найдено</td></tr>}
                         </tbody>
                     </table>
                 </div>
