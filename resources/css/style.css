@@ -887,6 +887,9 @@ body {
 .main-addnewbook__container .main-addnewbook__table tr:last-child .item:last-child {
     border-radius: 0 0 0px 0;
 }
+.main-addnewbook__container .main-addnewbook__table tr:last-child .item {
+    border-bottom: 0;
+}
 .main-addnewbook__container .main-addnewbook__table .item:last-child {
     border-right: 1px solid #aaaaaa;
 }
