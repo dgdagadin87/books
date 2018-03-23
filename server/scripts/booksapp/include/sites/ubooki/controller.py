@@ -5,6 +5,18 @@ import requests
 from ...miscutils.helpers import BooksHelpers
 
 
+class UbookiCacheBook(object):
+
+    def __init__(self, book_link):
+        self._host = 'https://ubooki.ru'
+        self._link = book_link
+
+    def cache_book(self):
+        import time
+        time.sleep(3)
+        return 777
+
+
 class UbookiCollection(object):
 
     def __init__(self, search_term):

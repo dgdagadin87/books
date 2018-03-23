@@ -28,7 +28,7 @@ class Users(models.Model):
 
 class Cached_books(models.Model):
 	cached_book_id = models.AutoField(primary_key=True)
-	book_link = models.CharField(max_length=100)
+	book_link = models.CharField(max_length=100,unique=True)
 	book_content = models.TextField()
 
 
