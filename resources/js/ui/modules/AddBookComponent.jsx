@@ -361,7 +361,7 @@ class AddBookComponent extends BaseModule {
                                 
                                 ajaxQuery(
                                     {
-                                        url: CUL(defaultSettings, urlSettings['downloadRawBook']),
+                                        url: CUL(defaultSettings, urlSettings['getRawBook']),
                                         data: queryData,
                                         method: 'POST'
                                     },
