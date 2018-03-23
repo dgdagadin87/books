@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from ..miscutils.sessions import BooksHelpers
 from ..miscutils.sessions import BooksSessions
 
@@ -8,6 +8,7 @@ class BaseController:
     def __init__(self, controller_name, request, check_is_admin):
         self.controller_name = controller_name
         self._request = request
+        self._http_response = HttpResponse
         self._json_response = JsonResponse
         self._check_is_admin = check_is_admin
         self._user_data = BooksSessions.check_if_authorized(self._request, return_user=True)

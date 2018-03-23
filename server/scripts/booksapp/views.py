@@ -20,6 +20,7 @@ from .include.controllers.api.edituser import api_edituser_controller
 from .include.controllers.api.deleteuser import api_deleteuser_controller
 from .include.controllers.api.addbook import api_addbook_controller
 from .include.controllers.api.getrawbook import api_getrawbook_controller
+from .include.controllers.test.gettestbook import test_gettestbook_controller
 
 
 def gui_central(request, url='', id=None):
@@ -109,3 +110,8 @@ def api_addbook(request):
 @csrf_exempt
 def api_getrawbook(request):
     return api_getrawbook_controller(request)
+
+
+@csrf_exempt
+def test_gettestbook(request):
+    return test_gettestbook_controller(request)
