@@ -22,13 +22,21 @@ class GetRawBookController(BaseController):
 
         # 1)Данные из POST
         book_link = str(self._request.POST.get('bookLink'))
+        book_author = str(self._request.POST.get('bookAuthor'))
+        book_genre = str(self._request.POST.get('bookGenre'))
+        book_name = str(self._request.POST.get('bookName'))
 
-        # 1) Проверяем, есть ли закэшированная книга с такой ссылкой
+        # 2) Берем или создаем книгу и возвращаем ее ИД
         try:
             cached_book_object = Cached_books.objects.get(book_link=book_link)
             return self._return_data(cached_book_object.book_id)
         except Cached_books.DoesNotExist:
-            controller = UbookiCacheBook(book_link)
+            controller = UbookiCacheBook({
+                'link': book_link,
+                'author': book_author,
+                'genre': book_genre,
+                'name': book_name
+            })
             return self._return_data(controller.cache_book())
         except Exception:
             return self.standart_error()

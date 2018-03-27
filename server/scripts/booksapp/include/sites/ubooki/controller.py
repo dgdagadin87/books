@@ -1,6 +1,8 @@
 from lxml import html
+from lxml.html.soupparser import fromstring
 from urllib.parse import unquote
-import xml.etree.ElementTree as xml
+from ...miscutils.fbcreator import FbCreator
+from ...miscutils.helpers import BooksHelpers
 import requests
 
 from ...miscutils.helpers import BooksHelpers
@@ -8,19 +10,54 @@ from ...miscutils.helpers import BooksHelpers
 
 class UbookiCacheBook(object):
 
-    def __init__(self, book_link):
+    def __init__(self, config):
+
         self._host = 'https://ubooki.ru'
-        self._link = book_link
+        self._link = config['link']
+        self._author = config['author']
+        self._name = config['name']
+        self._genre = config['genre']
 
     def cache_book(self):
         try:
-            response = requests.post('http://127.0.0.1:8000/test/gettestbook')
+            response = requests.get('http://127.0.0.1:8000/test/gettestbook')
         except Exception as e:
             print(e)
             return False
 
+        config = dict()
+
+        config['author'] = self._author
+        config['genre'] = self._genre
+        config['bookName'] = self._name
+        config['authorId'] = BooksHelpers.get_author_id()
+        config['annotation'] = BooksHelpers.get_annotation(self._name, self._author, self._genre)
+
         # Начало парсинга
-        tree = html.fromstring(response.text)
+        tree = fromstring(response.text)
+
+        # Получение списка секций
+        section_list = tree.xpath(".//section")
+
+        sections = list()
+
+        for current_section in section_list:
+            section_data = {
+                'title': None,
+                'content': []
+            }
+            children = current_section.getchildren()
+            for item in children:
+                if item.tag == 'h3':
+                    title_children = item.getchildren()
+                    p_tag = title_children[0]
+                    section_data['title'] = p_tag.text
+                elif item.tag == 'p':
+                    section_data['content'].append(item.text)
+
+            sections.append(section_data)
+
+        config['content'] = sections
 
         return 777
 

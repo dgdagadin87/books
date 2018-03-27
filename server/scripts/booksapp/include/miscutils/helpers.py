@@ -8,6 +8,15 @@ from decimal import Decimal
 class BooksHelpers(object):
 
     @staticmethod
+    def get_author_id():
+        return '0123456789'
+
+    @staticmethod
+    def get_annotation(book_name, book_author, book_genre):
+        book_annotation = 'Название книги - "' + str(book_name) + '", автор книги - ' + str(book_author) + ', жанр - ' + str(book_genre) + '.'
+        book_annotation += 'Данный файл был создан приложением "Книги". Приятного прочтения!'
+
+    @staticmethod
     def json2object(data):
         return json.loads(data, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
 

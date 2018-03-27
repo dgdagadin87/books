@@ -19,7 +19,7 @@ class DownloadRawBookController(BaseController):
 
         # Присваиваем http-ответу необходимые заголовки
         http_response = self._http_response(fb_creator.create_fb2({}), content_type='application/octet-stream; charset=utf-8')
-        http_response['Content-Disposition'] = 'attachment; filename="Nesting.fb2"'
+        http_response['Content-Disposition'] = 'attachment; filename="Book.fb2"'
 
         # Возврат, если все нормально
         return http_response
