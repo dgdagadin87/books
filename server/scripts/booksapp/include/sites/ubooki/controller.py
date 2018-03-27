@@ -1,5 +1,6 @@
 from lxml import html
 from urllib.parse import unquote
+import xml.etree.ElementTree as xml
 import requests
 
 from ...miscutils.helpers import BooksHelpers
@@ -12,8 +13,15 @@ class UbookiCacheBook(object):
         self._link = book_link
 
     def cache_book(self):
-        import time
-        time.sleep(3)
+        try:
+            response = requests.post('http://127.0.0.1:8000/test/gettestbook')
+        except Exception as e:
+            print(e)
+            return False
+
+        # Начало парсинга
+        tree = html.fromstring(response.text)
+
         return 777
 
 

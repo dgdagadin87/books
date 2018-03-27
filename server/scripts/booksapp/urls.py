@@ -24,5 +24,6 @@ urlpatterns = [
 	url(r'^api/sendtomail/(?P<id>\d+)$',     views.api_sendtomail, name='api_sendtomail'),
 	url(r'^api/addbook$',                    views.api_addbook, name='api_addbook'),
 	url(r'^api/getrawbook',                  views.api_getrawbook, name='api_getrawbook'),
+	url(r'^api/downloadrawbook/(?P<id>\d+)$',views.api_downloadrawbook, name='api_downloadbook'),
 	url(r'^test/gettestbook',                views.test_gettestbook, name='test_gettestbook'),
 ]
