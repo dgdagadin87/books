@@ -356,7 +356,9 @@ class AddBookComponent extends BaseModule {
                                 globalEvents.trigger('downloadRawBook', 'start', false);
                                 
                                 let queryData = {
-                                    bookLink: currentItem['link']
+                                    bookLink: currentItem['link'],
+                                    bookAuthor: author,
+                                    bookGenre: currentItem['genre']
                                 };
                                 
                                 ajaxQuery(
