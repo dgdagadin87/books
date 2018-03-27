@@ -66,7 +66,7 @@ class ModalComponent extends BaseComponent {
 
         const {bookId} = this.state;
         
-        window.location.href = '/downloadrawbook/' + bookId;
+        window.location.href = '/api/downloadrawbook/' + bookId;
     }
 
     _closeHandler() {
