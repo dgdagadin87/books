@@ -358,7 +358,8 @@ class AddBookComponent extends BaseModule {
                                 let queryData = {
                                     bookLink: currentItem['link'],
                                     bookAuthor: author,
-                                    bookGenre: currentItem['genre']
+                                    bookGenre: currentItem['genre'],
+                                    bookName: currentItem['name']
                                 };
                                 
                                 ajaxQuery(
