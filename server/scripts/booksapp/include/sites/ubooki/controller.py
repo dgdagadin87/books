@@ -1,11 +1,10 @@
-from lxml import html
-from lxml.html.soupparser import fromstring
+import requests
 from urllib.parse import unquote
+from lxml.html.soupparser import fromstring
 from ...miscutils.fbcreator import FbCreator
 from ...miscutils.helpers import BooksHelpers
-import requests
-
-from ...miscutils.helpers import BooksHelpers
+from booksapp.models import Cached_books
+from bs4 import BeautifulSoup
 
 
 class UbookiCacheBook(object):
@@ -20,7 +19,8 @@ class UbookiCacheBook(object):
 
     def cache_book(self):
         try:
-            response = requests.get('http://127.0.0.1:8000/test/gettestbook')
+            # response = requests.get('http://127.0.0.1:8000/test/gettestbook')
+            response = requests.get(self._link)
         except Exception as e:
             print(e)
             return False
@@ -29,37 +29,58 @@ class UbookiCacheBook(object):
 
         config['author'] = self._author
         config['genre'] = self._genre
-        config['bookName'] = self._name
+        config['bookTitle'] = self._name
         config['authorId'] = BooksHelpers.get_author_id()
         config['annotation'] = BooksHelpers.get_annotation(self._name, self._author, self._genre)
 
-        # Начало парсинга
-        tree = fromstring(response.text)
-
-        # Получение списка секций
-        section_list = tree.xpath(".//section")
+        soup = BeautifulSoup(response.text)
+        lines = soup.find('div', {'class','entry-content'})
 
         sections = list()
 
-        for current_section in section_list:
-            section_data = {
-                'title': None,
-                'content': []
-            }
-            children = current_section.getchildren()
-            for item in children:
-                if item.tag == 'h3':
-                    title_children = item.getchildren()
-                    p_tag = title_children[0]
-                    section_data['title'] = p_tag.text
-                elif item.tag == 'p':
-                    section_data['content'].append(item.text)
+        section_data = {
+            'title': None,
+            'content': []
+        }
+        counter = 0
+        section_counter = 1
 
+        for current_paragraph in lines.findAll('p'):
+
+            if counter == 50:
+                sections.append(section_data)
+
+                section_data = {
+                    'title': None,
+                    'content': []
+                }
+
+                counter = 0
+                section_counter += 1
+
+            if counter == 0:
+                str_section_number = str(section_counter)
+                section_data['title'] = 'Глава ' + str_section_number
+
+            section_data['content'].append(current_paragraph.text)
+
+            counter += 1
+
+        if len(section_data['content']) > 0:
             sections.append(section_data)
 
         config['content'] = sections
 
-        return 777
+        fb_creator = FbCreator()
+        encoded_xml_file = str(fb_creator.create_fb2(config), 'utf-8')
+
+        book_for_adding = Cached_books(book_link=self._link, book_content=encoded_xml_file)
+        try:
+            book_for_adding.save()
+            latest_cached = Cached_books.objects.latest('cached_book_id')
+            return latest_cached.cached_book_id
+        except Exception:
+            return 777
 
 
 class UbookiCollection(object):
@@ -78,7 +99,7 @@ class UbookiCollection(object):
             return False
 
         # Начало парсинга
-        tree = html.fromstring(response.text)
+        tree = fromstring(response.text)
 
         # Если ничего не найдено
         not_found = tree.xpath(".//*[@class='entry-content']")
@@ -117,6 +138,8 @@ class UbookiCollection(object):
 
     def _get_book_url(self, cell):
         book_link = cell.attrib.get('href')
+        if book_link[0] != '/':
+            book_link = '/' + book_link
         return self._host + unquote(book_link)
 
     def _get_book_genre(self, cell):

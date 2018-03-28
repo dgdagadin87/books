@@ -29,7 +29,7 @@ class GetRawBookController(BaseController):
         # 2) Берем или создаем книгу и возвращаем ее ИД
         try:
             cached_book_object = Cached_books.objects.get(book_link=book_link)
-            return self._return_data(cached_book_object.book_id)
+            return self._return_data(cached_book_object.cached_book_id)
         except Cached_books.DoesNotExist:
             controller = UbookiCacheBook({
                 'link': book_link,
@@ -37,7 +37,9 @@ class GetRawBookController(BaseController):
                 'genre': book_genre,
                 'name': book_name
             })
-            return self._return_data(controller.cache_book())
+            book_id = controller.cache_book()
+            print(book_id)
+            return self._return_data(book_id)
         except Exception:
             return self.standart_error()
 

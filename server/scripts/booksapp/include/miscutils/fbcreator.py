@@ -69,7 +69,7 @@ class FbCreator(object):
 
         title = xml.SubElement(body, 'title')
         title_content = xml.SubElement(title, 'p')
-        title_content.text = self._config['bookName']
+        title_content.text = self._config['bookTitle']
 
         for section in self._config['content']:
             self._add_section_to_body(body, section)
