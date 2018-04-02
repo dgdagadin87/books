@@ -39,6 +39,11 @@ class ModalComponent extends BaseComponent {
             $('#addNewBook_modal').dialog('open');
         };
 
+        if (step === 'error') {
+            $('#addNewBook_modal').dialog('close');
+            return;
+        }
+
         this.setStats({
             mode: 'addbook',
             step: step,
@@ -54,6 +59,11 @@ class ModalComponent extends BaseComponent {
             $('#addNewBook_modal').dialog('option', 'title', title);
             $('#addNewBook_modal').dialog('open');
         };
+
+        if (step === 'error') {
+            $('#addNewBook_modal').dialog('close');
+            return;
+        }
 
         this.setStats({
             mode: 'downloadbook',

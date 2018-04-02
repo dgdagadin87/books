@@ -372,6 +372,7 @@ class AddBookComponent extends BaseModule {
                                         afterSuccess: (result) => {
                                             if (!result.isSuccess) {
                                                 globalEvents.trigger('showError', result);
+                                                globalEvents.trigger('downloadRawBook', 'error');
                                                 return;
                                             }
                                             let {data} = result;
