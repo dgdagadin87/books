@@ -79,8 +79,9 @@ class UbookiCacheBook(object):
             book_for_adding.save()
             latest_cached = Cached_books.objects.latest('cached_book_id')
             return latest_cached.cached_book_id
-        except Exception:
-            return 777
+        except Exception as e:
+            print (e)
+            return False
 
 
 class UbookiCollection(object):

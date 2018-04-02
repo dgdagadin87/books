@@ -38,16 +38,18 @@ class GetRawBookController(BaseController):
                 'name': book_name
             })
             book_id = controller.cache_book()
-            print(book_id)
-            return self._return_data(book_id)
+            if book_id is False:
+                return self._return_data(None, False, 'Ошибка при формировании файла книги')
+            else:
+                return self._return_data(book_id)
         except Exception:
             return self.standart_error()
 
-    def _return_data(self, book_id):
+    def _return_data(self, book_id, is_success=True, message=None):
         return self.response_to_client({
             'data': {
                 'bookId': book_id
             },
-            'message': None,
-            'isSuccess': True
+            'message': message,
+            'isSuccess': is_success
         })
