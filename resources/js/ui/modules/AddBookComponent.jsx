@@ -396,7 +396,10 @@ class AddBookComponent extends BaseModule {
                                 globalEvents.trigger('addInMyBooks', 'start');
                                 
                                 let queryData = {
-                                    bookLink: currentItem['link']
+                                    bookLink: currentItem['link'],
+                                    bookAuthor: author,
+                                    bookGenre: currentItem['genre'],
+                                    bookName: currentItem['name']
                                 };
                                 
                                 ajaxQuery(
