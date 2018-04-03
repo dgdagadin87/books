@@ -8,7 +8,7 @@ var config = {
     devtool: 'eval-source-map',
     entry:  __dirname + "/resources/js/Application.js",
     output: {
-        path: __dirname + "/resources/js/bundle",
+        path: __dirname + "/server/scripts/booksapp/static/js",
         filename: "bundle.js"
     },
     module: {
@@ -49,7 +49,7 @@ var config = {
 /*
  * If bundling for production, optimize output
  */
-//if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     config.devtool = false;
     config.plugins = [
         new webpack.optimize.OccurenceOrderPlugin(),
@@ -58,6 +58,6 @@ var config = {
             'process.env': {NODE_ENV: JSON.stringify('production')}
         })
     ];
-//};
+}
 
 module.exports = config;

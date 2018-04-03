@@ -6,7 +6,7 @@
   "license": "ISC",
   "scripts": {
     "start": "webpack-dev-server --progress --port=777",
-    "build": "NODE_ENV=production node_modules/.bin/webpack -p --progress --colors"
+    "build": "set NODE_ENV=production&&webpack --progress --colors --config=./webpack.config.js"
   },
   "devDependencies": {
     "babel-core": "~6.7.*",
