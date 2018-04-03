@@ -6,6 +6,7 @@
   "license": "ISC",
   "scripts": {
     "start": "webpack-dev-server --progress --port=777",
+    "dev": "set NODE_ENV=development&&webpack --progress --colors --config=./webpack.config.js",
     "build": "set NODE_ENV=production&&webpack --progress --colors --config=./webpack.config.js"
   },
   "devDependencies": {
@@ -23,8 +24,8 @@
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1",
     "prop-types": "^15.6.0",
-    "react": "^15.6.2",
-    "react-dom": "^15.6.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "style-loader": "^0.19.0",
