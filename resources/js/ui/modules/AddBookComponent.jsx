@@ -412,6 +412,7 @@ class AddBookComponent extends BaseModule {
                                         afterSuccess: (result) => {
                                             if (!result.isSuccess) {
                                                 globalEvents.trigger('showError', result);
+                                                globalEvents.trigger('addInMyBooks', 'error');
                                                 return;
                                             }
                                             let defaultMyBooksData = getDefaultState('mybooks');
