@@ -43,7 +43,7 @@ class AddRawBookController(BaseController):
             })
             book_data = controller.cache_book(True)
             if book_data is False:
-                return self._return_data(None, False, 'Ошибка при формировании файла книги')
+                return self._return_data(False, 'Ошибка при формировании файла книги')
             else:
                 return self._add_to_my_books(book_data)
         except Exception as e:
