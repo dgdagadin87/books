@@ -17,7 +17,7 @@ class UbookiCacheBook(object):
         self._name = config['name']
         self._genre = config['genre']
 
-    def cache_book(self):
+    def cache_book(self, return_size=False):
         try:
             # response = requests.get('http://127.0.0.1:8000/test/gettestbook')
             response = requests.get(self._link)
@@ -78,7 +78,9 @@ class UbookiCacheBook(object):
         try:
             book_for_adding.save()
             latest_cached = Cached_books.objects.latest('cached_book_id')
-            return latest_cached.cached_book_id
+            cached_book_id = latest_cached.cached_book_id
+            return_data = cached_book_id if return_size is False else {'book_id': cached_book_id, 'book_size': len(latest_cached.book_content)}
+            return return_data
         except Exception as e:
             print (e)
             return False
