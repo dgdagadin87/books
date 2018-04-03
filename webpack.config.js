@@ -1,23 +1,28 @@
 var webpack = require('webpack');
+const path = require('path');
 
-/*
- * Default webpack configuration for development
- */
+const RESOURCE_PATH = path.resolve('resources');
+const NODE_MODULES_PATH = path.resolve('node_modules');
 
 var config = {
     devtool: 'eval-source-map',
-    entry:  __dirname + "/resources/js/Application.js",
+    entry:  __dirname + "/resources/js/Application.jsx",
     output: {
         path: __dirname + "/server/scripts/booksapp/static/js",
         filename: "bundle.js"
     },
     module: {
         resolve: {
+            modules: [
+                NODE_MODULES_PATH,
+                RESOURCE_PATH
+            ],
             extensions: ['', '.js', '.jsx']
         },
         loaders: [
             {
                 test: /\.jsx?$/,
+                include: RESOURCE_PATH,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
