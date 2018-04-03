@@ -21,8 +21,11 @@ class BaseController:
         if base_checks is not None:
             return self._json_response(base_checks)
 
-    def standart_error(self):
-        return self.response_to_client({'success': False, 'message': 'Произошла непредвиденная ошибка'})
+    def standart_error(self, message=None):
+        return self.response_to_client({
+            'success': False,
+            'message': 'Произошла непредвиденная ошибка' if message is None else message
+        })
 
     # Типа абстрактный метод
     def run(self):

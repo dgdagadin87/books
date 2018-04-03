@@ -116,7 +116,7 @@ def api_getrawbook(request):
 
 @csrf_exempt
 def api_addrawbook(request):
-    return api_getrawbook_controller(request)
+    return api_addrawbook_controller(request)
 
 
 @csrf_exempt

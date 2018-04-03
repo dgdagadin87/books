@@ -30,7 +30,10 @@ class AddRawBookController(BaseController):
         # 2) Берем или создаем книгу и возвращаем ее ИД
         try:
             cached_book_object = Cached_books.objects.get(book_link=book_link)
-            return self._return_data(cached_book_object.cached_book_id)
+            return self._add_to_my_books({
+                'book_id': cached_book_object.cached_book_id,
+                'book_size': len(cached_book_object.book_content)
+            })
         except Cached_books.DoesNotExist:
             controller = UbookiCacheBook({
                 'link': book_link,
@@ -43,8 +46,8 @@ class AddRawBookController(BaseController):
                 return self._return_data(None, False, 'Ошибка при формировании файла книги')
             else:
                 return self._add_to_my_books(book_data)
-        except Exception:
-            return self.standart_error()
+        except Exception as e:
+            return self.standart_error(message=e)
 
     def _add_to_my_books(self, cached_book_data):
 
@@ -56,13 +59,13 @@ class AddRawBookController(BaseController):
             book_object = Books.objects.get(cached_book_id_id=cached_book_id)
         except Books.DoesNotExist:
             book_exists = False
-        except Exception:
-            return self.standart_error()
+        except Exception as e:
+            return self.standart_error(message=e)
 
-        user_id = self._user_data.user_id
-        book_id = book_object.book_id
+        user_id = self._user_data['user'].user_id
 
         if book_exists is True:
+            book_id = book_object.book_id
             return self._add_book_to_user(book_id, user_id)
         else:
             book_author = str(self._request.POST.get('bookAuthor'))
@@ -87,8 +90,8 @@ class AddRawBookController(BaseController):
                 latest_book = Books.objects.latest('book_id')
                 latest_id = latest_book.book_id
                 return self._add_book_to_user(latest_id, user_id)
-            except Exception:
-                return self.standart_error()
+            except Exception as e:
+                return self.standart_error(message=e)
 
     def _add_book_to_user(self, book_id, user_id):
 
@@ -97,16 +100,16 @@ class AddRawBookController(BaseController):
             return self._return_data()
         except Books_2_users.DoesNotExist:
             pass
-        except Exception:
-            return self.standart_error()
+        except Exception as e:
+            return self.standart_error(message=e)
 
         book_for_adding = Books_2_users(book_id_id=book_id, user_id_id=user_id)
 
         try:
             book_for_adding.save()
             return self._return_data()
-        except Exception:
-            return self.standart_error(message='Ошибка при добавлении в соотношение между книгами и пользователями')
+        except Exception as e:
+            return self.standart_error(message=e)
 
     def _return_data(self, is_success=True, message=None):
         return self.response_to_client({
