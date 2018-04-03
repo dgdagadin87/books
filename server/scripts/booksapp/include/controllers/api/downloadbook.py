@@ -1,5 +1,4 @@
 from django.http import HttpResponse, JsonResponse
-import base64
 from booksapp.models import Books, Cached_books
 
 
@@ -35,10 +34,10 @@ def api_downloadbook_controller(helpers, sessions, request, book_id):
         book_content = 'Not_found'
     except Exception:
         return response({'success': False, 'message': 'Произошла непредвиденная ошибка'})
-
+    print(helpers.translate(book_name))
     # Присваиваем http-ответу необходимые заголовки
-    http_response = HttpResponse(base64.b64decode(book_content), content_type='application/octet-stream; charset=utf-8')
-    http_response['Content-Disposition'] = 'attachment; filename="' + helpers.translate(book_name) + '.fb2"'
+    http_response = HttpResponse(book_content, content_type='application/octet-stream; charset=utf-8')
+    http_response['Content-Disposition'] = 'attachment; filename="Book-for-reading.fb2"'
 
     # Возврат, если все нормально
     return http_response

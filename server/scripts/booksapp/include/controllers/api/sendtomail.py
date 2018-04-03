@@ -1,4 +1,3 @@
-import base64
 from django.http import JsonResponse
 from booksapp.models import Books, Cached_books
 from django.core.mail import EmailMessage
@@ -43,7 +42,7 @@ def api_sendtomail_controller(helpers, sessions, request, book_id):
         return response({'success': False, 'message': 'Произошла непредвиденная ошибка'})
 
     # Получаем контент книги
-    encoded_content = base64.b64decode(book_content)
+    encoded_content = book_content
 
     # Имя файла
     file_name = helpers.translate(book_name) + '.fb2'
@@ -53,7 +52,8 @@ def api_sendtomail_controller(helpers, sessions, request, book_id):
     message.attach(file_name, encoded_content, 'text/plain')
     try:
         message.send()
-    except Exception:
+    except Exception as e:
+        print(e)
         return response({'message': 'При отправке письма произошла непредвиденная ошибка', 'isSuccess': False})
 
     # Возврат, если все нормально
