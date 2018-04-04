@@ -65,7 +65,8 @@ class DescriptionComponent extends BaseComponent {
                     style={{display: isHidden ? 'none' : 'block'}}
                     className="main-description__content"
                 >
-                    {data.bookShortDesc + ' ...'}
+                    <div><strong>Описание</strong></div>
+                    {data.bookShortDesc}
                 </div>
             </div>
         );
