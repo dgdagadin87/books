@@ -1081,10 +1081,29 @@ body {
     margin: 15px auto 0;
 }
 .main-about__content {
-    padding: 10px;
+    padding: 20px;
     border-bottom: 1px solid #aaaaaa;
     border-left: 1px solid #aaaaaa;
     border-right: 1px solid #aaaaaa;
+}
+.main-about__content .paragraph {
+    font-size: 15px;
+    text-align: justify;
+}
+.main-about__content .paragraph ul {
+    margin-top:5px;
+    padding-left: 20px;
+}
+.main-about__content .paragraph ul.tech-list a {
+    margin-left:5px;
+    color: #2b80cf;
+    text-decoration: underline;
+}
+.main-about__content .paragraph ul.tech-list a:hover {
+    text-decoration: none;
+}
+.main-about__content .paragraph ul.tech-list li {
+    line-height: 18px;
 }
 
 .header__popup-window {
