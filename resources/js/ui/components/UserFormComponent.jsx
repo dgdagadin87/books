@@ -34,7 +34,7 @@ class UserFormComponent extends BaseComponent {
 
     _handleLoginInput(event) {
 
-        let value = event.target.value;
+        let value = event.currentTarget.value;
         
         const {setParentState} = this.props;
 
@@ -45,7 +45,7 @@ class UserFormComponent extends BaseComponent {
     
     _handleNameInput(event) {
 
-        let value = event.target.value;
+        let value = event.currentTarget.value;
         
         const {setParentState} = this.props;
 

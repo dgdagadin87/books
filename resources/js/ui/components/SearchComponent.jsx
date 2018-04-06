@@ -27,7 +27,7 @@ class SearchComponent extends BaseComponent {
 
     _handleInput(event) {
 
-        let value = event.target.value;
+        let value = event.currentTarget.value;
 
         this.setStats({
             searchTerm: value

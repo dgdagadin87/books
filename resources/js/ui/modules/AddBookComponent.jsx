@@ -162,7 +162,7 @@ class AddBookComponent extends BaseModule {
         let error = false;
 
         stateObject['searchTerm'] = searchTerm;
-        
+
         if (isEmpty(searchTerm)) {
             error = true;
             stateObject['isSearchError'] = true;

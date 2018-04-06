@@ -54,7 +54,7 @@ class SendToMailComponent extends BaseComponent {
     _validateMail() {
         
         let {mailValue} = this.state;
-        
+
         this.setStats({
             isError: !checkEmail(mailValue)
         });
@@ -62,7 +62,7 @@ class SendToMailComponent extends BaseComponent {
 
     _handleInput(event) {
 
-        let value = event.target.value;
+        let value = event.currentTarget.value;
 
         this.setStats({
             mailValue: value,
