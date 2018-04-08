@@ -1,3 +1,4 @@
+import re
 import requests
 from urllib.parse import unquote
 from lxml.html.soupparser import fromstring
@@ -5,6 +6,8 @@ from ...miscutils.fbcreator import FbCreator
 from ...miscutils.helpers import BooksHelpers
 from booksapp.models import Cached_books
 from bs4 import BeautifulSoup
+
+import html2text
 
 
 class UbookiCacheBook(object):
@@ -35,6 +38,23 @@ class UbookiCacheBook(object):
 
         soup = BeautifulSoup(response.text)
         lines = soup.find('div', {'class','entry-content'})
+        extracted_lines = lines.extract()
+        pattern = re.compile(r'<script[\s\S]+?/script>')
+        result = re.sub(pattern, '', str(extracted_lines))
+
+        preload_result = html2text.html2text(result)
+
+        splitted_result = preload_result.split('\n')
+
+        prepared_items = []
+        current_item = ''
+        for item in splitted_result:
+            stripped_item = str(str(item).strip())
+            if stripped_item != '':
+                current_item += stripped_item + ' '
+            else:
+                prepared_items.append(current_item)
+                current_item = ''
 
         sections = list()
 
@@ -45,9 +65,9 @@ class UbookiCacheBook(object):
         counter = 0
         section_counter = 1
 
-        for current_paragraph in lines.findAll('p'):
+        for current_paragraph in prepared_items:
 
-            if counter == 50:
+            if counter == 150:
                 sections.append(section_data)
 
                 section_data = {
@@ -62,7 +82,7 @@ class UbookiCacheBook(object):
                 str_section_number = str(section_counter)
                 section_data['title'] = 'Глава ' + str_section_number
 
-            section_data['content'].append(current_paragraph.text)
+            section_data['content'].append(current_paragraph)
 
             counter += 1
 
