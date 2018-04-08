@@ -1,13 +1,12 @@
 import re
 import requests
+import html2text
 from urllib.parse import unquote
 from lxml.html.soupparser import fromstring
 from ...miscutils.fbcreator import FbCreator
 from ...miscutils.helpers import BooksHelpers
 from booksapp.models import Cached_books
 from bs4 import BeautifulSoup
-
-import html2text
 
 
 class UbookiCacheBook(object):
