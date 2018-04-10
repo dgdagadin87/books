@@ -77,8 +77,8 @@ body {
     padding: 15px 15px;
     color: #ffffff;
     font-weight: 400;
-    font: 15px/15px "Helvetica Neue Light",Arial,Tahoma,sans-serif;
-    font-size: 15px;
+    font: 15px/15px Verdana,"Helvetica Neue Light",Arial,Tahoma,sans-serif;
+    font-size: 14px;
     text-decoration: none;
     /*text-shadow: 1px 1px 1px black, 0 0 1em #000000;*/
 }
