@@ -20,7 +20,7 @@ export default class FooterComponent extends BaseComponent {
                         </div>
                     </div>
                     <div className="center-one">
-                        Версия <strong>0.0.1</strong> &copy;
+                        Версия <strong>0.0.2</strong> &copy;
                     </div>
                     <div className="right-one">
                         <div>
